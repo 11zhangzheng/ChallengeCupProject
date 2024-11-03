@@ -23,8 +23,6 @@ export default {
     log(){
       setTimeout(function(){
         console.clear();
-        console.log('%c  农产品服务平台  %c  您的帐号存在异常行为，已被封停（请联系工作人员）  ','font-size:12px;color:#FADFA3;background-color:#030307;line-height:25px;padding:0 5px;margin:8px 0','font-size:12px;color:#030307;background-color:#FADFA3;line-height:25px;padding:0 3px');
-        console.log('%c 联系方式  %c 4002-106-2335 ','font-size:12px;color:white;background-color:#FF4081;line-height:25px;padding:0 5px;margin:7px 0','font-size:12px;color:white;background-color:#424242;line-height:25px;padding:0 3px');
       }, 2000);
     },
     exit(accountNumber,token){
@@ -53,7 +51,7 @@ export default {
         this.$http.post('/user/existKey?key='+accountNumber).then((res)=>{
           if(res.data.code===200){
             if(!res.data.data){
-              const confirmText = [`帐号：${accountNumber}` , `已被注销（有疑问请联系工作人员）`];
+              const confirmText = [`帐号：${accountNumber}` , `已被注销（有疑问请联系管理人员）`];
               const newData = []
               const h = this.$createElement
               let i =0;
@@ -75,7 +73,7 @@ export default {
                     this.exit(accountNumber,this.$store.state.token);
                     this.log();
                     this.clearInfo();
-                    this.$msg.error("您的帐号存在异常行为，已被封停（请联系工作人员）")
+                    this.$msg.error("您的帐号存在异常行为，请联系工作人员")
                   }else{
                     this.$http.post('/vip/existsVip?accountNumber='+accountNumber).then((rep)=>{
                       if(rep.data.code === 200) {
