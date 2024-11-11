@@ -10,7 +10,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import 'default-passive-events'
 import { Notification } from 'element-ui'
-import DonMessage  from "./assets/js/message"
+import DonMessage from "./assets/js/message"
 import qs from 'qs'
 import VCharts from 'v-charts'
 import Es6Promise from 'es6-promise'
@@ -39,12 +39,12 @@ const http = axios.create({
   timeout: 30000, // 请求超时时间
   baseURL: VAR.http,
 })
-if(localStorage.getItem("satoken")){
+if (localStorage.getItem("satoken")) {
   http.defaults.headers['satoken'] = localStorage.getItem("satoken");
 }
-Vue.prototype["$axios"]=axios
-Vue.prototype["$http"]=http;
-Vue.prototype["$qs"]=qs;
+Vue.prototype["$axios"] = axios
+Vue.prototype["$http"] = http;
+Vue.prototype["$qs"] = qs;
 Vue.use(VCharts)
 Vue.use(ElementUI);
 setAxios();
@@ -64,13 +64,13 @@ NProgress.configure({
   trickleSpeed: 200, // 自动递增间隔
   minimum: 0.3 // 初始化时的最小百分比
 })
-router.beforeEach((to, from , next) => {
+router.beforeEach((to, from, next) => {
   // 每次切换页面时，调用进度条
   NProgress.start();
   if (to.matched.some(record => record.meta.requiresAuth)) {
     //判断当前是否有登录的权限
-    if (store.state.token===null) {
-      Notification({title: '警告', message: '请先登录！', type: 'warning'});
+    if (store.state.token === null) {
+      Notification({ title: '警告', message: '请先登录！', type: 'warning' });
       next({
         path: '/loginForm',
       })
@@ -79,44 +79,44 @@ router.beforeEach((to, from , next) => {
 
   if (to.matched.some(record => record.meta.productRole)) {
     //判断当前是否有登录的权限
-    if (store.state.role && store.state.role.indexOf(VAR.adminRole)===-1 && store.state.role.indexOf(VAR.productRole)===-1) {
+    if (store.state.role && store.state.role.indexOf(VAR.adminRole) === -1 && store.state.role.indexOf(VAR.productRole) === -1) {
       next('/NoAccess')
     }
-  }else if (to.matched.some(record => record.meta.orderRole)) {
+  } else if (to.matched.some(record => record.meta.orderRole)) {
     //判断当前是否有登录的权限
-    if (store.state.role && store.state.role.indexOf(VAR.adminRole)===-1 && store.state.role.indexOf(VAR.orderRole)===-1) {
+    if (store.state.role && store.state.role.indexOf(VAR.adminRole) === -1 && store.state.role.indexOf(VAR.orderRole) === -1) {
       next('/NoAccess')
     }
-  }else if (to.matched.some(record => record.meta.userRole)) {
+  } else if (to.matched.some(record => record.meta.userRole)) {
     //判断当前是否有登录的权限
-    if (store.state.role && store.state.role.indexOf(VAR.adminRole)===-1 && store.state.role.indexOf(VAR.userRole)===-1) {
+    if (store.state.role && store.state.role.indexOf(VAR.adminRole) === -1 && store.state.role.indexOf(VAR.userRole) === -1) {
       next('/NoAccess')
     }
   }
 
-  if(to.path==='/login'){
+  if (to.path === '/login') {
     next({
       path: '/loginForm',
     })
   }
 
-  if(to.path==='/HomePage' && store.state.role && store.state.role.indexOf(VAR.ordinaryRole)!==-1){
-    if(from.path!=='/MallHome'){
+  if (to.path === '/HomePage' && store.state.role && store.state.role.indexOf(VAR.ordinaryRole) !== -1) {
+    if (from.path !== '/MallHome') {
       next({
         path: '/MallHome',
       })
-    }else{
+    } else {
       router.go(0)
     }
-  }else if(to.path==='/MallHome' && store.state.role && store.state.role.indexOf(VAR.ordinaryRole)===-1){
-    if(from.path!=='/HomePage'){
+  } else if (to.path === '/MallHome' && store.state.role && store.state.role.indexOf(VAR.ordinaryRole) === -1) {
+    if (from.path !== '/HomePage') {
       next({
         path: '/HomePage',
       })
-    }else{
+    } else {
       router.go(0)
     }
-  }else{
+  } else {
     next() // 确保一定要调用 next()
   }
 });
