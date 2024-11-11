@@ -46,8 +46,16 @@
               <el-switch v-model="productForm.isNew"></el-switch>
             </el-form-item>
           </el-form-item>
-          <el-form-item label="农产品介绍：" prop="productDescribe" style="width: 45%;">
-            <el-input type="textarea" class="product-desc" size="small" show-word-limit :autosize="{ minRows: 1, maxRows: 4}"  v-model="productForm.productDescribe" placeholder="农产品描述"></el-input>
+          <el-form-item label="农产品介绍：" prop="productDescribe" style="width: 45%; margin-right: 5%">
+            <el-input 
+              type="textarea" 
+              class="product-desc" 
+              size="small" 
+              show-word-limit 
+              :autosize="{ minRows: 1, maxRows: 4}"  
+              v-model="productForm.productDescribe" 
+              placeholder="农产品描述">
+            </el-input>
           </el-form-item>
           <el-form-item label="农产品图片：" prop="productUrl" style="width: 45%;">
             <el-upload
@@ -254,25 +262,30 @@
   }
 
   .product-add .product-box{
-    height: 700px;
+    height: 780px;
     width: 90%;
   }
 
   .product-add .info-box{
-    height: 600px;
+    height: 680px;
     border:1px solid #EBEEF5;
   }
 
   .product-add .product-form {
+    height: 640px;
     width: 700px;
-    height: 560px;
     margin: 25px auto 0;
     text-align: left;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
 
   .product-add .product-form .el-form-item{
     margin-bottom: 15px;
+    display: inline-block;
+    vertical-align: top;
   }
   .product-add .product-upload .el-upload-dragger{
     height: 140px;
@@ -283,8 +296,9 @@
   }
 
   .product-add .product-desc .el-textarea__inner{
-    max-height: 160px;
-    height: 145px!important;
+    max-height: 140px;
+    min-height: 140px;
+    width: 100%;
   }
   .product-add .avatar-uploader-icon {
     font-size: 28px;
@@ -297,6 +311,7 @@
 
   .product-add .product-form .el-form-item__label{
     width: 94px;
+    padding-right: 10px;
   }
   .product-add .product-form .select-spec .el-select__tags{
     overflow-y: scroll;
@@ -304,5 +319,8 @@
   }
   .product-add .product-form .select-spec .el-select__tags::-webkit-scrollbar{
     width: 0;
+  }
+  .product-add .product-upload {
+    vertical-align: top;
   }
 </style>
