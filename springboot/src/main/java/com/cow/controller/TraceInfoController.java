@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/trace")
+@RequestMapping("/api/trace")
 
 public class TraceInfoController {
     @Autowired
     private TraceInfoMapper traceInfoMapper;
-    @GetMapping("/getTraceInfoById")
+    @GetMapping("/info")
     public Result getTraceInfoById(@Param("id") Integer id){
         TraceInfo traceInfo = traceInfoMapper.selectById(id);
         TraceInfoVO traceInfoVO = new TraceInfoVO(traceInfo);
