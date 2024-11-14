@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "traceinfo")
+@Table(name = "trace_info")
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraceInfo {
