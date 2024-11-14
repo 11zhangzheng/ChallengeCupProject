@@ -2,21 +2,18 @@ package com.cow.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+@Component
 @Data
-@Entity
-@Table(name = "manager")
+@TableName("manager")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Manager {
-    @Id
     @TableId
     private Integer managerId;
     @TableField("name")

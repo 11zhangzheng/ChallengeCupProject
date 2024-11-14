@@ -4,9 +4,10 @@ import com.cow.dao.ManagerMapper;
 import com.cow.entity.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 @Component
-
+@RestController
 public class ManagerController {
     @Autowired
     private ManagerMapper managerMapper;
