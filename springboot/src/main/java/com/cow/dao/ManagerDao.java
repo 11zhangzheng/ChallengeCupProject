@@ -5,6 +5,6 @@ import com.cow.entity.Manager;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ManagerMapper extends BaseMapper<Manager> {
+public interface ManagerDao extends BaseMapper<Manager> {
 
 }

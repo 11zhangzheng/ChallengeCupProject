@@ -1,6 +1,6 @@
 package com.cow.vo;
 
-import com.cow.dao.ManagerMapper;
+import com.cow.dao.ManagerDao;
 import com.cow.entity.Manager;
 import com.cow.entity.TraceInfo;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class TraceInfoVO {
     @Autowired
-    public ManagerMapper managerMapper;
+    public ManagerDao ManagerDao;
     private  Integer managerId;
     private String managerName;
     private String phone;
@@ -32,9 +32,9 @@ public class TraceInfoVO {
         this.productDate=traceInfo.getProductDate();
         this.specification=traceInfo.getSpecification();
         this.productionAddress=traceInfo.getProductionAddress();
-        Manager manager=managerMapper.selectById(managerId);
-        this.managerName=manager.getManagerName();
-        this.phone=manager.getPhone();
+//        Manager manager=ManagerDao.selectById(managerId);
+//        this.managerName=manager.getManagerName();
+//        this.phone=manager.getPhone();
     }
 
 }

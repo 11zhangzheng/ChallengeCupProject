@@ -1,7 +1,7 @@
 package com.cow.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cow.dao.TraceInfoMapper;
+import com.cow.dao.TraceInfoDao;
 import com.cow.entity.TraceInfo;
 import com.cow.vo.Result;
 import com.cow.vo.TraceInfoVO;
@@ -16,14 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class TraceInfoController {
     @Autowired
-    private TraceInfoMapper traceInfoMapper;
+    private TraceInfoDao traceInfoDao;
+
     @GetMapping("/info")
-    public Result getTraceInfoById(@Param("id") Integer id){
-        TraceInfo traceInfo = traceInfoMapper.selectById(id);
-        TraceInfoVO traceInfoVO = new TraceInfoVO(traceInfo);
-        if (traceInfo != null){
-            return Result.ok(traceInfoVO);
+    public Result getTraceInfoById(@Param("id") String id) {
+        if (id == null || id.trim().isEmpty()) {
+            return Result.fail("Invalid ID,ID is null");
         }
-        return Result.fail();
+        try {
+            TraceInfo traceInfo = traceInfoDao.selectById(id);
+
+            if (traceInfo != null) {
+                TraceInfoVO traceInfoVO = new TraceInfoVO(traceInfo);
+                return Result.ok(traceInfoVO);
+            } else {
+                return Result.fail("TraceInfo not found");
+            }
+        } catch (Exception e) {
+            // 异常处理
+            e.printStackTrace();
+            return Result.fail("error: " + e.getMessage());
+        }
     }
+
 }

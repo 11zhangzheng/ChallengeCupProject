@@ -1,6 +1,6 @@
 package com.cow.controller;
 
-import com.cow.dao.ManagerMapper;
+import com.cow.dao.ManagerDao;
 import com.cow.entity.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManagerController {
     @Autowired
-    private ManagerMapper managerMapper;
+    private ManagerDao ManagerDao;
 
     public Manager getManagerById(Integer id) {
-        Manager manager = managerMapper.selectById(id);
+        Manager manager = ManagerDao.selectById(id);
         if (manager != null) {
             return manager;
         } else {

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraceInfo {
-    @TableId
+    @TableId(value = "traceCode")
     private String TraceCode;
     @TableField("productName")
     private String productName;

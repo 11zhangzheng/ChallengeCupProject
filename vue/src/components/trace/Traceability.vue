@@ -48,11 +48,11 @@
           </div>
           <div class="info-item">
             <span class="label">负责人</span>
-            <span class="value">{{ traceData.manager }}</span>
+            <span class="value">{{ traceData.managerName }}</span>
           </div>
           <div class="info-item">
             <span class="label">联系电话</span>
-            <span class="value">{{ traceData.contactPhone }}</span>
+            <span class="value">{{ traceData.phone }}</span>
           </div>
         </div>
       </div>
@@ -65,16 +65,17 @@ export default {
   name: 'Traceability',
   data() {
     return {
-      traceData: {
-        traceCode: '83771780494235483766',
-        productName: '有机草莓',
-        productImage: '',
-        specification: '500g/盒',
-        productionAddress: '四川省成都市新都区新繁镇红光村',
-        productionDate: '2024-03-15',
-        manager: '张三',
-        contactPhone: '028-12345678'
-      }
+      traceData:{},
+      // traceData: {
+      //   traceCode: '83771780494235483766',
+      //   productName: '有机草莓',
+      //   productImage: '',
+      //   specification: '500g/盒',
+      //   productionAddress: '四川省成都市新都区新繁镇红光村',
+      //   productionDate: '2024-03-15',
+      //   manager: '张三',
+      //   contactPhone: '028-12345678'
+      // }
     }
   },
   computed: {
@@ -85,6 +86,14 @@ export default {
   },
   created() {
     const productId = this.$route.query.id;
+    this.$http.get('api/trace/info?id='+productId).then(res => {
+      if(res.data.code===200||res.data.code===20000){
+        this.traceData=res.data.data;
+
+      }else{
+        this.$message('获取溯源信息失败,请联系管理员处理 ！')
+      }
+})
     console.log('商品ID:', productId);
   }
 }

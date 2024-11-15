@@ -5,5 +5,5 @@ import com.cow.entity.TraceInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface TraceInfoMapper extends BaseMapper<TraceInfo> {
+public interface TraceInfoDao extends BaseMapper<TraceInfo> {
 }

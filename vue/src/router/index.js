@@ -287,7 +287,8 @@ export default new Router({
         {
           path: '/traceability',
           name: 'Traceability',
-          component: () => import("../components/trace/Traceability")
+          component: () => import("../components/trace/Traceability"),
+          props: true
         }
       ],
     },
