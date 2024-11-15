@@ -6,6 +6,31 @@
       </div>
       <div class="order-info">
         <div class="info-title">
+          <i class="el-icon-coordinate"></i>
+          溯源信息
+        </div>
+        <div class="info-content traceability-content">
+          <div class="qr-container">
+            <el-image 
+              v-if="orderInfo.traceQrCode" 
+              :src="orderInfo.traceQrCode"
+              class="qr-image"
+              fit="contain">
+            </el-image>
+            <div v-else class="qr-placeholder">
+              <i class="el-icon-picture-outline"></i>
+              <p>溯源二维码生成中...</p>
+            </div>
+            <div class="qr-desc">产品唯一溯源二维码</div>
+          </div>
+          <div class="trace-tips">
+            <p>扫描二维码可查看该农产品完整的溯源信息</p>
+            <p>包括生产方全部数据</p>
+          </div>
+        </div>
+      </div>
+      <div class="order-info">
+        <div class="info-title">
           <i class="el-icon-edit"></i>
           基本信息
         </div>
@@ -311,6 +336,65 @@
     left: 60%;
   }
 
+  .traceability-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px !important;
+    background: #f8f9fa;
+  }
 
+  .qr-container {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+  }
+
+  .qr-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .qr-placeholder {
+    width: 200px;
+    height: 200px;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #dcdfe6;
+    border-radius: 4px;
+  }
+
+  .qr-placeholder i {
+    font-size: 48px;
+    color: #909399;
+    margin-bottom: 10px;
+  }
+
+  .qr-placeholder p {
+    color: #909399;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .qr-desc {
+    margin-top: 15px;
+    color: #606266;
+    font-size: 14px;
+  }
+
+  .trace-tips {
+    margin-left: 40px;
+    color: #909399;
+  }
+
+  .trace-tips p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
 
 </style>
