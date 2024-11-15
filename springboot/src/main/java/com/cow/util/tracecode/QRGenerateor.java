@@ -6,7 +6,7 @@ import cn.hutool.extra.qrcode.QrConfig;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRGenerateor {
-    private static final String QR_PREFIX = "https://localhost:9999/"+"traceability?id=";
+    private static final String QR_PREFIX = "https://localhost:8080/"+"traceability?id=";
     public static void generateQRCode(String content) {
         try{
             QrCodeUtil
