@@ -5,10 +5,16 @@
       <el-breadcrumb-item to="/MallHome">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in $route.meta.headerName" :key="index">
         <router-link v-if="item.url" :to="item.url">{{item.name}}</router-link>
-        <span v-else>
-        {{item.name}}
-      </span>
+        <span v-else>{{item.name}}</span>
       </el-breadcrumb-item>
+      
+      <!-- 添加智+种植链接 -->
+      <div class="ai-planting">
+        <router-link to="/aiPlanting" class="ai-link">
+          <span>智+种植</span>
+        </router-link>
+      </div>
+      
       <watcher class="wat" :class="{watcher:this.$store.state.token!==null}"></watcher>
       <div class="avatar" :class="{'notLogin':this.$store.state.token===null}">
         <el-dropdown v-if="this.$store.state.token!==null" class="el-dropdown" placement="bottom-start" style="padding-top: 18px;">
@@ -186,11 +192,11 @@ export default {
   }
   .header .avatar{
     position: absolute;
-    right: 83px;
+    right: 50px;
   }
 
   .header .notLogin{
-    right: 50px!important;
+    right: 30px!important;
   }
 
   .header .el-avatar{
@@ -211,22 +217,92 @@ export default {
     width: 100px;
   }
 
-  .header .watcher{
-    position: absolute;
-    right: 140px!important;
+  .header .watcher.watcher,
+  .header .wat.wat {
+    position: absolute !important;
+    right: 180px !important;
     cursor: pointer;
   }
-  .header .watcher .sw-card-slim-container{
-    position: absolute;
-    right: -150px!important;
+
+  .header .watcher .sw-card-slim-container,
+  .header .wat .sw-card-slim-container {
+    position: absolute !important;
+    right: -80px !important;
+    width: auto !important;
   }
 
-  .header .wat{
+  /* 添加智+种植的样式 */
+  .header .ai-planting {
     position: absolute;
-    right: 240px;
+    right: 480px;
+    line-height: 4;
+    z-index: 999;
   }
-  .header .wat .sw-card-slim-container{
+
+  .header .ai-planting .ai-link {
+    text-decoration: none;
+    color: #409EFF;
+    font-size: 14px;
+    padding: 6px 20px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .header .ai-planting .ai-link:hover {
+    color: #66b1ff;
+  }
+
+  .header .ai-planting .ai-link:after {
+    content: '';
     position: absolute;
-    right: -150px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #409EFF;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .header .ai-planting .ai-link:hover:after {
+    transform: scaleX(1);
+  }
+
+  .header .ai-planting .el-icon-plant {
+    margin-right: 4px;
+    font-size: 16px;
+  }
+
+  .header .ai-planting .ai-link span {
+    vertical-align: middle;
+  }
+
+  /* 激活状态的样式 */
+  .header .ai-planting .router-link-active {
+    color: #409EFF;
+  }
+
+  .header .ai-planting .router-link-active:after {
+    transform: scaleX(1);
+  }
+
+  /* 天气组件样式 */
+  .header .wat {
+    position: absolute !important;
+    right: 180px !important;
+    top: 0 !important;
+    width: 300px !important;  /* 给一个固定宽度 */
+    z-index: 1000 !important; /* 提高层级 */
+  }
+
+  /* 头像位置 */
+  .header .avatar {
+    position: absolute;
+    right: 50px;
+    z-index: 1000;
+  }
+
+  .header .notLogin {
+    right: 30px !important;
   }
 </style>

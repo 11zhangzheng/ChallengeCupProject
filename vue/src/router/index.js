@@ -289,6 +289,24 @@ export default new Router({
           name: 'Traceability',
           component: () => import("../components/trace/Traceability"),
           props: true
+        },
+        {
+          path: '/aiPlanting',
+          name: '智+种植',
+          component: () => import("../components/mall/AiPlanting"),
+          meta: {
+            requiresAuth: false,
+            headerName: [{ name: '智+种植' }]
+          }
+        },
+        {
+          path: '/chatPage',
+          name: 'AI智能问答',
+          component: () => import("../components/mall/ChatPage"),
+          meta: {
+            requiresAuth: false,
+            headerName: [{ name: 'AI智能问答' }]
+          }
         }
       ],
     },

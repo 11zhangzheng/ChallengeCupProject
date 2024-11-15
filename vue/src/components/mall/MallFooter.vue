@@ -6,6 +6,7 @@
         <ul class="list-service clearfix">
           <li><i class="el-icon-time"></i>7天无理由退货</li>
           <li><i class="el-icon-position"></i>15天免费换货</li>
+          <li><i class="el-icon-truck"></i>农产品纯透明链路直销</li>
         </ul>
       </div>
       <div class="footer-copyright">

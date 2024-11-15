@@ -7,14 +7,17 @@
     <!--导航栏-->
     <div class="mall-nav">
       <el-menu :default-active="activeIndex" class="el-menu-demo" :collapse-transition="false" active-text-color="#409EFF" mode="horizontal" @select="handleSelect">
+        <!-- 农产品服务平台 -->
         <el-menu-item index="1" style="width: 12%;margin-left:10%;position: relative">
           <router-link to="/MallHome" style="text-decoration: none;position: absolute;right: 0">
             <span style="font-size: 20px">农产品服务平台</span>
           </router-link>
         </el-menu-item>
+        
+        <!-- 搜索框 -->
         <el-menu-item index="2" style="width: 50%">
           <el-input placeholder="请输入内容" v-model="queryProductInfo" @keyup.enter.native="queryProduct(queryProductInfo)" class="input-with-select" style="height: 45px;">
-            <el-select v-model="select"  slot="prepend" placeholder="请选择" style="width: 120px;user-select: none;">
+            <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 120px;user-select: none;">
               <el-option label="农产品名称" value="1"></el-option>
               <el-option label="农产品分类" value="2"></el-option>
               <el-option label="农产品品牌" value="3"></el-option>
@@ -22,10 +25,14 @@
             <el-button slot="append" icon="el-icon-search" @click="queryProduct(queryProductInfo)"></el-button>
           </el-input>
         </el-menu-item>
+
+        <!-- 农产品分类 -->
         <el-submenu index="3" style="width: 10%">
           <template slot="title">农产品分类</template>
           <el-menu-item v-for="(item,i) in productType" :index="'3-'+i" :key="'3-'+i" @click="queryProduct(item,'type')">{{item}}</el-menu-item>
         </el-submenu>
+
+        <!-- 农产品品牌 -->
         <el-submenu index="4" style="width: 10%">
           <template slot="title">农产品品牌</template>
           <el-menu-item v-for="(item,i) in productBrand" :index="'4-'+i" :key="'4-'+i" @click="queryProduct(item,'brand')">{{item}}</el-menu-item>
