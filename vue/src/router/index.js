@@ -307,6 +307,16 @@ export default new Router({
             requiresAuth: false,
             headerName: [{ name: 'AI智能问答' }]
           }
+        },
+        {
+          path: '/knowledgeManage',
+          name: '知识库上传',
+          component: () => import("../components/knowledge/KnowledgeManage"),
+          meta: {
+            requiresAuth: true,
+            adminRole: true,
+            headerName: [{ name: '知识库上传' }]
+          }
         }
       ],
     },

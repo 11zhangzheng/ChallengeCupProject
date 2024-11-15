@@ -1,4 +1,3 @@
-<!--侧边栏组件-->
 <template>
     <div class="aside">
       <el-menu
@@ -14,7 +13,7 @@
         <router-link to="/HomePage" class="router-link">
           <el-menu-item id="HomePage" index="1">
             <i class="el-icon-s-home"></i>
-            <span slot="title">首页</span>
+            <span>首页</span>
           </el-menu-item>
         </router-link>
         <el-submenu index="2">
@@ -138,6 +137,28 @@
             </router-link>
           </el-menu-item-group>
         </el-submenu>
+
+      <!-- 添加智+种植菜单 -->
+      <el-submenu index="6">
+        <template slot="title">
+          <i class="el-icon-umbrella"/>
+          <span>智能农业</span>
+        </template>
+        <el-menu-item-group>
+          <router-link to="/aiPlanting" class="router-link">
+            <el-menu-item id="AiPlanting" index="6-1" class="el-menu-item-bg">
+              <i class="el-icon-magic-stick"/>
+              <span>智+种植</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/knowledgeManage" class="router-link" v-if="$store.state.role && $store.state.role.indexOf($VAR.adminRole)!==-1">
+            <el-menu-item id="KnowledgeManage" index="6-2" class="el-menu-item-bg">
+              <i class="el-icon-collection"/>
+              <span>知识库上传</span>
+            </el-menu-item>
+          </router-link>
+        </el-menu-item-group>
+      </el-submenu>
       </el-menu>
     </div>
 </template>
@@ -200,7 +221,9 @@
           case "/SlideShow":
             document.getElementById("SlideShow").style.color = 'rgb(64, 158, 255)';
             break;
-
+          case "/aiPlanting":
+          document.getElementById("AiPlanting").style.color = 'rgb(64, 158, 255)';
+          break;
         }
         if(this.$route.path==='/HomePage'){
           this.$refs.menu.close(window.localStorage.getItem('menu-index'));
@@ -252,6 +275,9 @@
               this.$refs.menu.close(key);
             }
             break
+          case "6":
+          // 智能农业模块不需要特殊权限控制
+          break;
         }
       },
       handleClose(key, keyPath) {
