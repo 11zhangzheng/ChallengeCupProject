@@ -9,12 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 17:02
- * @description 商品品牌业务逻辑
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ProductBrandServiceImpl implements ProductBrandService {

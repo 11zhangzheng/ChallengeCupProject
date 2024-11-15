@@ -5,12 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 16:51
- * @description 商品品牌
- */
+
 public interface ProductBrandDao extends BaseDao<ProductBrand> {
     /**
      * 查询所有品牌名

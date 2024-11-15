@@ -4,12 +4,7 @@ import com.cow.entity.Purchase;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 11:01
- * @description 采购表业务逻辑
- */
+
 public interface PurchaseService {
 
     /**

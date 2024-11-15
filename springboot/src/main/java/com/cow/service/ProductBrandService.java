@@ -4,12 +4,7 @@ import com.cow.entity.ProductBrand;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 16:59
- * @description 商品品牌业务逻辑
- */
+
 public interface ProductBrandService {
     /**
      * 通过ID查询

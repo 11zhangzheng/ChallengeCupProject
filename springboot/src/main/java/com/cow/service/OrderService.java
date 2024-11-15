@@ -5,12 +5,7 @@ import com.cow.entity.Order;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/18 11:30
- * @description 订单业务逻辑
- */
+
 public interface OrderService {
     /**
      * 通过ID查询

@@ -4,12 +4,6 @@ import com.cow.entity.Vip;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/20 16:47
- * @description 会员业务逻辑
- */
 public interface VipService {
     /**
      * 通过ID查询会员信息

@@ -4,12 +4,7 @@ import com.cow.entity.Supplier;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 8:16
- * @description 供应商业务逻辑
- */
+
 public interface SupplierService {
     /**
      * 通过供应商ID查询供应商信息

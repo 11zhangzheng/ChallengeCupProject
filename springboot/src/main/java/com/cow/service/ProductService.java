@@ -5,12 +5,7 @@ import com.cow.entity.Product;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/13 14:47
- * @description 商品信息业务逻辑
- */
+
 public interface ProductService {
     /**
      * 根据商品ID查询商品信息

@@ -5,12 +5,7 @@ import com.cow.entity.ShoppingCart;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2021/1/2 9:14
- * @description 购物车业务逻辑
- */
+
 public interface ShoppingCartService {
 
     /**

@@ -6,12 +6,7 @@ import com.cow.entity.User;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 9:55
- * @description 用户业务逻辑
- */
+
 public interface UserService {
     /**
      * 根据用户ID查询用户信息

@@ -5,12 +5,7 @@ import com.cow.entity.ReturnGoods;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 22:19
- * @description 商品退货业务逻辑
- */
+
 public interface ReturnGoodsService {
     /**
      * 通过ID查询

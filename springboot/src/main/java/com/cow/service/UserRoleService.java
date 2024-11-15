@@ -5,12 +5,7 @@ import com.cow.entity.UserRole;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 15:40
- * @description 用户角色业务逻辑
- */
+
 public interface UserRoleService {
     /**
      * 查询用户角色

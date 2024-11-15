@@ -4,12 +4,7 @@ import com.cow.entity.Banner;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 15:43
- * @description 商品轮播图
- */
+
 public interface BannerService {
     /**
      * 通过编号查询

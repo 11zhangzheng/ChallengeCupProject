@@ -4,12 +4,7 @@ import com.cow.entity.Role;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 13:39
- * @description 角色业务逻辑
- */
+
 public interface RoleService {
     /**
      * 根据ID查询角色信息

@@ -12,12 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2021/1/4 11:09
- * @description 商品评价业务逻辑
- */
+
 
 @Service
 @Transactional(rollbackFor = Exception.class)

@@ -4,12 +4,7 @@ import com.cow.entity.ProductType;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 15:43
- * @description 商品分类业务逻辑
- */
+
 public interface ProductTypeService {
     /**
      * 根据商品分类ID查询

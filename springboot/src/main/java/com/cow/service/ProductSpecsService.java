@@ -4,12 +4,7 @@ import com.cow.entity.ProductSpecs;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/17 19:11
- * @description 商品规格业务逻辑
- */
+
 public interface ProductSpecsService {
     /**
      * 查询所有商品规格

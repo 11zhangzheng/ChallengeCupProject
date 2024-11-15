@@ -7,12 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- *
- * @email QQ550080747
- * @date 2021/1/1 10:01
- * @description 读取配置文件信息
- */
+
 public class PropertiesUtil {
     private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 

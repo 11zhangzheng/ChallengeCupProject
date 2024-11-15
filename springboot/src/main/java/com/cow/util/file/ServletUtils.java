@@ -14,11 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-/**
- * 客户端工具类
- *
- * @author 教研源码
- */
+
 public class ServletUtils {
 
 

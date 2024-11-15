@@ -4,12 +4,7 @@ import com.cow.entity.ReturnReason;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/24 21:04
- * @description 退货原因业务逻辑
- */
+
 public interface ReturnReasonService {
     /**
      * 根据ID查询
