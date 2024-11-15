@@ -9,12 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 8:17
- * @description 供应商业务逻辑
- */
+
 
 @Service
 @Transactional(rollbackFor = Exception.class)

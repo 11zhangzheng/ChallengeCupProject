@@ -9,12 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/13 14:02
- * @description 商品表实体类
- */
+
 
 @Data
 @Entity

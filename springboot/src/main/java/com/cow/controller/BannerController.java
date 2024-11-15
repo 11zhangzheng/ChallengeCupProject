@@ -10,11 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @description 商品类别
- */
+
 @CrossOrigin
 @RestController
 public class BannerController {

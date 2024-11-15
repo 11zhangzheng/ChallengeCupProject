@@ -16,12 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/29 15:11
- * @description 发送邮件、产生验证码图片、发送短信等工具类操作
- */
+
 @CrossOrigin
 @RestController
 public class UtilController {

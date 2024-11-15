@@ -11,12 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/13 14:55
- * @description 商品信息业务逻辑
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ProductServiceImpl implements ProductService {

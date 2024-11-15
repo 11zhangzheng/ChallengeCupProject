@@ -5,7 +5,6 @@ import com.cow.util.tracecode.QRGenerateor;
 import com.cow.vo.Result;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

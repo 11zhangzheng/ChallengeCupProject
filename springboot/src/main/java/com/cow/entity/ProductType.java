@@ -9,12 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 15:27
- * @description 商品分类 实体
- */
+
 @Data
 @Entity
 @Table(name = "product_type")

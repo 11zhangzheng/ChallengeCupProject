@@ -5,12 +5,7 @@ import com.cow.entity.ShoppingCart;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2021/1/2 9:19
- * @description 购物车表
- */
+
 public interface ShoppingCartDao extends BaseDao<ShoppingCart> {
     /**
      * 查询用户购物车信息

@@ -16,11 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @description 商品相关业务
- */
+
 
 @CrossOrigin
 @RestController

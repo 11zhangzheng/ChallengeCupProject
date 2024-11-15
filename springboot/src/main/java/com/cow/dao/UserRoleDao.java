@@ -5,12 +5,7 @@ import com.cow.entity.UserRole;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 15:22
- * @description userRole
- */
+
 public interface UserRoleDao extends BaseDao<UserRole> {
     /**
      * 根据用户编号查询用户角色信息

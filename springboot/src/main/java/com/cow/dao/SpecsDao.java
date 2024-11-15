@@ -5,12 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/17 16:02
- * @description 商品规格表
- */
+
 public interface SpecsDao extends BaseDao<Specs> {
     /**
      * 根据类型查询所有

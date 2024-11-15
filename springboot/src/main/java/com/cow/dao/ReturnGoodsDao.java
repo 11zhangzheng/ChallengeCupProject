@@ -6,12 +6,7 @@ import com.cow.entity.ReturnGoods;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 22:11
- * @description 商品退货表
- */
+
 public interface ReturnGoodsDao extends BaseDao<ReturnGoods> {
     /**
      * 查询用户退货商品信息

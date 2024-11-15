@@ -7,11 +7,6 @@ import lombok.*;
 import java.io.InputStream;
 import java.util.Date;
 
-/**
- * 文件表
- *
- * @author 教研源码
- */
 @Data
 @TableName("inf_file")
 @ToString(callSuper = true)

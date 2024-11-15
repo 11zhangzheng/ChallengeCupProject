@@ -13,11 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @description 数据分析，商品数量，订单数量等分析业务
- */
+
 @CrossOrigin
 @RestController
 public class OverViewController {

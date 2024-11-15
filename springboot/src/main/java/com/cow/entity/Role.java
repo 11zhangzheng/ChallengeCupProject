@@ -9,12 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 13:27
- * @description 用户权限
- */
+
 @Data
 @Entity
 @Table(name = "role")

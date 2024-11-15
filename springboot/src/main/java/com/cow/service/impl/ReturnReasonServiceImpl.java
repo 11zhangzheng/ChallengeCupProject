@@ -9,12 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/24 21:06
- * @description 退货原因业务逻辑
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ReturnReasonServiceImpl implements ReturnReasonService {

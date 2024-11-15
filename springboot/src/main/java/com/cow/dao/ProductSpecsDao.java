@@ -4,12 +4,7 @@ import com.cow.entity.ProductSpecs;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/17 16:49
- * @description 商品与商品规格表
- */
+
 public interface ProductSpecsDao extends BaseDao<ProductSpecs> {
     /**
      * 根据商品id查询所有商品规格名称

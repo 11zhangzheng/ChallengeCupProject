@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @description 购物车业务类
- */
+
 @RestController
 @CrossOrigin
 public class ShoppingCartController {

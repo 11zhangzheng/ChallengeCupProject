@@ -9,12 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/17 15:57
- * @description 商品规格表   eg：服装 M、X、XL尺码等信息
- */
+
 
 @Data
 @Entity

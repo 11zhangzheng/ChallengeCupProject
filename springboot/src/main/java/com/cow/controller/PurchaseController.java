@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @description 供应商和采购
- */
+
 @CrossOrigin
 @RestController
 public class PurchaseController {

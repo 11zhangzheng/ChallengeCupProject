@@ -5,12 +5,7 @@ import com.cow.entity.Product;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/13 14:14
- * @description 商品表
- */
+
 public interface ProductDao extends BaseDao<Product> {
     /**
      * 根据商品分类查询

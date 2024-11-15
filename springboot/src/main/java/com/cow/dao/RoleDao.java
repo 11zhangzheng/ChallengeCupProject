@@ -5,12 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 13:31
- * @description role表
- */
+
 public interface RoleDao extends BaseDao<Role> {
     /**
      * 查询所有可用的角色

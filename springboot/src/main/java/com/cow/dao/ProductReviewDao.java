@@ -5,12 +5,7 @@ import com.cow.entity.ProductReview;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2021/1/4 10:52
- * @description 商品评价
- */
+
 public interface ProductReviewDao extends BaseDao<ProductReview> {
     /**
      * 查询所有

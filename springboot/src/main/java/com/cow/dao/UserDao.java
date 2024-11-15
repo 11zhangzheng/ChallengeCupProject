@@ -8,12 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/10/31 9:26
- * @description user
- */
+
 @Component
 public interface UserDao extends BaseDao<User> {
     /**

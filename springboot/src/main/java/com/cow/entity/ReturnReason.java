@@ -8,12 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/24 20:54
- * @description 退货原因表
- */
+
 @Data
 @Entity
 @Table(name = "return_reason")

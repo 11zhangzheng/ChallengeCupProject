@@ -8,12 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/25 7:55
- * @description 供应商表
- */
 @Data
 @Entity
 @Table(name = "supplier")

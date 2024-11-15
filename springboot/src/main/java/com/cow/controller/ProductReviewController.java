@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @description 商品评价 业务类
- */
+
 @RestController
 @CrossOrigin
 public class ProductReviewController {

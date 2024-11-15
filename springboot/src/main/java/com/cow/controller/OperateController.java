@@ -21,11 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- *
- * @email QQ550080747
- * @description 登录、退出、修改个人信息等业务操作
- */
+
 @Slf4j
 @CrossOrigin
 @RestController

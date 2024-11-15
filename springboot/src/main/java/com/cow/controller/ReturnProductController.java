@@ -19,11 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @description 商品退回
- */
+
 @CrossOrigin
 @RestController
 public class ReturnProductController {

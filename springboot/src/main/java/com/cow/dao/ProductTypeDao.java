@@ -5,12 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/12 15:33
- * @description 商品类别表
- */
 public interface ProductTypeDao extends BaseDao<ProductType> {
     /**
      * 查询所有分类名

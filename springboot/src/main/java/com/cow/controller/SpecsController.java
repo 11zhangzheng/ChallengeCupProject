@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @description 商品规格、商品与商品规格的关联
- */
+
 
 @CrossOrigin
 @RestController

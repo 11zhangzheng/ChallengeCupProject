@@ -6,12 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/18 10:20
- * @description 订单表
- */
+
 public interface OrderDao extends BaseDao<Order> {
     /**
      * 根据用户账号查询订单信息

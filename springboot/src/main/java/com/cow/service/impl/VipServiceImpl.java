@@ -10,12 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @email QQ550080747
- * @date 2020/11/20 16:49
- * @description 会员业务逻辑
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class VipServiceImpl implements VipService {
