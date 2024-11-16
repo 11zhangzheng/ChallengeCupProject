@@ -39,27 +39,30 @@ public class PropertiesUtil {
         CALLBACK = (String) properties.get("callback");
         FRONTEND = (String) properties.get("frontend");
     }
+    public static String getFrontend() {
+        return FRONTEND;
+    }
 
-//    public static String getRedisHost() {
-//        return REDIS_HOST;
-//    }
+    public static String getRedisHost() {
+        return REDIS_HOST;
+    }
 
-//    public static String getRedisPwd() {
-//        return REDIS_PWD;
-//    }
+    public static String getRedisPwd() {
+        return REDIS_PWD;
+    }
 
-//    public static String getPort() {
-//        return PORT;
-//    }
+    public static String getPort() {
+        return PORT;
+    }
 
-//    public static String getDomain() {
-//        return DOMAIN;
-//    }
+    public static String getDomain() {
+        return DOMAIN;
+    }
 
-//    public static String getCallback() {
-//        return CALLBACK;
-//    }
+    public static String getCallback() {
+        return CALLBACK;
+    }
 
-//    private PropertiesUtil() {
-//    }
+    private PropertiesUtil() {
+    }
 }

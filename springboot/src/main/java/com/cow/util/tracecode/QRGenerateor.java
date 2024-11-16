@@ -10,7 +10,7 @@ public class QRGenerateor {
     public static void main(String[] args){
         generateQRCode("12345678900987654321");
     }
-    private static final String QR_PREFIX = "http://"+PropertiesUtil.get+"/trace?id=";
+    private static final String QR_PREFIX = "http://"+PropertiesUtil.getFrontend()+"/traceability?id=";
     public static void generateQRCode(String content) {
         try{
             QrCodeUtil
