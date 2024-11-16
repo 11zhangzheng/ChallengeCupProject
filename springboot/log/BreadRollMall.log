@@ -9453,3 +9453,47 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 [Smart Farming] 2024-11-15 15:14:15.418 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 [Smart Farming] 2024-11-15 15:14:15.446 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
 [Smart Farming] 2024-11-15 15:14:15.456 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+[Smart Farming] 2024-11-15 17:50:08.819 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+[Smart Farming] 2024-11-15 17:50:08.857 [main] INFO  com.cow.BreadRollMallServer - Starting BreadRollMallServer on AmingLenovoXiaoxin14pro with PID 17324 (C:\Users\25612\Desktop\natural\springboot\target\classes started by 25612 in C:\Users\25612\Desktop\natural\springboot)
+[Smart Farming] 2024-11-15 17:50:08.858 [main] INFO  com.cow.BreadRollMallServer - The following profiles are active: redis,mail,jdbc
+[Smart Farming] 2024-11-15 17:50:09.986 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[Smart Farming] 2024-11-15 17:50:09.987 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[Smart Farming] 2024-11-15 17:50:10.083 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 85ms. Found 0 JPA repository interfaces.
+[Smart Farming] 2024-11-15 17:50:10.103 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+[Smart Farming] 2024-11-15 17:50:10.105 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+[Smart Farming] 2024-11-15 17:50:10.158 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40ms. Found 0 Redis repository interfaces.
+[Smart Farming] 2024-11-15 17:50:10.426 [main] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - Post-processing PropertySource instances
+[Smart Farming] 2024-11-15 17:50:10.462 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+[Smart Farming] 2024-11-15 17:50:10.462 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.463 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.463 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.463 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.464 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.464 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application-jdbc.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.464 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application-mail.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.464 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application-redis.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.464 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[Smart Farming] 2024-11-15 17:50:10.509 [main] INFO  c.u.j.filter.DefaultLazyPropertyFilter - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+[Smart Farming] 2024-11-15 17:50:10.799 [main] INFO  c.u.j.resolver.DefaultLazyPropertyResolver - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+[Smart Farming] 2024-11-15 17:50:10.801 [main] INFO  c.u.j.detector.DefaultLazyPropertyDetector - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+[Smart Farming] 2024-11-15 17:50:10.933 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9999 (http)
+[Smart Farming] 2024-11-15 17:50:10.949 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9999"]
+[Smart Farming] 2024-11-15 17:50:10.950 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[Smart Farming] 2024-11-15 17:50:10.950 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+[Smart Farming] 2024-11-15 17:50:11.208 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[Smart Farming] 2024-11-15 17:50:11.208 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2277 ms
+[Smart Farming] 2024-11-15 17:50:11.633 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+[Smart Farming] 2024-11-15 17:50:13.376 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[Smart Farming] 2024-11-15 17:50:13.486 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.25.Final
+[Smart Farming] 2024-11-15 17:50:13.782 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[Smart Farming] 2024-11-15 17:50:14.107 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+[Smart Farming] 2024-11-15 17:50:16.061 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[Smart Farming] 2024-11-15 17:50:16.082 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[Smart Farming] 2024-11-15 17:50:20.013 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[Smart Farming] 2024-11-15 17:50:20.584 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9999"]
+[Smart Farming] 2024-11-15 17:50:20.609 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9999 (http) with context path ''
+[Smart Farming] 2024-11-15 17:50:20.618 [main] INFO  com.cow.BreadRollMallServer - Started BreadRollMallServer in 12.338 seconds (JVM running for 13.451)
+[Smart Farming] 2024-11-15 17:50:20.618 [main] INFO  com.cow.BreadRollMallServerRunner - Executing command line runner...
+[Smart Farming] 2024-11-15 17:55:40.005 [http-nio-9999-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[Smart Farming] 2024-11-15 17:55:40.005 [http-nio-9999-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[Smart Farming] 2024-11-15 17:55:40.037 [http-nio-9999-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 32 ms
