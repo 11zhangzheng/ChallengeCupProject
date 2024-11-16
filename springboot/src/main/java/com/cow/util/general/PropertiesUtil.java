@@ -1,5 +1,8 @@
 package com.cow.util.general;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,7 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+@Data
+@Getter
+@Setter
 public class PropertiesUtil {
     private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 
@@ -16,6 +21,7 @@ public class PropertiesUtil {
     private static final String PORT;
     private static final String DOMAIN;
     private static final String CALLBACK;
+    private static final String FRONTEND;
 
     static {
         Properties properties = new Properties();
@@ -31,28 +37,29 @@ public class PropertiesUtil {
         PORT = (String) properties.get("port");
         DOMAIN = (String) properties.get("domain");
         CALLBACK = (String) properties.get("callback");
+        FRONTEND = (String) properties.get("frontend");
     }
 
-    public static String getRedisHost() {
-        return REDIS_HOST;
-    }
+//    public static String getRedisHost() {
+//        return REDIS_HOST;
+//    }
 
-    public static String getRedisPwd() {
-        return REDIS_PWD;
-    }
+//    public static String getRedisPwd() {
+//        return REDIS_PWD;
+//    }
 
-    public static String getPort() {
-        return PORT;
-    }
+//    public static String getPort() {
+//        return PORT;
+//    }
 
-    public static String getDomain() {
-        return DOMAIN;
-    }
+//    public static String getDomain() {
+//        return DOMAIN;
+//    }
 
-    public static String getCallback() {
-        return CALLBACK;
-    }
+//    public static String getCallback() {
+//        return CALLBACK;
+//    }
 
-    private PropertiesUtil() {
-    }
+//    private PropertiesUtil() {
+//    }
 }
