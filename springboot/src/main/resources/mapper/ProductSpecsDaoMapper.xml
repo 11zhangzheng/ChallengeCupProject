@@ -52,4 +52,12 @@
             (#{item.productId},#{item.specsId})
         </foreach>
     </insert>
+
+    <!--根据产品ID查询规格-->
+    <select id="selectByProductId" resultType="ProductSpecs" parameterType="Integer">
+        select product_id, specs_id
+        from product_specs
+        where product_id = #{productId}
+        limit 1;
+    </select>
 </mapper>

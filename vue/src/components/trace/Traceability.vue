@@ -43,7 +43,7 @@
             <span class="value">{{ traceData.productDate }}</span>
           </div>
           <div class="info-item address">
-            <span class="label">生产地址</span>
+            <span class="label">生产方</span>
             <span class="value">{{ traceData.productionAddress }}</span>
           </div>
           <div class="info-item">

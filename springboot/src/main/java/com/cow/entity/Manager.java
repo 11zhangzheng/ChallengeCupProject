@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Manager {
-    @TableId
+    @TableId("managerId")
     private Integer managerId;
     @TableField("name")
     private String managerName;

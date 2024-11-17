@@ -29,4 +29,12 @@ public interface ProductSpecsDao extends BaseDao<ProductSpecs> {
      * @return 是否添加成功
      */
     Boolean insertBatch(List<ProductSpecs> productSpecsList);
+
+    /**
+     * 根据产品ID查询规格
+     *
+     * @param productId 产品ID
+     * @return 产品规格信息
+     */
+    ProductSpecs selectByProductId(Integer productId);
 }

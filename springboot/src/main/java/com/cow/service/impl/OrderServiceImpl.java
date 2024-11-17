@@ -2,7 +2,9 @@ package com.cow.service.impl;
 
 import com.cow.dao.OrderDao;
 import com.cow.entity.Order;
+import com.cow.entity.TraceInfo;
 import com.cow.service.OrderService;
+import com.cow.service.TraceInfoService;
 import com.cow.util.tracecode.TraceCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private TraceInfoService traceInfoService;
 
     @Override
     public Order selectById(Integer orderId) {
@@ -59,7 +64,16 @@ public class OrderServiceImpl implements OrderService {
         String traceCode = TraceCodeUtil.generateTraceCode();
         order.setTraceCode(traceCode);
         order.setOrderTime(new Date());
-        return orderDao.insertData(order);
+
+        TraceInfo traceInfo = new TraceInfo();
+        traceInfo.setTraceCode(traceCode);
+        traceInfo.setSpecification(order.getProductNo() + " " + order.getProductSpecs());
+        traceInfo.setProductDate(new java.text.SimpleDateFormat("yyyy-MM-dd").format(order.getOrderTime()));
+        traceInfo.setManager(1);
+
+        boolean traceInfoSaved = traceInfoService.save(traceInfo);
+
+        return traceInfoSaved && orderDao.insertData(order);
     }
 
     @Override
