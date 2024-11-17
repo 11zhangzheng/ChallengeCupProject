@@ -14,7 +14,7 @@ public class LangChainConfig {
     @Value("${spring.openai.api.key}")
     private String openaiApiKey;
 
-    @Value("${spring.openai.api.base-url:https://api.spring.openai.com/v1}")
+    @Value("${spring.openai.api.base-url:https://api.openai.com/v1}")
     private String openaiBaseUrl;
 
     @Bean
@@ -22,7 +22,7 @@ public class LangChainConfig {
         return OpenAiChatModel.builder()
                 .apiKey(openaiApiKey)
                 .baseUrl(openaiBaseUrl)
-                .modelName("gpt-3.5-turbo")
+                .modelName("gpt-4o-mini")
                 .temperature(0.7)
                 .build();
     }
@@ -32,7 +32,7 @@ public class LangChainConfig {
         return OpenAiEmbeddingModel.builder()
                 .apiKey(openaiApiKey)
                 .baseUrl(openaiBaseUrl)
-                .modelName("text-embedding-ada-002")
+                .modelName("text-embedding-3-small")
                 .build();
     }
 } 

@@ -15,7 +15,7 @@ spring:
 
   chroma:
     server:
-      host: localhost
+
       port: 8585
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
