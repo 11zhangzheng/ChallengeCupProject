@@ -17,7 +17,8 @@
                order_from,
                order_state,
                accept_address,
-               return_state
+               return_state,
+               trace_code
         from `order`
         where order_id = #{orderId};
     </select>
@@ -38,7 +39,8 @@
                order_from,
                order_state,
                accept_address,
-               return_state
+               return_state,
+               trace_code
         from `order`
         where !return_state
         order by order_time desc;
@@ -60,7 +62,8 @@
                order_from,
                order_state,
                accept_address,
-               return_state
+               return_state,
+               trace_code
         from `order`
         where order_no = #{orderNo}
     </select>
@@ -182,10 +185,10 @@
     <insert id="insertData" parameterType="Order">
         insert into `order` (order_id, order_no, order_time, product_no, product_specs, user_account, user_name,
                              contact_way, pay_price, pay_amount,
-                             pay_type, order_from, order_state, accept_address, return_state)
+                             pay_type, order_from, order_state, accept_address, return_state, trace_code)
         values (#{orderId}, #{orderNo}, #{orderTime}, #{productNo}, #{productSpecs}, #{userAccount},
                 #{userName}, #{contactWay}, #{payPrice}, #{payAmount}, #{payType}, #{orderFrom}, #{orderState},
-                #{acceptAddress}, #{returnState});
+                #{acceptAddress}, #{returnState}, #{traceCode});
     </insert>
 
     <!--通过ID更新-->
@@ -203,6 +206,9 @@
             </if>
             <if test="returnState != null">
                 return_state = #{returnState},
+            </if>
+            <if test="traceCode != null">
+                trace_code = #{traceCode},
             </if>
         </set>
         where order_id = #{orderId};

@@ -90,4 +90,7 @@ public class Order {
      * 退货状态
      */
     private Boolean returnState;
+
+    private String traceCode;
+
 }
