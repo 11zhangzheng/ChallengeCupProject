@@ -8,15 +8,7 @@ spring:
       charset: utf-8
       force: true
 
-  openai:
-    api:
-      key: sk-UmHgMcHvrxN4UMSB86Aa5345Ed334b0693BeC61e8605E582
-      base-url:  https://gptgod.cloud/v1
 
-  chroma:
-    server:
-      host: localhost
-      port: 8585
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

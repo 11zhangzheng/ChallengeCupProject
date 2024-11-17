@@ -1,0 +1,12 @@
+openai:
+  api:
+    key: sk-UmHgMcHvrxN4UMSB86Aa5345Ed334b0693BeC61e8605E582
+    base-url:  https://gptgod.cloud/v1
+    chat-model: gpt-3.5-turbo
+    embedding-model: text-embedding-ada-002
+
+
+chroma:
+  server:
+    host: localhost
+    port: 8585

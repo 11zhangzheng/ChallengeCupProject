@@ -11,18 +11,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LangChainConfig {
 
-    @Value("${spring.openai.api.key}")
+    @Value("${openai.api.key}")
     private String openaiApiKey;
 
-    @Value("${spring.openai.api.base-url:https://api.spring.openai.com/v1}")
+    @Value("${openai.api.base-url}")
     private String openaiBaseUrl;
+
+    @Value("${openai.api.chat-model}")
+    private String openaiChatModel;
+
+    @Value("${openai.api.embedding-model}")
+    private String openaiEmbeddingModel;
 
     @Bean
     public ChatLanguageModel chatLanguageModel() {
         return OpenAiChatModel.builder()
                 .apiKey(openaiApiKey)
                 .baseUrl(openaiBaseUrl)
-                .modelName("gpt-3.5-turbo")
+                .modelName(openaiChatModel)
                 .temperature(0.7)
                 .build();
     }
@@ -32,7 +38,7 @@ public class LangChainConfig {
         return OpenAiEmbeddingModel.builder()
                 .apiKey(openaiApiKey)
                 .baseUrl(openaiBaseUrl)
-                .modelName("text-embedding-ada-002")
+                .modelName(openaiEmbeddingModel)
                 .build();
     }
 } 
