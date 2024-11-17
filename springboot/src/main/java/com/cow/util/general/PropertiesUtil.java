@@ -1,8 +1,5 @@
 package com.cow.util.general;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,18 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-@Data
-@Getter
-@Setter
+
 public class PropertiesUtil {
     private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 
     private static final String REDIS_HOST;
     private static final String REDIS_PWD;
     private static final String PORT;
-    private static final String DOMAIN;
+    public static final String DOMAIN;
     private static final String CALLBACK;
-    private static final String FRONTEND;
 
     static {
         Properties properties = new Properties();
@@ -37,10 +31,6 @@ public class PropertiesUtil {
         PORT = (String) properties.get("port");
         DOMAIN = (String) properties.get("domain");
         CALLBACK = (String) properties.get("callback");
-        FRONTEND = (String) properties.get("frontend");
-    }
-    public static String getFrontend() {
-        return FRONTEND;
     }
 
     public static String getRedisHost() {

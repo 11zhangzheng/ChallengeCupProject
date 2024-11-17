@@ -3,14 +3,10 @@ package com.cow.util.tracecode;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import cn.hutool.extra.qrcode.QrConfig;
-import com.cow.util.general.PropertiesUtil;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRGenerateor {
-    public static void main(String[] args){
-        generateQRCode("12345678900987654321");
-    }
-    private static final String QR_PREFIX = "http://"+PropertiesUtil.getFrontend()+"/traceability?id=";
+    private static final String QR_PREFIX = "https://localhost:8080/"+"traceability?id=";
     public static void generateQRCode(String content) {
         try{
             QrCodeUtil
