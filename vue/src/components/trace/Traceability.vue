@@ -3,14 +3,14 @@
     <div class="trace-card trace-header">
       <div class="title">农产品唯一身份标识码</div>
       <div class="barcode">
-        <span v-for="(part, index) in formattedTraceCode" 
-              :key="index" 
+        <span v-for="(part, index) in formattedTraceCode"
+              :key="index"
               class="code-part">
           {{ part }}
         </span>
       </div>
     </div>
-    
+
     <div class="trace-card trace-status">
       <div class="status-icon">
         <i class="el-icon-check"></i>
@@ -26,12 +26,12 @@
             <i class="el-icon-picture-outline"></i>
             <span>暂无图片</span>
           </div>
-          <img 
+          <img
             v-else
-            :src="traceData.productImage" 
+            :src="traceData.productImage"
             :alt="traceData.productName">
         </div>
-        
+
         <h3>{{ traceData.productName }}</h3>
         <div class="info-grid">
           <div class="info-item">
@@ -40,7 +40,7 @@
           </div>
           <div class="info-item">
             <span class="label">生产日期</span>
-            <span class="value">{{ traceData.productionDate }}</span>
+            <span class="value">{{ traceData.productDate }}</span>
           </div>
           <div class="info-item address">
             <span class="label">生产地址</span>
@@ -65,17 +65,17 @@ export default {
   name: 'Traceability',
   data() {
     return {
-      traceData:{},
-      // traceData: {
-      //   traceCode: '83771780494235483766',
-      //   productName: '有机草莓',
-      //   productImage: '',
-      //   specification: '500g/盒',
-      //   productionAddress: '四川省成都市新都区新繁镇红光村',
-      //   productionDate: '2024-03-15',
-      //   manager: '张三',
-      //   contactPhone: '028-12345678'
-      // }
+      // traceData:{},
+      traceData: {
+        traceCode: '',
+        productName: '',
+        productImage: '',
+        specification: '',
+        productionAddress: '',
+        productionDate: '',
+        manager: '',
+        phone: ''
+      }
     }
   },
   computed: {
@@ -89,7 +89,6 @@ export default {
     this.$http.get('api/trace/info?id='+productId).then(res => {
       if(res.data.code===200||res.data.code===20000){
         this.traceData=res.data.data;
-
       }else{
         this.$message('获取溯源信息失败,请联系管理员处理 ！')
       }
@@ -276,4 +275,4 @@ export default {
 .image-placeholder span {
   font-size: 14px;
 }
-</style> 
+</style>
