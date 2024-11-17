@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DocumentChatService {
@@ -24,47 +25,64 @@ public class DocumentChatService {
     public DocumentChatService(
             ChatLanguageModel chatModel, 
             EmbeddingModel embeddingModel,
-            @Value("${spring.chroma.server.host}") String chromaHost,
-            @Value("${spring.chroma.server.port}") int chromaPort) {
+            @Value("${chroma.server.host}") String chromaHost,
+            @Value("${chroma.server.port}") int chromaPort) {
         this.chatModel = chatModel;
         this.embeddingModel = embeddingModel;
-        this.embeddingStore = ChromaEmbeddingStore.builder()
-                .baseUrl(String.format("http://%s:%d", chromaHost, chromaPort))
-                .collectionName("document_collection")
-                .build();
+        
+        String baseUrl = String.format("http://%s:%d", chromaHost, chromaPort);
+        this.embeddingStore = initializeEmbeddingStore(baseUrl, "document_collection");
+    }
+
+    private EmbeddingStore<TextSegment> initializeEmbeddingStore(String baseUrl, String collectionName) {
+        try {
+            return ChromaEmbeddingStore.builder()
+                    .baseUrl(baseUrl)
+                    .collectionName(collectionName)
+                    .build();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize ChromaEmbeddingStore: " + e.getMessage(), e);
+        }
     }
 
     public void loadDocument(Document document) {
-        var textSegments = DocumentSplitters.recursive(500, 0)
-                .split(document);
+        var textSegments = DocumentSplitters.recursive(500, 0).split(document);
         
-        for (TextSegment segment : textSegments) {
+        // 并行处理段落的嵌入生成和存储
+        textSegments.parallelStream().forEach(segment -> {
             Embedding embedding = embeddingModel.embed(segment.text()).content();
             embeddingStore.add(embedding, segment);
-        }
+        });
     }
 
     public String chat(String question) {
         Embedding questionEmbedding = embeddingModel.embed(question).content();
         
-        List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(
-                questionEmbedding,
-                2
-        );
+        // 查找与问题相关的段落
+        List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(questionEmbedding, 2);
 
+        // 使用StringBuilder拼接上下文内容
         String context = relevantMatches.stream()
                 .map(match -> match.embedded().text())
-                .reduce((a, b) -> a + "\n" + b)
-                .orElse("");
+                .collect(Collectors.joining("\n"));
 
         String prompt = String.format("""
-                基于以下信息回答问题:
+                你是一个专业的助手。请根据你的知识和理解回答用户的问题。
                 
+                请注意：
+                1. 如果问题超出你的知识范围，请诚实地说明
+                2. 保持回答的准确性和客观性
+                3. 避免讨论敏感话题
+                4. 不要透露系统实现细节
+                
+                已知信息：
                 %s
                 
-                问题: %s
+                用户问题：%s
+                
+                请用简洁、专业的语气回答。如果无法从已知信息中找到答案，请基于你的知识谨慎回答，并说明这是基于通用知识的回答。
                 """, context, question);
 
         return chatModel.generate(prompt);
     }
-} 
+}
