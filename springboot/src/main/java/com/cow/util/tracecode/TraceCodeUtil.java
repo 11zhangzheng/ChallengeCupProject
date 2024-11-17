@@ -4,11 +4,15 @@ import java.util.UUID;
 
 public class TraceCodeUtil {
 
-    private static String getNewUUID() {
-        String Part1 = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 3);
+    /**
+     * 生成溯源码
+     * @return 20位溯源码
+     */
+    public static String generateTraceCode() {
+        String part1 = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 3);
         long timestamp = System.currentTimeMillis();
-        String Part2 = String.valueOf(timestamp);
-        String Part3 = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 4);
-        return Part1+Part2+Part3;
+        String part2 = String.valueOf(timestamp);
+        String part3 = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 4);
+        return part1 + part2 + part3;
     }
 }

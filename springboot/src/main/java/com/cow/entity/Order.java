@@ -91,7 +91,9 @@ public class Order {
      */
     private Boolean returnState;
 
-
+    /**
+     * 唯一溯源码
+     */
     private String traceCode;
 
 }

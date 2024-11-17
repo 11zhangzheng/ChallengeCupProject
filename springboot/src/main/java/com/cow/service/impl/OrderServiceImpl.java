@@ -3,6 +3,7 @@ package com.cow.service.impl;
 import com.cow.dao.OrderDao;
 import com.cow.entity.Order;
 import com.cow.service.OrderService;
+import com.cow.util.tracecode.TraceCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Boolean insertData(Order order) {
+        String traceCode = TraceCodeUtil.generateTraceCode();
+        order.setTraceCode(traceCode);
         order.setOrderTime(new Date());
         return orderDao.insertData(order);
     }
