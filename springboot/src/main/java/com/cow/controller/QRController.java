@@ -1,6 +1,5 @@
 package com.cow.controller;
 
-import cn.hutool.core.io.FileUtil;
 import com.cow.util.tracecode.QRGenerateor;
 import com.cow.vo.Result;
 import io.lettuce.core.dynamic.annotation.Param;
@@ -14,10 +13,10 @@ public class QRController {
     @GetMapping("/getQRCodeBytes")
     public Result<byte[]> getQRCodeBytes(@Param("productId") String productId) {
         try {
-            QRGenerateor.generateQRCode(productId);
+            byte[] qrBytes = QRGenerateor.generateQRCode(productId);
+            return Result.ok(qrBytes);
         } catch (RuntimeException e) {
             return Result.fail(e.toString());
         }
-        return Result.ok(FileUtil.readBytes("D:/QR/QRcode.jpg"));
     }
 }

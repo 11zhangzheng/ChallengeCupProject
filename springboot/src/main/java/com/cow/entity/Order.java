@@ -91,6 +91,7 @@ public class Order {
      */
     private Boolean returnState;
 
+
     private String traceCode;
 
 }
