@@ -2665,3 +2665,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'manag
 [Smart Farming] 2024-11-18 01:20:20.781 [http-nio-9999-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 [Smart Farming] 2024-11-18 01:20:20.781 [http-nio-9999-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 [Smart Farming] 2024-11-18 01:20:20.782 [http-nio-9999-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[Smart Farming] 2024-11-18 01:27:53.468 [SpringApplicationShutdownHook] INFO  com.cow.BreadRollMallServerRunner - Resetting Redis counter before shutdown...
+[Smart Farming] 2024-11-18 01:27:53.614 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[Smart Farming] 2024-11-18 01:27:53.618 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+[Smart Farming] 2024-11-18 01:27:53.622 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
