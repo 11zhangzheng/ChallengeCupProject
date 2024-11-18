@@ -2,17 +2,16 @@ server:
   port: 9999
 spring:
   application:
-    name: BreadRollMall-Server
+    name: Mall-Server
   http:
     encoding:
       charset: utf-8
       force: true
-
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   profiles:
-    include: redis,mail,jdbc
+    include: redis,mail,jdbc,langchain4j
   servlet:
     multipart:
       max-file-size: 6MB
