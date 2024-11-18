@@ -14,7 +14,7 @@ public class PropertiesUtil {
     private static final String REDIS_HOST;
     private static final String REDIS_PWD;
     private static final String PORT;
-    private static final String DOMAIN;
+    public static final String DOMAIN;
     private static final String CALLBACK;
 
     static {
