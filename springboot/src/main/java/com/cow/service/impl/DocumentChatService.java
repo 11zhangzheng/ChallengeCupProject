@@ -25,8 +25,8 @@ public class DocumentChatService {
     public DocumentChatService(
             ChatLanguageModel chatModel, 
             EmbeddingModel embeddingModel,
-            @Value("${chroma.server.host}") String chromaHost,
-            @Value("${chroma.server.port}") int chromaPort) {
+            @Value("${spring.chroma.server.host}") String chromaHost,
+            @Value("${spring.chroma.server.port}") int chromaPort) {
         this.chatModel = chatModel;
         this.embeddingModel = embeddingModel;
         

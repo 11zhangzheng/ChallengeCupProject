@@ -11,16 +11,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LangChainConfig {
 
-    @Value("${openai.api.key}")
+    @Value("${spring.openai.api.key}")
     private String openaiApiKey;
 
-    @Value("${openai.api.base-url}")
+    @Value("${spring.openai.api.base-url}")
     private String openaiBaseUrl;
 
-    @Value("${openai.api.chat-model}")
+    @Value("${spring.openai.api.chat-model}")
     private String openaiChatModel;
 
-    @Value("${openai.api.embedding-model}")
+    @Value("${spring.openai.api.embedding-model}")
     private String openaiEmbeddingModel;
 
     @Bean
