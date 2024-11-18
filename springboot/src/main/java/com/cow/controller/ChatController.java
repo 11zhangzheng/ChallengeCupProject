@@ -11,17 +11,24 @@ import dev.langchain4j.data.document.parser.TextDocumentParser;
 import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
 import dev.langchain4j.data.document.parser.apache.poi.ApachePoiDocumentParser;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
+
+    private static final Logger log = LoggerFactory.getLogger(ChatController.class);
 
     private final DocumentChatService chatService;
 
@@ -31,49 +38,54 @@ public class ChatController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file) throws Exception {
-        String fileName = file.getOriginalFilename().toLowerCase();
-        if (!fileName.endsWith(".txt") && !fileName.endsWith(".pdf") && 
-            !fileName.endsWith(".doc") && !fileName.endsWith(".docx") &&
-            !fileName.endsWith(".ppt") && !fileName.endsWith(".pptx") &&
-            !fileName.endsWith(".xls") && !fileName.endsWith(".xlsx")) {
-            return ResponseEntity.badRequest().body("目前只支持txt, pdf, doc, docx, ppt, pptx, xls, xlsx格式文件");
-        }
-
-        DocumentParser parser;
-        if (fileName.endsWith(".pdf")) {
-            parser = new ApachePdfBoxDocumentParser();
-        } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx") ||
-                   fileName.endsWith(".ppt") || fileName.endsWith(".pptx") ||
-                   fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
-            parser = new ApachePoiDocumentParser();
-        } else {
-            parser = new TextDocumentParser();
-        }
-
-        // 创建自定义的 DocumentSource
-        DocumentSource source = new DocumentSource() {
-            private final byte[] content = file.getBytes();
-            private final Metadata metadata = new Metadata();
-            
-            @Override
-            public InputStream inputStream() throws IOException {
-                return new ByteArrayInputStream(content);
-            }
-            
-            @Override
-            public Metadata metadata() {
-                metadata.add("fileName", fileName);
-                return metadata;
-            }
-        };
-
         try {
+            String fileName = file.getOriginalFilename().toLowerCase();
+            log.info("Receiving file upload request: {}, size: {}", fileName, file.getSize());
+            
+            if (!fileName.endsWith(".txt") && !fileName.endsWith(".pdf") && 
+                !fileName.endsWith(".doc") && !fileName.endsWith(".docx") &&
+                !fileName.endsWith(".ppt") && !fileName.endsWith(".pptx") &&
+                !fileName.endsWith(".xls") && !fileName.endsWith(".xlsx")) {
+                log.warn("Unsupported file type: {}", fileName);
+                return ResponseEntity.badRequest().body("目前只支持txt, pdf, doc, docx, ppt, pptx, xls, xlsx格式文件");
+            }
+
+            DocumentParser parser;
+            if (fileName.endsWith(".pdf")) {
+                parser = new ApachePdfBoxDocumentParser();
+            } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx") ||
+                       fileName.endsWith(".ppt") || fileName.endsWith(".pptx") ||
+                       fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+                parser = new ApachePoiDocumentParser();
+            } else {
+                parser = new TextDocumentParser();
+            }
+
+            // 创建自定义的 DocumentSource
+            DocumentSource source = new DocumentSource() {
+                private final byte[] content = file.getBytes();
+                private final Metadata metadata = new Metadata();
+                
+                @Override
+                public InputStream inputStream() throws IOException {
+                    return new ByteArrayInputStream(content);
+                }
+                
+                @Override
+                public Metadata metadata() {
+                    metadata.add("fileName", fileName);
+                    return metadata;
+                }
+            };
+
             Document document = DocumentLoader.load(source, parser);
             chatService.loadDocument(document);
             return ResponseEntity.ok("文档上传成功");
         } catch (BlankDocumentException e) {
+            log.error("Blank document error", e);
             return ResponseEntity.badRequest().body("文档内容为空");
         } catch (Exception e) {
+            log.error("Document processing error", e);
             return ResponseEntity.badRequest().body("文档处理失败: " + e.getMessage());
         }
     }

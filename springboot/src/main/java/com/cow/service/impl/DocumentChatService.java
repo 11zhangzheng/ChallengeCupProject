@@ -11,10 +11,12 @@ import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.chroma.ChromaEmbeddingStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class DocumentChatService {
 
@@ -56,33 +58,35 @@ public class DocumentChatService {
     }
 
     public String chat(String question) {
-        Embedding questionEmbedding = embeddingModel.embed(question).content();
-        
-        // 查找与问题相关的段落
-        List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(questionEmbedding, 2);
+        try {
+            Embedding questionEmbedding = embeddingModel.embed(question).content();
+            List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(questionEmbedding, 2);
 
-        // 使用StringBuilder拼接上下文内容
-        String context = relevantMatches.stream()
-                .map(match -> match.embedded().text())
-                .collect(Collectors.joining("\n"));
+            String context = relevantMatches.stream()
+                    .map(match -> match.embedded().text())
+                    .collect(Collectors.joining("\n"));
 
-        String prompt = String.format("""
-                你是一个专业的助手。请根据你的知识和理解回答用户的问题。
-                
-                请注意：
-                1. 如果问题超出你的知识范围，请诚实地说明
-                2. 保持回答的准确性和客观性
-                3. 避免讨论敏感话题
-                4. 不要透露系统实现细节
-                
-                已知信息：
-                %s
-                
-                用户问题：%s
-                
-                请用简洁、专业的语气回答。如果无法从已知信息中找到答案，请基于你的知识谨慎回答，并说明这是基于通用知识的回答。
-                """, context, question);
+            String prompt = String.format("""
+                    你是一个专业的助手。请根据你的知识和理解回答用户的问题。
+                    
+                    请注意：
+                    1. 如果问题超出你的知识范围，请诚实地说明
+                    2. 保持回答的准确性和客观性
+                    3. 避免讨论敏感话题
+                    4. 不要透露系统实现细节
+                    
+                    已知信息：
+                    %s
+                    
+                    用户问题：%s
+                    
+                    请用简洁、专业的语气回答。如果无法从已知信息中找到答案，请基于你的知识谨慎回答，并说明这是基于通用知识的回答。
+                    """, context, question);
 
-        return chatModel.generate(prompt);
+            return chatModel.generate(prompt);
+        } catch (Exception e) {
+            log.error("Chat error:", e);
+            return "抱歉，系统暂时无法处理您的请求。请稍后再试或换个问题。";
+        }
     }
 }

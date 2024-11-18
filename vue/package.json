@@ -12,10 +12,13 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "default-passive-events": "^2.0.0",
+    "dompurify": "^3.2.0",
     "echarts": "^4.9.0",
     "element-china-area-data": "^5.0.2",
     "element-ui": "^2.13.2",
     "es6-promise": "^4.2.8",
+    "highlight.js": "^11.10.0",
+    "markdown-it": "^14.1.0",
     "nprogress": "^0.2.0",
     "qs": "^6.9.4",
     "v-charts": "^1.19.0",

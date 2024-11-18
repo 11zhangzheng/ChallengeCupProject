@@ -125,3 +125,40 @@ router.afterEach(() => {
   // 在即将进入新的页面组件前，关闭掉进度条
   NProgress.done()
 })
+
+// 配置 axios 默认值
+axios.defaults.baseURL = '/' // 使用相对路径
+axios.defaults.timeout = 30000 // 增加超时时间到30秒
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
+// 添加请求拦截器
+axios.interceptors.request.use(
+  config => {
+    // 在发送请求之前做些什么
+    console.log('发送请求:', config)
+    return config
+  },
+  error => {
+    // 对请求错误做些什么
+    console.error('请求配置错误:', error)
+    return Promise.reject(error)
+  }
+)
+
+// 添加响应拦截器
+axios.interceptors.response.use(
+  response => {
+    console.log('收到响应:', response)
+    return response
+  },
+  error => {
+    console.error('响应错误:', error)
+    if (error.response) {
+      console.log('错误状态码:', error.response.status)
+      console.log('错误数据:', error.response.data)
+    }
+    return Promise.reject(error)
+  }
+)
+
+Vue.prototype.$axios = axios

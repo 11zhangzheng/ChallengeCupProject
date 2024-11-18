@@ -7,24 +7,48 @@
           <i class="el-icon-upload"></i>
           <span>知识库文件上传</span>
         </div>
-        <div class="desc">上传文件将自动构建为AI问答知识库</div>
+        <div class="desc">上传文件或URL将自动构建为AI问答知识库</div>
       </div>
       
-      <!-- 文档上传的接口在这里 -->
+      <!-- 添加URL上传区域 -->
+      <div class="url-upload-section">
+        <el-input
+          v-model="urlInput"
+          placeholder="请输入网页URL，例如: https://example.com/article"
+          class="url-input">
+          <template slot="prepend">URL</template>
+          <el-button 
+            slot="append" 
+            type="primary" 
+            :loading="urlLoading"
+            @click="handleUrlUpload">
+            {{ urlLoading ? '加载中...' : '解析网页' }}
+          </el-button>
+        </el-input>
+      </div>
+
+      <div class="divider">
+        <span>或</span>
+      </div>
+      
+      <!-- 原有的文件上传区域 -->
       <el-upload
         class="upload-area"
         drag
-        action="/api/knowledge/upload"
+        :action="uploadUrl"
         :headers="uploadHeaders"
         :on-success="uploadSuccess"
         :on-error="uploadError"
         :before-upload="beforeUpload"
+        :http-request="customUpload"
         :limit="5"
+        name="file"
+        accept=".txt,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
         multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
           <div class="upload-main-text">点击或将文件拖拽到此处上传</div>
-          <div class="upload-sub-text">支持 txt、pdf、doc、docx 格式</div>
+          <div class="upload-sub-text">支持 txt、pdf、doc、docx、ppt、pptx、xls、xlsx 格式</div>
         </div>
       </el-upload>
     </el-card>
@@ -43,7 +67,7 @@
             文件要求
           </div>
           <ul class="guide-list">
-            <li>支持的文件格式: TXT、PDF、DOC、DOCX</li>
+            <li>支持的文件格式: TXT、PDF、DOC、DOCX、PPT、PPTX、XLS、XLSX</li>
             <li>单个文件大小不超过10MB</li>
             <li>建议上传结构化的文本文件</li>
           </ul>
@@ -103,8 +127,11 @@ export default {
   name: 'KnowledgeManage',
   data() {
     return {
+      uploadUrl: 'http://localhost:9999/api/chat/upload',
+      urlInput: '',
+      urlLoading: false,
       uploadHeaders: {
-        'Authorization': this.$store.state.token
+        'satoken': localStorage.getItem('satoken') || ''
       },
       progressVisible: false,
       uploadProgress: 0,
@@ -116,22 +143,89 @@ export default {
     }
   },
   methods: {
-    // 上传前校验
+    customUpload(options) {
+      const formData = new FormData()
+      formData.append('file', options.file)
+      
+      console.log('开始上传文件:', {
+        file: options.file,
+        headers: this.uploadHeaders,
+        url: this.uploadUrl
+      })
+
+      const xhr = new XMLHttpRequest()
+      xhr.open('POST', this.uploadUrl, true)
+      
+      xhr.withCredentials = true
+      
+      Object.keys(this.uploadHeaders).forEach(key => {
+        xhr.setRequestHeader(key, this.uploadHeaders[key])
+      })
+      
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          console.log('上传响应:', xhr.responseText)
+          if (xhr.responseText === '文档上传成功') {
+            options.onSuccess(xhr.responseText)
+          } else {
+            options.onError(new Error(xhr.responseText))
+          }
+        } else {
+          console.error('上传失败:', {
+            status: xhr.status,
+            response: xhr.responseText
+          })
+          options.onError(new Error(xhr.responseText || '上传失败'))
+        }
+      }
+      
+      xhr.onerror = () => {
+        console.error('上传错误:', {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          response: xhr.responseText
+        })
+        options.onError(new Error('网络错误'))
+      }
+      
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const percent = Math.round((e.loaded * 100) / e.total)
+          this.uploadProgress = percent
+          console.log('上传进度:', percent + '%')
+        }
+      }
+      
+      try {
+        xhr.send(formData)
+      } catch (error) {
+        console.error('发送请求失败:', error)
+        options.onError(new Error('发送请求失败'))
+      }
+    },
+
     beforeUpload(file) {
-      const isValidType = ['text/plain', 'application/pdf', 'application/msword', 
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)
-      const isLt10M = file.size / 1024 / 1024 < 10
+      console.log('准备上传文件:', {
+        name: file.name,
+        size: file.size,
+        type: file.type
+      })
 
+      const isLt6M = file.size / 1024 / 1024 < 6
+      if (!isLt6M) {
+        this.$message.error('文件大小不能超过 6MB!')
+        return false
+      }
+      
+      const fileName = file.name.toLowerCase()
+      const validExtensions = ['.txt', '.pdf', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx']
+      const isValidType = validExtensions.some(ext => fileName.endsWith(ext))
+      
       if (!isValidType) {
-        this.$message.error('只能上传txt/pdf/doc/docx格式文件!')
-        return false
-      }
-      if (!isLt10M) {
-        this.$message.error('文件大小不能超过 10MB!')
+        this.$message.error('只支持txt、pdf、doc、docx、ppt、pptx、xls、xlsx格式文件!')
         return false
       }
 
-      // 显示进度对话框
       this.progressVisible = true
       this.uploadProgress = 0
       this.progressStatus = {
@@ -140,28 +234,39 @@ export default {
         type: ''
       }
 
-      // 模拟上传进度
-      this.simulateProgress()
       return true
     },
 
-    // 模拟上传进度
-    simulateProgress() {
-      let progress = 0
-      const timer = setInterval(() => {
-        if (progress < 90) {
-          progress += Math.random() * 10
-          this.uploadProgress = Math.floor(progress)
-        } else {
-          clearInterval(timer)
+    uploadError(err, file) {
+      console.error('上传错误详情:', {
+        error: err,
+        response: err.response,
+        status: err.status,
+        file: file.name
+      })
+      
+      let errorMessage = '上传失败'
+      
+      if (err.response) {
+        try {
+          const response = err.response
+          errorMessage = (response.data && response.data.message) || response.data || '服务器处理失败'
+        } catch (e) {
+          console.error('解析错误响应失败:', e)
+          errorMessage = '文件处���失败，请稍后重试'
         }
-      }, 500)
+      }
+      
+      this.handleUploadError(errorMessage)
     },
 
-    // 上传成功
-    uploadSuccess(response) {
-      if (response.code === 200) {
-        // 更新进度状态
+    uploadSuccess(response, file) {
+      console.log('上传响应:', response)
+      
+      const isSuccess = response === "文档上传成功" || 
+                       (response && typeof response === 'object' && response.message === "文档上传成功")
+      
+      if (isSuccess) {
         this.uploadProgress = 100
         this.progressStatus = {
           icon: 'el-icon-success',
@@ -169,22 +274,15 @@ export default {
           type: 'success'
         }
         
-        // 延迟关闭进度框
         setTimeout(() => {
           this.progressVisible = false
           this.$message.success('文件已成功上传到知识库')
         }, 1000)
       } else {
-        this.handleUploadError(response.message)
+        this.handleUploadError(typeof response === 'string' ? response : '上传失败')
       }
     },
 
-    // 上传失败
-    uploadError(err) {
-      this.handleUploadError(err.message || '上传失败')
-    },
-
-    // 处理上传错误
     handleUploadError(message) {
       this.progressStatus = {
         icon: 'el-icon-error',
@@ -194,8 +292,75 @@ export default {
       
       setTimeout(() => {
         this.progressVisible = false
-        this.$message.error(message || '上传失败')
+        this.$message.error(message || '上传失败，请稍后重试')
       }, 1000)
+    },
+
+    // 添加URL上传方法
+    async handleUrlUpload() {
+      if (!this.urlInput.trim()) {
+        this.$message.warning('请输入URL')
+        return
+      }
+
+      if (!this.isValidUrl(this.urlInput)) {
+        this.$message.error('请输入有效的URL地址')
+        return
+      }
+
+      this.urlLoading = true
+      this.progressVisible = true
+      this.progressStatus = {
+        icon: 'el-icon-loading',
+        text: '正在解析网页内容...',
+        type: ''
+      }
+
+      try {
+        const response = await fetch('http://localhost:9999/api/chat/url', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+            ...this.uploadHeaders
+          },
+          body: this.urlInput
+        })
+
+        const result = await response.text()
+
+        if (response.ok) {
+          this.progressStatus = {
+            icon: 'el-icon-success',
+            text: '网页内容解析成功!',
+            type: 'success'
+          }
+          this.$message.success('网页内容已成功添加到知识库')
+          this.urlInput = ''
+        } else {
+          throw new Error(result)
+        }
+      } catch (error) {
+        this.progressStatus = {
+          icon: 'el-icon-error',
+          text: '解析失败: ' + (error.message || '网络错误'),
+          type: 'exception'
+        }
+        this.$message.error(error.message || '网页解析失败，请稍后重试')
+      } finally {
+        this.urlLoading = false
+        setTimeout(() => {
+          this.progressVisible = false
+        }, 1500)
+      }
+    },
+
+    isValidUrl(string) {
+      try {
+        new URL(string)
+        return true
+      } catch (_) {
+        return false
+      }
     }
   }
 }
@@ -335,5 +500,35 @@ export default {
 .progress-text {
   margin-bottom: 20px;
   color: #606266;
+}
+
+.url-upload-section {
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.url-input {
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid #EBEEF5;
+}
+
+.divider span {
+  padding: 0 20px;
+  color: #909399;
+  font-size: 14px;
+  background: white;
 }
 </style> 

@@ -5,7 +5,23 @@ module.exports = {
   dev: {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    // 跨域问题需要的代理，后端服务地址
+    proxyTable: {
+      '/api': {
+        target: 'http://localhost:9999',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/api'
+        },
+        logLevel: 'debug',
+        onProxyReq: function (proxyReq, req, res) {
+          // 只有非文件上传请求才设置 Content-Type
+          if (!req.url.includes('/chat/upload')) {
+            proxyReq.setHeader('Content-Type', 'application/json');
+          }
+        }
+      }
+    },
     host: '127.0.0.1', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
