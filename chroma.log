@@ -1,0 +1,100 @@
+[33mWARNING[0m:  [19-11-2024 21:46:31] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-11-2024 21:46:32] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component System
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component Posthog
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 21:46:32] Starting component SegmentAPI
+[32mINFO[0m:     [19-11-2024 21:46:32] Started server process [[36m6760[0m]
+[32mINFO[0m:     [19-11-2024 21:46:32] Waiting for application startup.
+[32mINFO[0m:     [19-11-2024 21:46:32] Application startup complete.
+[32mINFO[0m:     [19-11-2024 21:46:32] Uvicorn running on [1mhttp://localhost:8585[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-11-2024 21:46:33] Backing off send_request(...) for 0.6s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:46:34] Backing off send_request(...) for 0.6s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:46:34] Backing off send_request(...) for 4.0s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[31mERROR[0m:    [19-11-2024 21:46:38] Giving up send_request(...) after 4 tries (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:46:48] 127.0.0.1:63064 - "GET /api/v1/collections/document_collection HTTP/1.1" 400
+[32mINFO[0m:     [19-11-2024 21:46:48] 127.0.0.1:63064 - "POST /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:46:49] Backing off send_request(...) for 0.2s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:46:49] Backing off send_request(...) for 0.3s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:46:49] Backing off send_request(...) for 2.8s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[31mERROR[0m:    [19-11-2024 21:46:52] Giving up send_request(...) after 4 tries (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 21:47:16] 127.0.0.1:63106 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:47:17] Shutting down
+[32mINFO[0m:     [19-11-2024 21:47:18] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component System
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component Posthog
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 21:47:18] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-11-2024 21:47:18] Application shutdown complete.
+[32mINFO[0m:     [19-11-2024 21:47:18] Finished server process [[36m6760[0m]
+[33mWARNING[0m:  [19-11-2024 21:47:23] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-11-2024 21:47:23] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component System
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component Posthog
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 21:47:23] Starting component SegmentAPI
+[32mINFO[0m:     [19-11-2024 21:47:23] Started server process [[36m23036[0m]
+[32mINFO[0m:     [19-11-2024 21:47:23] Waiting for application startup.
+[32mINFO[0m:     [19-11-2024 21:47:23] Application startup complete.
+[32mINFO[0m:     [19-11-2024 21:47:23] Uvicorn running on [1mhttp://localhost:8585[0m (Press CTRL+C to quit)
+[36mDEBUG[0m:    [19-11-2024 21:50:48] Starting component PersistentLocalHnswSegment
+[32mINFO[0m:     [19-11-2024 21:50:48] 127.0.0.1:63771 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:51:19] 127.0.0.1:63805 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-11-2024 21:51:34] Number of requested results 2 is greater than number of elements in index 1, updating n_results = 1
+[32mINFO[0m:     [19-11-2024 21:51:34] 127.0.0.1:63805 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:52:49] 127.0.0.1:63916 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:52:49] 127.0.0.1:63917 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:52:49] 127.0.0.1:63916 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:52:49] 127.0.0.1:63916 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:52:49] 127.0.0.1:63917 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:53:14] 127.0.0.1:63916 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:54:01] 127.0.0.1:64012 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:54:01] 127.0.0.1:64013 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:54:01] 127.0.0.1:64014 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:54:01] 127.0.0.1:64012 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:54:15] 127.0.0.1:64012 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64844 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64849 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64845 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64848 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64847 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:55:54] 127.0.0.1:64846 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:20] 127.0.0.1:64845 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:20] 127.0.0.1:64846 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:20] 127.0.0.1:64845 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:20] 127.0.0.1:64847 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65349 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65351 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65350 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65357 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65360 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65354 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65359 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65349 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65363 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65351 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65362 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65353 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65356 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65355 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65361 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65358 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:56:59] 127.0.0.1:65352 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 21:57:09] 127.0.0.1:65352 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 21:59:08] 127.0.0.1:49166 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:01:04] 127.0.0.1:50261 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
