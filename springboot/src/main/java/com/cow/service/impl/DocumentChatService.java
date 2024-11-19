@@ -15,6 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+
+import com.cow.model.ChatMessage;
 
 @Slf4j
 @Service
@@ -23,6 +28,7 @@ public class DocumentChatService {
     private final ChatLanguageModel chatModel;
     private final EmbeddingModel embeddingModel;
     private final EmbeddingStore<TextSegment> embeddingStore;
+    private final Map<String, List<ChatMessage>> chatHistories = new ConcurrentHashMap<>();
 
     public DocumentChatService(
             ChatLanguageModel chatModel, 
@@ -57,8 +63,13 @@ public class DocumentChatService {
         });
     }
 
-    public String chat(String question) {
+    public String chat(String sessionId, String chatId, String question) {
         try {
+            // 使用 chatId 获取历史记录
+            String historyKey = chatId + ":" + sessionId;
+            List<ChatMessage> history = chatHistories.computeIfAbsent(historyKey, k -> new ArrayList<>());
+            
+            // 获取相关文档
             Embedding questionEmbedding = embeddingModel.embed(question).content();
             List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(questionEmbedding, 2);
 
@@ -66,14 +77,23 @@ public class DocumentChatService {
                     .map(match -> match.embedded().text())
                     .collect(Collectors.joining("\n"));
 
+            // 构建包含历史记录的提示词
+            StringBuilder conversationContext = new StringBuilder();
+            for (ChatMessage msg : history) {
+                conversationContext.append(msg.getRole()).append(": ").append(msg.getContent()).append("\n");
+            }
+
             String prompt = String.format("""
                     你是一个专业的助手。请根据你的知识和理解回答用户的问题。
                     
                     请注意：
-                    1. 如果问题超出你的知识范围，请诚实地说明
+                    1. 如果问题超出你的知识围，请诚实地说明
                     2. 保持回答的准确性和客观性
                     3. 避免讨论敏感话题
                     4. 不要透露系统实现细节
+                    
+                    聊天历史：
+                    %s
                     
                     智农知识库信息：
                     %s
@@ -81,12 +101,42 @@ public class DocumentChatService {
                     用户问题：%s
                     
                     请用简洁、专业的语气回答。如果无法从已知信息中找到答案，请基于你的知识谨慎回答，并说明这是需要查阅资料验证的回答。
-                    """, context, question);
+                    """, conversationContext, context, question);
 
-            return chatModel.generate(prompt);
+            String response = chatModel.generate(prompt);
+            
+            // 更新会话历史
+            history.add(new ChatMessage("user", question, "text", System.currentTimeMillis()));
+            history.add(new ChatMessage("assistant", response, "text", System.currentTimeMillis()));
+            
+            // 保持历史记录在合理范围内
+            while (history.size() > 20) {
+                history.remove(0);
+            }
+
+            return response;
         } catch (Exception e) {
             log.error("Chat error:", e);
             return "抱歉，系统暂时无法处理您的请求。请稍后再试或换个问题。";
+        }
+    }
+
+    // 清除特定对话的历史记录
+    public void clearHistory(String sessionId, String chatId) {
+        String historyKey = chatId + ":" + sessionId;
+        chatHistories.remove(historyKey);
+    }
+
+    // 加载对话历史到上下文
+    public void loadChatHistory(String sessionId, String chatId, List<ChatMessage> messages) {
+        String historyKey = chatId + ":" + sessionId;
+        List<ChatMessage> history = chatHistories.computeIfAbsent(historyKey, k -> new ArrayList<>());
+        history.clear(); // 清除现有历史
+        // 只添加最近的20条消息作为上下文
+        int startIndex = Math.max(0, messages.size() - 20);
+        for (int i = startIndex; i < messages.size(); i++) {
+            ChatMessage msg = messages.get(i);
+            history.add(new ChatMessage(msg.getRole(), msg.getContent(), msg.getType(), msg.getTimestamp()));
         }
     }
 }

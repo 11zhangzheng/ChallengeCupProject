@@ -98,3 +98,143 @@
 [32mINFO[0m:     [19-11-2024 21:57:09] 127.0.0.1:65352 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
 [32mINFO[0m:     [19-11-2024 21:59:08] 127.0.0.1:49166 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
 [32mINFO[0m:     [19-11-2024 22:01:04] 127.0.0.1:50261 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:04:02] 127.0.0.1:50559 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:04:26] 127.0.0.1:50559 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:09:24] 127.0.0.1:51736 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:09:37] 127.0.0.1:51736 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:10:16] 127.0.0.1:51864 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:11:28] 127.0.0.1:52490 - "POST /api/v1/collections/56d5a416-6101-4b5e-bcba-4b122c000074/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:12:02] Shutting down
+[32mINFO[0m:     [19-11-2024 22:12:02] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component System
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component PersistentLocalHnswSegment
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:02] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-11-2024 22:12:02] Application shutdown complete.
+[32mINFO[0m:     [19-11-2024 22:12:02] Finished server process [[36m23036[0m]
+[33mWARNING[0m:  [19-11-2024 22:12:07] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-11-2024 22:12:08] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component System
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:08] Starting component SegmentAPI
+[32mINFO[0m:     [19-11-2024 22:12:08] Started server process [[36m26140[0m]
+[32mINFO[0m:     [19-11-2024 22:12:08] Waiting for application startup.
+[32mINFO[0m:     [19-11-2024 22:12:08] Application startup complete.
+[32mINFO[0m:     [19-11-2024 22:12:08] Uvicorn running on [1mhttp://localhost:8585[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-11-2024 22:12:09] Shutting down
+[32mINFO[0m:     [19-11-2024 22:12:09] Backing off send_request(...) for 0.2s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 22:12:09] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component System
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:09] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-11-2024 22:12:09] Application shutdown complete.
+[32mINFO[0m:     [19-11-2024 22:12:09] Finished server process [[36m26140[0m]
+[32mINFO[0m:     [19-11-2024 22:12:09] Backing off send_request(...) for 1.9s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 22:12:11] Backing off send_request(...) for 3.0s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[31mERROR[0m:    [19-11-2024 22:12:14] Giving up send_request(...) after 4 tries (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[33mWARNING[0m:  [19-11-2024 22:12:43] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-11-2024 22:12:43] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-11-2024 22:12:43] Starting component System
+[36mDEBUG[0m:    [19-11-2024 22:12:43] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-11-2024 22:12:43] Starting component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:44] Starting component SegmentAPI
+[32mINFO[0m:     [19-11-2024 22:12:44] Started server process [[36m4372[0m]
+[32mINFO[0m:     [19-11-2024 22:12:44] Waiting for application startup.
+[32mINFO[0m:     [19-11-2024 22:12:44] Application startup complete.
+[32mINFO[0m:     [19-11-2024 22:12:44] Uvicorn running on [1mhttp://localhost:8585[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-11-2024 22:12:44] Backing off send_request(...) for 0.8s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 22:12:45] Backing off send_request(...) for 1.4s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 22:12:47] Backing off send_request(...) for 1.0s (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[31mERROR[0m:    [19-11-2024 22:12:48] Giving up send_request(...) after 4 tries (requests.exceptions.SSLError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))))
+[32mINFO[0m:     [19-11-2024 22:12:53] Shutting down
+[32mINFO[0m:     [19-11-2024 22:12:53] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component System
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:53] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-11-2024 22:12:53] Application shutdown complete.
+[32mINFO[0m:     [19-11-2024 22:12:53] Finished server process [[36m4372[0m]
+[33mWARNING[0m:  [19-11-2024 22:12:58] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-11-2024 22:12:59] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component System
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component Posthog
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 22:12:59] Starting component SegmentAPI
+[32mINFO[0m:     [19-11-2024 22:12:59] Started server process [[36m2408[0m]
+[32mINFO[0m:     [19-11-2024 22:12:59] Waiting for application startup.
+[32mINFO[0m:     [19-11-2024 22:12:59] Application startup complete.
+[32mINFO[0m:     [19-11-2024 22:12:59] Uvicorn running on [1mhttp://localhost:8585[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-11-2024 22:13:15] 127.0.0.1:52597 - "GET /api/v1/collections/document_collection HTTP/1.1" 400
+[32mINFO[0m:     [19-11-2024 22:13:16] 127.0.0.1:52597 - "POST /api/v1/collections HTTP/1.1" 200
+[36mDEBUG[0m:    [19-11-2024 22:14:55] Starting component PersistentLocalHnswSegment
+[32mINFO[0m:     [19-11-2024 22:14:55] 127.0.0.1:52704 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:15:14] 127.0.0.1:52704 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:15:37] 127.0.0.1:52704 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:22:55] 127.0.0.1:54435 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:30:40] 127.0.0.1:55975 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56021 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56024 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56023 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56025 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56032 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56030 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56027 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56026 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56031 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56025 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56034 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56029 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56028 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56021 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56022 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:16] 127.0.0.1:56033 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/add HTTP/1.1" 201
+[32mINFO[0m:     [19-11-2024 22:31:33] 127.0.0.1:56021 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:32:11] 127.0.0.1:56081 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:42:40] 127.0.0.1:57705 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:43:11] 127.0.0.1:57791 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:45:23] 127.0.0.1:58255 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:45:43] 127.0.0.1:58255 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:47:11] 127.0.0.1:58632 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:47:50] 127.0.0.1:58672 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:48:14] 127.0.0.1:58672 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:48:25] 127.0.0.1:58672 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:48:32] 127.0.0.1:58672 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:48:48] 127.0.0.1:58672 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:53:14] 127.0.0.1:59601 - "GET /api/v1/collections/document_collection HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:53:28] 127.0.0.1:59601 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:53:47] 127.0.0.1:59601 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:55:29] 127.0.0.1:60048 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 22:56:18] 127.0.0.1:60109 - "POST /api/v1/collections/59d4496c-c134-4e75-abeb-8f689c0461f3/query HTTP/1.1" 200
