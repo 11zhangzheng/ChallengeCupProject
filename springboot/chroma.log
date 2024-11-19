@@ -121,3 +121,17 @@
 [32mINFO[0m:     [19-11-2024 00:10:56] 127.0.0.1:59331 - "POST /api/v1/collections/1a123c4d-ae49-48db-b82a-ff720bea6dba/query HTTP/1.1" 200
 [32mINFO[0m:     [19-11-2024 00:11:17] 127.0.0.1:59331 - "POST /api/v1/collections/1a123c4d-ae49-48db-b82a-ff720bea6dba/query HTTP/1.1" 200
 [32mINFO[0m:     [19-11-2024 00:11:48] 127.0.0.1:59379 - "POST /api/v1/collections/1a123c4d-ae49-48db-b82a-ff720bea6dba/query HTTP/1.1" 200
+[32mINFO[0m:     [19-11-2024 00:19:41] Shutting down
+[32mINFO[0m:     [19-11-2024 00:19:41] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component System
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component PersistentLocalHnswSegment
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component Posthog
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-11-2024 00:19:41] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-11-2024 00:19:41] Application shutdown complete.
+[32mINFO[0m:     [19-11-2024 00:19:41] Finished server process [[36m17556[0m]
