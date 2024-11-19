@@ -25,7 +25,7 @@
               @blur="saveTitle(index)"
               @keyup.enter.native="saveTitle(index)"
             ></el-input>
-            <span v-else @dblclick="editTitle(index)">{{ item.title || '新对话' }}</span>
+            <span v-else @dblclick="editTitle(index)">{{ item.title || '新���' }}</span>
             <el-dropdown trigger="click" @command="handleCommand($event, index)">
               <i class="el-icon-more"></i>
               <el-dropdown-menu slot="dropdown">
@@ -139,7 +139,9 @@ export default {
       currentMessages: [],
       inputMessage: '',
       isTyping: false,
-      isHistoryCollapsed: false
+      streamingSpeed: 12,
+      isHistoryCollapsed: false,
+      localStorageKey: 'chat_histories'
     }
   },
   
@@ -173,64 +175,55 @@ export default {
       })
     },
 
-    async loadChatHistories() {
-      try {
-        const response = await fetch('/api/chat/histories', {
-          headers: {
-            'satoken': localStorage.getItem('satoken') || ''
-          }
-        })
-        if (response.ok) {
-          this.chatHistory = await response.json()
-          if (this.chatHistory.length > 0) {
-            await this.switchChat(this.chatHistory[0].id)
-          }
+    loadChatHistories() {
+      const histories = localStorage.getItem(this.localStorageKey)
+      if (histories) {
+        this.chatHistory = JSON.parse(histories)
+        if (this.chatHistory.length > 0) {
+          this.switchChat(this.chatHistory[0].id)
         }
-      } catch (error) {
-        console.error('加载聊天历史失败:', error)
-        this.$message.error('加载聊天历史失败')
       }
+    },
+
+    saveChatHistories() {
+      localStorage.setItem(this.localStorageKey, JSON.stringify(this.chatHistory))
     },
 
     async createNewChat() {
-      try {
-        const response = await fetch('/api/chat/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'satoken': localStorage.getItem('satoken') || ''
-          },
-          body: JSON.stringify({ title: '新对话' })
-        })
-        
-        if (response.ok) {
-          const newChat = await response.json()
-          this.chatHistory.unshift(newChat)
-          await this.switchChat(newChat.id)
-        }
-      } catch (error) {
-        console.error('创建新对话失败:', error)
-        this.$message.error('创建新对话失败')
+      const newChat = {
+        id: Date.now().toString(),
+        title: this.generateChatTitle(),
+        messages: [],
+        createTime: new Date().toISOString(),
+        updateTime: new Date().toISOString()
       }
+      
+      this.chatHistory.unshift(newChat)
+      this.saveChatHistories()
+      await this.switchChat(newChat.id)
+    },
+
+    generateChatTitle() {
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = String(now.getMonth() + 1).padStart(2, '0')
+      const day = String(now.getDate()).padStart(2, '0')
+      const dateStr = `${year}-${month}-${day}`
+      
+      const todayChats = this.chatHistory.filter(chat => {
+        return chat.title.includes(dateStr)
+      })
+      const chatNumber = todayChats.length + 1
+
+      return `对话 ${dateStr} #${chatNumber}`
     },
 
     async switchChat(chatId) {
-      try {
-        const response = await fetch(`/api/chat/history/${chatId}`, {
-          headers: {
-            'satoken': localStorage.getItem('satoken') || ''
-          }
-        })
-        
-        if (response.ok) {
-          const chatHistory = await response.json()
-          this.currentChat = chatId
-          this.currentMessages = chatHistory.messages || []
-          this.scrollToBottom()
-        }
-      } catch (error) {
-        console.error('切换对话失败:', error)
-        this.$message.error('切换对话失败')
+      const chat = this.chatHistory.find(c => c.id === chatId)
+      if (chat) {
+        this.currentChat = chatId
+        this.currentMessages = chat.messages || []
+        this.scrollToBottom()
       }
     },
 
@@ -240,11 +233,27 @@ export default {
       const userMessage = this.inputMessage.trim()
       this.inputMessage = ''
       
-      this.currentMessages.push({
+      const userMsg = {
         role: 'user',
         content: userMessage,
         type: 'text'
-      })
+      }
+      this.currentMessages.push(userMsg)
+      
+      const aiMsg = {
+        role: 'assistant',
+        content: '',
+        type: 'text',
+        isLoading: true
+      }
+      this.currentMessages.push(aiMsg)
+      
+      const currentChat = this.chatHistory.find(c => c.id === this.currentChat)
+      if (currentChat) {
+        currentChat.messages = this.currentMessages
+        currentChat.updateTime = new Date().toISOString()
+        this.saveChatHistories()
+      }
       
       this.scrollToBottom()
       this.isTyping = true
@@ -265,18 +274,38 @@ export default {
         if (!response.ok) throw new Error('网络请求失败')
 
         const aiResponse = await response.text()
-        this.currentMessages.push({
-          role: 'assistant',
-          content: aiResponse,
-          type: 'text'
-        })
+        
+        const lastMessage = this.currentMessages[this.currentMessages.length - 1]
+        this.$set(lastMessage, 'isLoading', false)
+        
+        let displayedText = ''
+        const chars = aiResponse.split('')
+        
+        const typeNextChar = () => {
+          if (chars.length > 0) {
+            displayedText += chars.shift()
+            this.$set(lastMessage, 'content', displayedText)
+            if (currentChat) {
+              currentChat.messages = this.currentMessages
+              this.saveChatHistories()
+            }
+            this.scrollToBottom()
+            setTimeout(typeNextChar, this.streamingSpeed)
+          } else {
+            this.isTyping = false
+          }
+        }
+        
+        typeNextChar()
       } catch (error) {
         console.error('发送消息失败:', error)
         this.$message.error('发送消息失败')
         this.currentMessages.pop()
-      } finally {
         this.isTyping = false
-        this.scrollToBottom()
+        if (currentChat) {
+          currentChat.messages = this.currentMessages
+          this.saveChatHistories()
+        }
       }
     },
 
@@ -288,20 +317,7 @@ export default {
     async saveTitle(index) {
       const chat = this.chatHistory[index]
       this.$set(chat, 'isEditing', false)
-      
-      try {
-        await fetch(`/api/chat/history/${chat.id}/title`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'satoken': localStorage.getItem('satoken') || ''
-          },
-          body: JSON.stringify({ title: chat.title })
-        })
-      } catch (error) {
-        console.error('更新标题失败:', error)
-        this.$message.error('更新标题失败')
-      }
+      this.saveChatHistories()
     },
     
     async handleCommand(command, index) {
@@ -313,27 +329,17 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(async () => {
-          try {
-            await fetch(`/api/chat/history/${chat.id}`, {
-              method: 'DELETE',
-              headers: {
-                'satoken': localStorage.getItem('satoken') || ''
-              }
-            })
-            
-            this.chatHistory.splice(index, 1)
-            if (this.currentChat === chat.id) {
-              if (this.chatHistory.length > 0) {
-                await this.switchChat(this.chatHistory[0].id)
-              } else {
-                this.currentChat = null
-                this.currentMessages = []
-              }
+        }).then(() => {
+          this.chatHistory.splice(index, 1)
+          this.saveChatHistories()
+          
+          if (this.currentChat === chat.id) {
+            if (this.chatHistory.length > 0) {
+              this.switchChat(this.chatHistory[0].id)
+            } else {
+              this.currentChat = null
+              this.currentMessages = []
             }
-          } catch (error) {
-            console.error('删除对话失败:', error)
-            this.$message.error('删除对话失败')
           }
         })
       }

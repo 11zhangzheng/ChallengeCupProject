@@ -11,15 +11,13 @@ import dev.langchain4j.data.document.DocumentParser;
 import dev.langchain4j.data.document.DocumentSource;
 import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.document.parser.TextDocumentParser;
-import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
-import dev.langchain4j.data.document.parser.apache.poi.ApachePoiDocumentParser;
+import dev.langchain4j.data.document.parser.apache.tika.ApacheTikaDocumentParser;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.MediaType;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.ByteArrayInputStream;
@@ -28,6 +26,14 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.mime.MediaType;
+// import org.apache.tika.sax.BodyContentHandler;
+// import org.apache.tika.metadata.Metadata;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -49,52 +55,66 @@ public class ChatController {
             String fileName = file.getOriginalFilename().toLowerCase();
             log.info("Receiving file upload request: {}, size: {}", fileName, file.getSize());
             
-            if (!fileName.endsWith(".txt") && !fileName.endsWith(".pdf") && 
-                !fileName.endsWith(".doc") && !fileName.endsWith(".docx") &&
-                !fileName.endsWith(".ppt") && !fileName.endsWith(".pptx") &&
-                !fileName.endsWith(".xls") && !fileName.endsWith(".xlsx")) {
-                log.warn("Unsupported file type: {}", fileName);
-                return ResponseEntity.badRequest().body("目前只支持txt, pdf, doc, docx, ppt, pptx, xls, xlsx格式文件");
+            // 创建 Tika 配置和解析器
+            TikaConfig tikaConfig = TikaConfig.getDefaultConfig();
+            AutoDetectParser autoDetectParser = new AutoDetectParser(tikaConfig);
+            org.apache.tika.metadata.Metadata tikaMetadata = new org.apache.tika.metadata.Metadata();
+            
+            // 先尝试用 Tika 直接解析文本
+            String extractedText;
+            try (InputStream stream = file.getInputStream()) {
+                org.apache.tika.sax.BodyContentHandler handler = new org.apache.tika.sax.BodyContentHandler(-1);
+                autoDetectParser.parse(stream, handler, tikaMetadata);
+                extractedText = handler.toString();
+                log.info("Tika extracted text length: {}", extractedText.length());
+            }
+            
+            if (extractedText == null || extractedText.trim().isEmpty()) {
+                log.error("Tika failed to extract text from file: {}", fileName);
+                return ResponseEntity.badRequest().body("无法从文件中提取文本内容");
             }
 
-            DocumentParser parser;
-            if (fileName.endsWith(".pdf")) {
-                parser = new ApachePdfBoxDocumentParser();
-            } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx") ||
-                       fileName.endsWith(".ppt") || fileName.endsWith(".pptx") ||
-                       fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
-                parser = new ApachePoiDocumentParser();
-            } else {
-                parser = new TextDocumentParser();
+            // 创建文档对象
+            Document document = Document.from(
+                extractedText,
+                new dev.langchain4j.data.document.Metadata()
+                    .add("fileName", fileName)
+                    .add("Content-Type", tikaMetadata.get("Content-Type"))
+            );
+
+            try {
+                chatService.loadDocument(document);
+                return ResponseEntity.ok("文档上传成功");
+            } catch (Exception e) {
+                log.error("Failed to load document into chat service", e);
+                return ResponseEntity.badRequest().body("文档处理失败: " + e.getMessage());
             }
-
-            // 创建自定义的 DocumentSource
-            DocumentSource source = new DocumentSource() {
-                private final byte[] content = file.getBytes();
-                private final Metadata metadata = new Metadata();
-                
-                @Override
-                public InputStream inputStream() throws IOException {
-                    return new ByteArrayInputStream(content);
-                }
-                
-                @Override
-                public Metadata metadata() {
-                    metadata.add("fileName", fileName);
-                    return metadata;
-                }
-            };
-
-            Document document = DocumentLoader.load(source, parser);
-            chatService.loadDocument(document);
-            return ResponseEntity.ok("文档上传成功");
-        } catch (BlankDocumentException e) {
-            log.error("Blank document error", e);
-            return ResponseEntity.badRequest().body("文档内容为空");
         } catch (Exception e) {
-            log.error("Document processing error", e);
-            return ResponseEntity.badRequest().body("文档处理失败: " + e.getMessage());
+            log.error("Document processing error: ", e);
+            String errorMessage = e.getMessage();
+            if (errorMessage == null || errorMessage.trim().isEmpty()) {
+                errorMessage = "未知错误，请检查文件格式是否正确";
+            }
+            return ResponseEntity.badRequest().body("文档处理失败: " + errorMessage);
         }
+    }
+
+    // 添加检查 DOC 文件格式的方法
+    private boolean isValidDoc(byte[] content) {
+        // DOC 文件的魔数
+        byte[] docMagicNumber = {(byte) 0xD0, (byte) 0xCF, (byte) 0x11, (byte) 0xE0, 
+                                (byte) 0xA1, (byte) 0xB1, (byte) 0x1A, (byte) 0xE1};
+        
+        if (content.length < docMagicNumber.length) {
+            return false;
+        }
+        
+        for (int i = 0; i < docMagicNumber.length; i++) {
+            if (content[i] != docMagicNumber[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @PostMapping("/question")

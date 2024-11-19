@@ -43,12 +43,12 @@
         :http-request="customUpload"
         :limit="5"
         name="file"
-        accept=".txt,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
+        accept=".txt,.pdf,.docx,.pptx,.xlsx"
         multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
           <div class="upload-main-text">点击或将文件拖拽到此处上传</div>
-          <div class="upload-sub-text">支持 txt、pdf、doc、docx、ppt、pptx、xls、xlsx 格式</div>
+          <div class="upload-sub-text">支持 txt、pdf、docx、pptx、xlsx 格式</div>
         </div>
       </el-upload>
     </el-card>
@@ -67,9 +67,10 @@
             文件要求
           </div>
           <ul class="guide-list">
-            <li>支持的文件格式: TXT、PDF、DOC、DOCX、PPT、PPTX、XLS、XLSX</li>
+            <li>支持的文件格式: TXT、PDF、DOCX、PPTX、XLSX</li>
             <li>单个文件大小不超过10MB</li>
             <li>建议上传结构化的文本文件</li>
+            <li>不支持旧版 Office 格式（doc、ppt、xls），请转换为新版格式后上传</li>
           </ul>
         </div>
 
@@ -218,11 +219,11 @@ export default {
       }
       
       const fileName = file.name.toLowerCase()
-      const validExtensions = ['.txt', '.pdf', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx']
+      const validExtensions = ['.txt', '.pdf', '.docx', '.pptx', '.xlsx']
       const isValidType = validExtensions.some(ext => fileName.endsWith(ext))
       
       if (!isValidType) {
-        this.$message.error('只支持txt、pdf、doc、docx、ppt、pptx、xls、xlsx格式文件!')
+        this.$message.error('只支持txt、pdf、docx、pptx、xlsx格式文件!')
         return false
       }
 
@@ -253,7 +254,7 @@ export default {
           errorMessage = (response.data && response.data.message) || response.data || '服务器处理失败'
         } catch (e) {
           console.error('解析错误响应失败:', e)
-          errorMessage = '文件处���失败，请稍后重试'
+          errorMessage = '文件处失败，请稍后重试'
         }
       }
       
