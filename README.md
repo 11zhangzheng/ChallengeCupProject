@@ -105,4 +105,4 @@ chroma run --port 8585
    pip install --upgrade pip
    pip install chromadb --no-cache-dir
    ```
-2. 如果出现端口占用，可以在启动命令中指定其他端口号
+2. 如果出现端口占用，可以在启动命令中指定其他端口号，同时需要修改后端的`application-langchain4j.yml`文件
