@@ -2,7 +2,7 @@ package com.cow.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
@@ -51,11 +51,13 @@ public enum StatusCodeEnum {
     /**
      * 状态码
      */
-    private final Integer code;
+    @Setter
+    private Integer code;
 
     /**
      * 描述
      */
-    private final String desc;
+    @Setter
+    private String desc;
 
 }
