@@ -1,7 +1,7 @@
-# ChangeCupProject
+# ChallengeCupProject
 
 ## 项目概述
-ChangeCupProject 是一个全栈开发项目，包含前端和后端完整实现。
+ChallengeCupProject 是一个全栈开发项目，包含前端和后端完整实现。
 
 ## 技术栈
 
