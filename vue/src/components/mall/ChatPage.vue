@@ -10,8 +10,8 @@
           <h3>聊天记录</h3>
         </div>
         <div class="history-list">
-          <div 
-            v-for="(item, index) in chatHistory" 
+          <div
+            v-for="(item, index) in chatHistory"
             :key="item.id"
             class="history-item"
             :class="{ active: currentChat === item.id }"
@@ -47,8 +47,8 @@
       <!-- 聊天消息区域 -->
       <div class="chat-messages" ref="messageContainer">
         <template v-if="currentChat">
-          <div 
-            v-for="(msg, index) in currentMessages" 
+          <div
+            v-for="(msg, index) in currentMessages"
             :key="index"
             class="message"
             :class="msg.role"
@@ -63,7 +63,7 @@
               <div v-else>
                 <div v-if="msg.content" class="markdown-content" v-html="renderMarkdown(msg.content)"></div>
                 <div v-else-if="isTyping && index === currentMessages.length - 1" class="thinking-animation">
-                  <div class="thinking-text">智农AI助手正在思考</div>
+                  <div class="thinking-text">AI助手正在思考</div>
                   <div class="thinking-dots">
                     <span></span>
                     <span></span>
@@ -95,8 +95,8 @@
               @keyup.enter.native="handleEnter"
             ></el-input>
           </div>
-          <el-button 
-            type="primary" 
+          <el-button
+            type="primary"
             :loading="isTyping"
             :disabled="!currentChat || !inputMessage.trim() || isTyping"
             @click="sendMessage"
@@ -144,11 +144,11 @@ export default {
       localStorageKey: 'chat_histories'
     }
   },
-  
+
   created() {
     this.loadChatHistories()
   },
-  
+
   methods: {
     renderMarkdown(text) {
       return DOMPurify.sanitize(md.render(text))
@@ -197,7 +197,7 @@ export default {
         createTime: new Date().toISOString(),
         updateTime: new Date().toISOString()
       }
-      
+
       this.chatHistory.unshift(newChat)
       this.saveChatHistories()
       await this.switchChat(newChat.id)
@@ -209,7 +209,7 @@ export default {
       const month = String(now.getMonth() + 1).padStart(2, '0')
       const day = String(now.getDate()).padStart(2, '0')
       const dateStr = `${year}-${month}-${day}`
-      
+
       const todayChats = this.chatHistory.filter(chat => {
         return chat.title.includes(dateStr)
       })
@@ -232,14 +232,14 @@ export default {
 
       const userMessage = this.inputMessage.trim()
       this.inputMessage = ''
-      
+
       const userMsg = {
         role: 'user',
         content: userMessage,
         type: 'text'
       }
       this.currentMessages.push(userMsg)
-      
+
       const aiMsg = {
         role: 'assistant',
         content: '',
@@ -247,14 +247,14 @@ export default {
         isLoading: true
       }
       this.currentMessages.push(aiMsg)
-      
+
       const currentChat = this.chatHistory.find(c => c.id === this.currentChat)
       if (currentChat) {
         currentChat.messages = this.currentMessages
         currentChat.updateTime = new Date().toISOString()
         this.saveChatHistories()
       }
-      
+
       this.scrollToBottom()
       this.isTyping = true
 
@@ -274,13 +274,13 @@ export default {
         if (!response.ok) throw new Error('网络请求失败')
 
         const aiResponse = await response.text()
-        
+
         const lastMessage = this.currentMessages[this.currentMessages.length - 1]
         this.$set(lastMessage, 'isLoading', false)
-        
+
         let displayedText = ''
         const chars = aiResponse.split('')
-        
+
         const typeNextChar = () => {
           if (chars.length > 0) {
             displayedText += chars.shift()
@@ -295,7 +295,7 @@ export default {
             this.isTyping = false
           }
         }
-        
+
         typeNextChar()
       } catch (error) {
         console.error('发送消息失败:', error)
@@ -313,13 +313,13 @@ export default {
       const chat = this.chatHistory[index]
       this.$set(chat, 'isEditing', true)
     },
-    
+
     async saveTitle(index) {
       const chat = this.chatHistory[index]
       this.$set(chat, 'isEditing', false)
       this.saveChatHistories()
     },
-    
+
     async handleCommand(command, index) {
       const chat = this.chatHistory[index]
       if (command === 'edit') {
@@ -332,7 +332,7 @@ export default {
         }).then(() => {
           this.chatHistory.splice(index, 1)
           this.saveChatHistories()
-          
+
           if (this.currentChat === chat.id) {
             if (this.chatHistory.length > 0) {
               this.switchChat(this.chatHistory[0].id)
@@ -717,15 +717,15 @@ export default {
   .chat-input-container {
     padding: 12px;
   }
-  
+
   .chat-input {
     padding: 12px;
   }
-  
+
   .message {
     max-width: 90%;
   }
-  
+
   .el-button {
     width: 80px;
   }
@@ -754,4 +754,4 @@ export default {
   cursor: pointer;
   z-index: 2;
 }
-</style> 
+</style>

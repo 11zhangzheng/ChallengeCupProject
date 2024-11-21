@@ -4,11 +4,11 @@
     <div class="ai-planting-content">
       <div class="content-wrapper">
         <h1 class="main-title">智+种植</h1>
-        
+
         <!-- AI种植介绍部分 -->
         <div class="ai-description">
           <h2>什么是智+种植?</h2>
-          <p class="description-text">智+种植是智农商城推出的具有AI大模型能力的智能种植问答知识库平台。我们致力于：</p>
+          <p class="description-text">智+种植是HarvestHub推出的具有AI大模型能力的智能种植问答知识库平台。我们致力于：</p>
           <div class="features-grid">
             <div class="feature-card">
               <i class="el-icon-cpu"></i>
@@ -44,8 +44,8 @@
               <div class="entrance-text">
                 <h3>开始智能对话</h3>
                 <p>让AI助手为您解答种植难题</p>
-                <el-button 
-                  type="primary" 
+                <el-button
+                  type="primary"
                   size="large"
                   @click="$router.push('/chatPage')"
                   class="start-button"
@@ -62,7 +62,7 @@
           <h2>商家入驻</h2>
           <div class="join-card">
             <div class="join-content">
-              <h3>欢迎优质种植商家入驻"智农"平台！</h3>
+              <h3>欢迎优质种植商家入驻 HarvestHub！</h3>
               <p>如果您想要成为我们的合作伙伴，请联系管理员：</p>
               <div class="contact-info">
                 <i class="el-icon-message"></i>

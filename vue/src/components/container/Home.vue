@@ -17,7 +17,7 @@
         </el-main>
         <!--底部-->
         <el-footer class="el-footer" v-if="this.$store.state.role!==null && this.$store.state.role.indexOf(this.$VAR.ordinaryRole)===-1">
-          <div class="footer"><span>Copyright&nbsp;©&nbsp;{{new Date().getFullYear()}}&nbsp;&nbsp; 智农科技公司&nbsp;</span></div>
+          <div class="footer"><span>Copyright&nbsp;©&nbsp;{{new Date().getFullYear()}}&nbsp;&nbsp; HarvestHub&nbsp;</span></div>
         </el-footer>
       </el-container>
     </el-container>

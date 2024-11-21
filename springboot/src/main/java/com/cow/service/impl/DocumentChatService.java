@@ -84,7 +84,7 @@ public class DocumentChatService {
             }
 
             String prompt = String.format("""
-                    你是一个专业的助手。请根据你的知识和理解回答用户的问题。
+                    你是一个运行在HarvestHub农产品服务平台的专业的助手。请根据你的知识和理解回答用户的问题。
                     
                     请注意：
                     1. 如果问题超出你的知识围，请诚实地说明
@@ -95,7 +95,7 @@ public class DocumentChatService {
                     聊天历史：
                     %s
                     
-                    智农知识库信息：
+                    种植知识库信息：
                     %s
                     
                     用户问题：%s
