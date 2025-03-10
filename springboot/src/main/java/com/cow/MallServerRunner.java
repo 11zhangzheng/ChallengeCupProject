@@ -23,8 +23,8 @@ import java.util.Optional;
 import javax.annotation.PreDestroy;
 
 @Component
-public class BreadRollMallServerRunner implements ApplicationRunner {
-    private static final Logger log = LoggerFactory.getLogger(BreadRollMallServerRunner.class);
+public class MallServerRunner implements ApplicationRunner {
+    private static final Logger log = LoggerFactory.getLogger(MallServerRunner.class);
     private static final String REDIS_COUNTER_KEY = "shiro:cache:user.id";
     private static final String DEFAULT_USERNAME = "超级管理员";
     private static final String DEFAULT_PASSWORD = "123456";

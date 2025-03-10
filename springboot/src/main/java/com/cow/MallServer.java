@@ -13,10 +13,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @SpringBootApplication
 @MapperScan("com.cow.dao")
-public class BreadRollMallServer {
-    private static final Logger log = LoggerFactory.getLogger(BreadRollMallServer.class);
+public class MallServer {
+    private static final Logger log = LoggerFactory.getLogger(MallServer.class);
     public static void main(String[] args){
-        SpringApplication.run(BreadRollMallServer.class, args);
+        SpringApplication.run(MallServer.class, args);
     }
 }
 
