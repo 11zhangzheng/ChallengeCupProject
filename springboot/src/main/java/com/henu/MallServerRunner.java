@@ -2,7 +2,7 @@ package com.henu;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
 import com.henu.constant.UserStatusEnum;
-//import com.cow.entity.Superspring.server.host;
+//import com.henu.entity.Superspring.server.host;
 import com.henu.entity.SuperAdmin;
 import com.henu.entity.User;
 import com.henu.entity.UserRole;
