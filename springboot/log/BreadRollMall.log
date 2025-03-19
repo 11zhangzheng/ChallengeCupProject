@@ -1,5 +1,5 @@
 [Smart Farming] 2024-11-21 16:19:26.859 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatController' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\controller\ChatController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'documentChatService' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\service\impl\DocumentChatService.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.cow.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatController' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\controller\ChatController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'documentChatService' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\service\impl\DocumentChatService.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.henu.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:224)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
@@ -19,8 +19,8 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1289)
-	at com.cow.BreadRollMallServer.main(BreadRollMallServer.java:19)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'documentChatService' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\service\impl\DocumentChatService.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.cow.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
+	at com.henu.BreadRollMallServer.main(BreadRollMallServer.java:19)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'documentChatService' defined in file [D:\source\ChallengeCupProject\springboot\target\classes\com\cow\service\impl\DocumentChatService.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.henu.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:310)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:291)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
@@ -37,14 +37,14 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
 	... 19 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.cow.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.henu.service.impl.DocumentChatService]: Constructor threw exception; nested exception is java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:226)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:306)
 	... 33 common frames omitted
 Caused by: java.lang.RuntimeException: Failed to initialize ChromaEmbeddingStore: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
-	at com.cow.service.impl.DocumentChatService.initializeEmbeddingStore(DocumentChatService.java:52)
-	at com.cow.service.impl.DocumentChatService.<init>(DocumentChatService.java:42)
+	at com.henu.service.impl.DocumentChatService.initializeEmbeddingStore(DocumentChatService.java:52)
+	at com.henu.service.impl.DocumentChatService.<init>(DocumentChatService.java:42)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -56,7 +56,7 @@ Caused by: java.lang.RuntimeException: java.net.ConnectException: Failed to conn
 	at dev.langchain4j.store.embedding.chroma.ChromaClient.collection(ChromaClient.java:63)
 	at dev.langchain4j.store.embedding.chroma.ChromaEmbeddingStore.<init>(ChromaEmbeddingStore.java:41)
 	at dev.langchain4j.store.embedding.chroma.ChromaEmbeddingStore$Builder.build(ChromaEmbeddingStore.java:88)
-	at com.cow.service.impl.DocumentChatService.initializeEmbeddingStore(DocumentChatService.java:50)
+	at com.henu.service.impl.DocumentChatService.initializeEmbeddingStore(DocumentChatService.java:50)
 	... 42 common frames omitted
 Caused by: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8585
 	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297)
