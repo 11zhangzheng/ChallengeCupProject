@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 Vue.use(Router)
 export default new Router({
   routes: [
-    //path: '/', redirect: '/MallHome'
     {
       path: '/',
       redirect: () => {
@@ -71,7 +71,7 @@ export default new Router({
           component: () => import("../components/mall/MallPurchase"),
           meta: {
             requiresAuth: true,
-            headerName: [{ name: '购买农产品' }]
+            headerName: [{name: '购买农产品'}]
           }
         },
         {
@@ -80,7 +80,7 @@ export default new Router({
           component: () => import("../components/user/MyOrder"),
           meta: {
             requiresAuth: true,
-            headerName: [{ name: '我的订单' }]
+            headerName: [{name: '我的订单'}]
           }
         },
         {    //农产品列表
@@ -91,8 +91,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '农产品列表' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '农产品列表'}]
           }
         }, { //添加农产品
           path: '/ProductAdd',
@@ -102,8 +102,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '添加农产品' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '添加农产品'}]
           }
         }, { //农产品类别
           path: '/ProductType',
@@ -113,8 +113,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '农产品类别' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '农产品类别'}]
           }
         }, { //农产品品牌
           path: '/ProductBrand',
@@ -124,8 +124,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '农产品品牌' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '农产品品牌'}]
           }
         }, { //农产品规格
           path: '/ProductSpecs',
@@ -135,8 +135,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '农产品规格' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '农产品规格'}]
           }
         }, { //农产品采购
           path: '/Purchase',
@@ -146,8 +146,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '农产品采购' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '农产品采购'}]
           }
         }, { //供应商
           path: '/Supplier',
@@ -157,8 +157,8 @@ export default new Router({
             requiresAuth: true,
             productRole: true,
             headerName: [
-              { name: '农产品', url: '/ProductList' },
-              { name: '供应商管理' }]
+              {name: '农产品', url: '/ProductList'},
+              {name: '供应商管理'}]
           }
         }, { //订单列表列表
           path: '/OrderList',
@@ -168,8 +168,8 @@ export default new Router({
             requiresAuth: true,
             orderRole: true,
             headerName: [
-              { name: '订单', url: '/OrderList' },
-              { name: '订单列表' }]
+              {name: '订单', url: '/OrderList'},
+              {name: '订单列表'}]
           }
         }, { //订单详情
           path: '/OrderDetail',
@@ -179,8 +179,8 @@ export default new Router({
             requiresAuth: true,
             orderRole: true,
             headerName: [
-              { name: '订单', url: '/OrderList' },
-              { name: '订单详情' }]
+              {name: '订单', url: '/OrderList'},
+              {name: '订单详情'}]
           }
         }, { //退货原因
           path: '/ReturnReason',
@@ -190,8 +190,8 @@ export default new Router({
             requiresAuth: true,
             orderRole: true,
             headerName: [
-              { name: '订单', url: '/OrderList' },
-              { name: '退货原因设置' }]
+              {name: '订单', url: '/OrderList'},
+              {name: '退货原因设置'}]
           }
         }, { //农产品退货
           path: '/ReturnGoods',
@@ -201,8 +201,8 @@ export default new Router({
             requiresAuth: true,
             orderRole: true,
             headerName: [
-              { name: '订单', url: '/OrderList' },
-              { name: '退货申请处理' }]
+              {name: '订单', url: '/OrderList'},
+              {name: '退货申请处理'}]
           }
         }, { //农产品轮播图
           path: '/SlideShow',
@@ -212,8 +212,8 @@ export default new Router({
             requiresAuth: true,
             orderRole: true,
             headerName: [
-              { name: '营销', url: '/SlideShow' },
-              { name: '农产品轮播图' }]
+              {name: '营销', url: '/SlideShow'},
+              {name: '农产品轮播图'}]
           }
         }, { //管理员列表
           path: '/AdminList',
@@ -223,8 +223,8 @@ export default new Router({
             requiresAuth: true,
             userRole: true,
             headerName: [
-              { name: '权限', url: '/AdminList' },
-              { name: '用户列表' }]
+              {name: '权限', url: '/AdminList'},
+              {name: '用户列表'}]
           }
         }, { //顾客列表
           path: '/UserList',
@@ -234,8 +234,8 @@ export default new Router({
             requiresAuth: true,
             userRole: true,
             headerName: [
-              { name: '权限', url: '/UserList' },
-              { name: '用户列表' }]
+              {name: '权限', url: '/UserList'},
+              {name: '用户列表'}]
           }
         }, { //角色列表
           path: '/RoleList',
@@ -245,8 +245,8 @@ export default new Router({
             requiresAuth: true,
             userRole: true,
             headerName: [
-              { name: '权限', url: '/UserList' },
-              { name: '角色列表' }]
+              {name: '权限', url: '/UserList'},
+              {name: '角色列表'}]
           }
         }, { //个人中心
           path: '/personalCenter',
@@ -254,7 +254,7 @@ export default new Router({
           component: () => import("../components/user/PersonalCenter"),
           meta: {
             requiresAuth: true,
-            headerName: [{ name: '个人中心' }]
+            headerName: [{name: '个人中心'}]
           }
         }, { //修改密码
           path: '/changePassword',
@@ -262,7 +262,7 @@ export default new Router({
           component: () => import("../components/user/ChangePassword"),
           meta: {
             requiresAuth: true,
-            headerName: [{ name: '修改密码' }]
+            headerName: [{name: '修改密码'}]
           }
         }, { //修改密码
           path: '/shoppingCart',
@@ -270,14 +270,14 @@ export default new Router({
           component: () => import("../components/user/ShoppingCart"),
           meta: {
             requiresAuth: true,
-            headerName: [{ name: '购物车' }]
+            headerName: [{name: '购物车'}]
           }
         }, { //农产品评价
           path: '/productReview',
           name: '农产品评价',
           component: () => import("../components/mall/ProductReview"),
           meta: {
-            headerName: [{ name: '农产品评价' }]
+            headerName: [{name: '农产品评价'}]
           }
         }, {
           path: '/NoAccess',
@@ -296,7 +296,7 @@ export default new Router({
           component: () => import("../components/mall/AiPlanting"),
           meta: {
             requiresAuth: false,
-            headerName: [{ name: '智+种植' }]
+            headerName: [{name: '智+种植'}]
           }
         },
         {
@@ -305,7 +305,7 @@ export default new Router({
           component: () => import("../components/mall/ChatPage"),
           meta: {
             requiresAuth: false,
-            headerName: [{ name: 'AI智能问答' }]
+            headerName: [{name: 'AI智能问答'}]
           }
         },
         {
@@ -315,7 +315,7 @@ export default new Router({
           meta: {
             requiresAuth: true,
             adminRole: true,
-            headerName: [{ name: '知识库上传' }]
+            headerName: [{name: '知识库上传'}]
           }
         }
       ],

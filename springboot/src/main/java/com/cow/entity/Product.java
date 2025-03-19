@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import java.util.Date;
 
 
-
 @Data
 @Entity
 @Table(name = "product")

@@ -4,14 +4,14 @@
     <!--通过ID查询-->
     <select id="selectById" resultType="Logistics" parameterType="Integer">
         select logistic_id,
-               order_no,
-               sender,
-               sender_tel,
-               sender_add,
-               receiver,
-               receiver_tel,
-               receiver_add,
-               parcel_name
+        order_no,
+        sender,
+        sender_tel,
+        sender_add,
+        receiver,
+        receiver_tel,
+        receiver_add,
+        parcel_name
         from logistics
         where logistic_id = #{logisticId};
     </select>
@@ -19,14 +19,14 @@
     <!--根据订单编号查询-->
     <select id="selectOrderNo" resultType="Logistics" parameterType="String">
         select logistic_id,
-               order_no,
-               sender,
-               sender_tel,
-               sender_add,
-               receiver,
-               receiver_tel,
-               receiver_add,
-               parcel_name
+        order_no,
+        sender,
+        sender_tel,
+        sender_add,
+        receiver,
+        receiver_tel,
+        receiver_add,
+        parcel_name
         from logistics
         where order_no = #{orderNo};
     </select>
@@ -34,23 +34,23 @@
     <!--查询所有-->
     <select id="selectAll" resultType="Logistics">
         select logistic_id,
-               order_no,
-               sender,
-               sender_tel,
-               sender_add,
-               receiver,
-               receiver_tel,
-               receiver_add,
-               parcel_name
+        order_no,
+        sender,
+        sender_tel,
+        sender_add,
+        receiver,
+        receiver_tel,
+        receiver_add,
+        parcel_name
         from logistics;
     </select>
 
     <!--插入一条数据-->
     <insert id="insertData" parameterType="Logistics">
         insert into logistics (logistic_id, order_no, sender, sender_tel, sender_add, receiver, receiver_tel,
-                               receiver_add, parcel_name)
+        receiver_add, parcel_name)
         values (#{logisticId}, #{orderNo}, #{sender}, #{senderTel}, #{senderAdd},
-                #{receiver}, #{receiverTel}, #{receiverAdd}, #{parcelName});
+        #{receiver}, #{receiverTel}, #{receiverAdd}, #{parcelName});
     </insert>
 
 

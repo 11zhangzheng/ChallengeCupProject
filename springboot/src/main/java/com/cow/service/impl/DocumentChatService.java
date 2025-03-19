@@ -1,5 +1,6 @@
 package com.cow.service.impl;
 
+import com.cow.model.ChatMessage;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.embedding.Embedding;
@@ -9,17 +10,15 @@ import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.chroma.ChromaEmbeddingStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-
-import com.cow.model.ChatMessage;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -31,13 +30,13 @@ public class DocumentChatService {
     private final Map<String, List<ChatMessage>> chatHistories = new ConcurrentHashMap<>();
 
     public DocumentChatService(
-            ChatLanguageModel chatModel, 
+            ChatLanguageModel chatModel,
             EmbeddingModel embeddingModel,
             @Value("${spring.chroma.server.host}") String chromaHost,
             @Value("${spring.chroma.server.port}") int chromaPort) {
         this.chatModel = chatModel;
         this.embeddingModel = embeddingModel;
-        
+
         String baseUrl = String.format("http://%s:%d", chromaHost, chromaPort);
         this.embeddingStore = initializeEmbeddingStore(baseUrl, "document_collection");
     }
@@ -55,7 +54,7 @@ public class DocumentChatService {
 
     public void loadDocument(Document document) {
         var textSegments = DocumentSplitters.recursive(500, 0).split(document);
-        
+
         // 并行处理段落的嵌入生成和存储
         textSegments.parallelStream().forEach(segment -> {
             Embedding embedding = embeddingModel.embed(segment.text()).content();
@@ -68,7 +67,7 @@ public class DocumentChatService {
             // 使用 chatId 获取历史记录
             String historyKey = chatId + ":" + sessionId;
             List<ChatMessage> history = chatHistories.computeIfAbsent(historyKey, k -> new ArrayList<>());
-            
+
             // 获取相关文档
             Embedding questionEmbedding = embeddingModel.embed(question).content();
             List<EmbeddingMatch<TextSegment>> relevantMatches = embeddingStore.findRelevant(questionEmbedding, 2);
@@ -104,11 +103,11 @@ public class DocumentChatService {
                     """, conversationContext, context, question);
 
             String response = chatModel.generate(prompt);
-            
+
             // 更新会话历史
             history.add(new ChatMessage("user", question, "text", System.currentTimeMillis()));
             history.add(new ChatMessage("assistant", response, "text", System.currentTimeMillis()));
-            
+
             // 保持历史记录在合理范围内
             while (history.size() > 20) {
                 history.remove(0);

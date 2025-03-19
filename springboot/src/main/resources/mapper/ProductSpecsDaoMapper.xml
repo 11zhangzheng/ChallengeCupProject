@@ -6,9 +6,9 @@
         select specs_name
         from specs
         where specs_id in (
-            select specs_id
-            from product_specs
-            where product_id = #{productId});
+        select specs_id
+        from product_specs
+        where product_id = #{productId});
     </select>
 
     <!--查询所有-->
@@ -42,7 +42,7 @@
         delete
         from product_specs
         where product_id = #{productId}
-          and specs_id = #{specsId};
+        and specs_id = #{specsId};
     </delete>
 
     <!--批量添加-->

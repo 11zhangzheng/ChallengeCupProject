@@ -4,34 +4,33 @@ import router from './router'
 import store from './store'
 import setAxios from './setAxios'
 import axios from 'axios';
-import ElementUI from 'element-ui';
+import ElementUI, {Notification} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import 'default-passive-events'
-import { Notification } from 'element-ui'
 import DonMessage from "./assets/js/message"
 import qs from 'qs'
 import VCharts from 'v-charts'
 import Es6Promise from 'es6-promise'
 import './global/index.js'
 import animated from 'animate.css'
+//使用预防按钮多次重复点击指令
+import preventReClick from './util/preventRepeatClick'
+//使用按钮60s倒计时
+import countDown from './util/countDown'
+//引入自定义工具类
+import tools from "./util/tools";
 
 Vue.prototype["$VAR"] = VAR
 Vue.use(animated)
 require('es6-promise').polyfill()
 Es6Promise.polyfill()
 
-//使用预防按钮多次重复点击指令
-import preventReClick from './util/preventRepeatClick'
 Vue.use(preventReClick);
 
-//使用按钮60s倒计时
-import countDown from './util/countDown'
 Vue.prototype.$countDown = countDown;
 
-//引入自定义工具类
-import tools from "./util/tools";
 Vue.prototype.$tools = tools;
 
 Vue.prototype["$msg"] = DonMessage
@@ -52,7 +51,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })
 
@@ -70,7 +69,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     //判断当前是否有登录的权限
     if (store.state.token === null) {
-      Notification({ title: '警告', message: '请先登录！', type: 'warning' });
+      Notification({title: '警告', message: '请先登录！', type: 'warning'});
       next({
         path: '/loginForm',
       })

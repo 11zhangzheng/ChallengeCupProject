@@ -43,20 +43,15 @@ public class AlipayController {
     private static final String TRADE_TIME = "gmt_payment";
     private static final String TRADE_NAME = "subject";
     private static final String TRADE_AMOUNT = "buyer_pay_amount";
-
+    private final String hostAddress;
     @Autowired
     private ShoppingCartService shoppingCartService;
-
     @Autowired
     private AlipayService alipayService;
-
     @Autowired
     private OrderService orderService;
-
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
-    private final String hostAddress;
 
     public AlipayController() {
         this.hostAddress = PropertiesUtil.getCallback();

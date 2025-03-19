@@ -23,7 +23,7 @@ public class ServletUtils {
      *
      * @param response 响应
      * @param filename 文件名
-     * @param content 附件内容
+     * @param content  附件内容
      * @throws IOException
      */
     public static void writeAttachment(HttpServletResponse response, String filename, byte[] content) throws IOException {
@@ -33,8 +33,6 @@ public class ServletUtils {
         // 输出附件
         IoUtil.write(response.getOutputStream(), false, content);
     }
-
-
 
 
     /**

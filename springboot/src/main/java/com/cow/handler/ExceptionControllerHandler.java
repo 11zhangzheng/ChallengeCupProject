@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理
- *
  */
 @RestControllerAdvice
 public class ExceptionControllerHandler {
@@ -42,11 +41,11 @@ public class ExceptionControllerHandler {
 
     @ExceptionHandler(DisableLoginException.class)
     public CommonResult handlerDisableLoginException() {
-        return CommonResult.error( "此账号已被封禁");
+        return CommonResult.error("此账号已被封禁");
     }
 
     @ExceptionHandler(NotPermissionException.class)
     public CommonResult handlerNotPermissionException() {
-        return CommonResult.error( "无此权限");
+        return CommonResult.error("无此权限");
     }
 }

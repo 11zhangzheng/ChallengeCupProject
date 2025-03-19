@@ -7,10 +7,10 @@
         <el-button class="el-button-search" style="right: 111px" type="primary" @click="queryUser()">查询</el-button>
         <el-button class="el-button-search" style="right: 20px" @click="resetForm('userInfoForm')">重置</el-button>
       </div>
-      <el-form :model="userInfoForm" ref="userInfoForm" inline class="query-form">
+      <el-form ref="userInfoForm" :model="userInfoForm" class="query-form" inline>
         <el-form-item label="输入搜索" prop="key">
-          <el-input v-model="userInfoForm.key" @keyup.enter.native="queryUser()" clearable
-                    placeholder="帐号/姓名"></el-input>
+          <el-input v-model="userInfoForm.key" clearable placeholder="帐号/姓名"
+                    @keyup.enter.native="queryUser()"></el-input>
         </el-form-item>
       </el-form>
     </el-card>
@@ -19,33 +19,35 @@
         <i class="el-icon-coin"/>
         <span>数据列表</span>
       </div>
-      <el-table :data="userInfo" class="type-table" height="425" border style="width: 100%">
-        <el-table-column prop="userId" label="编号" width="100"></el-table-column>
-        <el-table-column prop="accountNumber" label="帐号" width="200"></el-table-column>
-        <el-table-column prop="userName" label="姓名" width="150"></el-table-column>
-        <el-table-column prop="telephone" label="手机号" width="200"></el-table-column>
-        <el-table-column prop="creatTime" label="注册时间" width="200"></el-table-column>
-        <el-table-column prop="loginTime" label="最后登录" width="200"></el-table-column>
+      <el-table :data="userInfo" border class="type-table" height="425" style="width: 100%">
+        <el-table-column label="编号" prop="userId" width="100"></el-table-column>
+        <el-table-column label="帐号" prop="accountNumber" width="200"></el-table-column>
+        <el-table-column label="姓名" prop="userName" width="150"></el-table-column>
+        <el-table-column label="手机号" prop="telephone" width="200"></el-table-column>
+        <el-table-column label="注册时间" prop="creatTime" width="200"></el-table-column>
+        <el-table-column label="最后登录" prop="loginTime" width="200"></el-table-column>
         <el-table-column label="是否启用" width="100">
           <template slot-scope="scope">
-            <el-switch :disabled="operateId===scope.row.userId||scope.row.userName===VAR.adminRole"
-                       @change="isUserState(scope.$index)" v-model="userInfo[scope.$index].userState"/>
+            <el-switch v-model="userInfo[scope.$index].userState"
+                       :disabled="operateId===scope.row.userId||scope.row.userName===VAR.adminRole" @change="isUserState(scope.$index)"/>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" min-width="200">
+        <el-table-column align="center" label="操作" min-width="200">
           <template slot-scope="scope">
             <el-button size="mini" style="margin: 0 2%" @click="allotRole(scope.$index)">分配角色</el-button>
-            <el-button size="mini" type="danger" title="超级管理员才有删除权限"
-                       :disabled="((operateId===scope.row.userId) || (operateRole!==null && operateRole.indexOf(VAR.adminRole)===-1))"
-                       style="margin: 0 2%" @click="deleteUser(scope.$index, userInfo)">删除</el-button>
+            <el-button :disabled="((operateId===scope.row.userId) || (operateRole!==null && operateRole.indexOf(VAR.adminRole)===-1))" size="mini" style="margin: 0 2%"
+                       title="超级管理员才有删除权限"
+                       type="danger" @click="deleteUser(scope.$index, userInfo)">删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
-    <el-dialog title="分配角色" class="user-dialog" :visible.sync="userDialogVisible" width="30%" distinguishCancelAndClose>
+    <el-dialog :visible.sync="userDialogVisible" class="user-dialog" distinguishCancelAndClose title="分配角色"
+               width="30%">
       <div style="text-align: left;width: 80%;margin: 0 auto">
-        <h3 style="margin-top: 0" v-if="userInfo.length!==0">姓名:
-          <el-tooltip effect="dark" :content="currentRoleName" placement="right">
+        <h3 v-if="userInfo.length!==0" style="margin-top: 0">姓名:
+          <el-tooltip :content="currentRoleName" effect="dark" placement="right">
             <el-tag v-if="currentRoleName.indexOf(VAR.adminRole)!==-1" type="warning">
               {{ userInfo[handleIndex]['userName'] }}
             </el-tag>
@@ -163,7 +165,11 @@ export default {
         this.$http.post('/user/delete?userId=' + this.userInfo[index].userId).then((rep) => {
           loading.close();
           if (rep.data.code === 200) {
-            this.$notify({title: '成功', message: '用户（' + this.userInfo[index].userName + '）\t删除成功', type: 'success'});
+            this.$notify({
+              title: '成功',
+              message: '用户（' + this.userInfo[index].userName + '）\t删除成功',
+              type: 'success'
+            });
             rows.splice(index, 1);//删掉该行
           } else {
             this.$notify({title: '错误', message: rep.data.message, type: 'error'});

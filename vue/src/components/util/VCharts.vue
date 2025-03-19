@@ -1,11 +1,11 @@
 <template>
   <ve-line
-    :data="chartData"
     :colors="chartColor"
-    :legend-visible="true"
-    :loading="loading"
+    :data="chartData"
     :data-empty="dataEmpty"
     :extend="extend"
+    :legend-visible="true"
+    :loading="loading"
     :settings="chartSettings">
   </ve-line>
 </template>
@@ -42,9 +42,10 @@ const DATA_FROM_BACKEND = {
 };
 
 import 'v-charts/lib/style.css'
+
 export default {
   name: 'VCharts',
-  data () {
+  data() {
     return {
       chartSettings: {
         xAxisType: 'time',
@@ -72,11 +73,11 @@ export default {
       dataEmpty: false
     }
   },
-  created () {
+  created() {
     this.getData()
   },
   methods: {
-    async getData(){
+    async getData() {
       this.chartData.rows = DATA_FROM_BACKEND.rows // 注意这里应该是接口给返回回来的数据，为了方便展示data结构，我这里用的是静态数据
       this.dataEmpty = false
     }

@@ -10,6 +10,17 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class RedisConfig {
+    @Value("${spring.redis.host}")
+    private String host;
+    @Value("${spring.redis.port}")
+    private Integer port;
+    @Value("${spring.redis.password}")
+    private String password;
+    @Value("${spring.redis.timeout}")
+    private Integer timeout;
+    @Value("${spring.redis.database}")
+    private Integer database;
+
     public RedisConfig() {
     }
 
@@ -20,19 +31,4 @@ public class RedisConfig {
         this.timeout = timeout;
         this.database = database;
     }
-
-    @Value("${spring.redis.host}")
-    private String host;
-
-    @Value("${spring.redis.port}")
-    private Integer port;
-
-    @Value("${spring.redis.password}")
-    private String password;
-
-    @Value("${spring.redis.timeout}")
-    private Integer timeout;
-
-    @Value("${spring.redis.database}")
-    private Integer database;
 }

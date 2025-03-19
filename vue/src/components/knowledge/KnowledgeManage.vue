@@ -9,18 +9,18 @@
         </div>
         <div class="desc">上传文件或URL将自动构建为AI问答知识库</div>
       </div>
-      
+
       <!-- 添加URL上传区域 -->
       <div class="url-upload-section">
         <el-input
           v-model="urlInput"
-          placeholder="请输入网页URL，例如: https://example.com/article"
-          class="url-input">
+          class="url-input"
+          placeholder="请输入网页URL，例如: https://example.com/article">
           <template slot="prepend">URL</template>
-          <el-button 
-            slot="append" 
-            type="primary" 
+          <el-button
+            slot="append"
             :loading="urlLoading"
+            type="primary"
             @click="handleUrlUpload">
             {{ urlLoading ? '加载中...' : '解析网页' }}
           </el-button>
@@ -30,21 +30,21 @@
       <div class="divider">
         <span>或</span>
       </div>
-      
+
       <!-- 原有的文件上传区域 -->
       <el-upload
-        class="upload-area"
-        drag
         :action="uploadUrl"
-        :headers="uploadHeaders"
-        :on-success="uploadSuccess"
-        :on-error="uploadError"
         :before-upload="beforeUpload"
+        :headers="uploadHeaders"
         :http-request="customUpload"
         :limit="5"
-        name="file"
+        :on-error="uploadError"
+        :on-success="uploadSuccess"
         accept=".txt,.pdf,.docx,.pptx,.xlsx"
-        multiple>
+        class="upload-area"
+        drag
+        multiple
+        name="file">
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
           <div class="upload-main-text">点击或将文件拖拽到此处上传</div>
@@ -59,7 +59,7 @@
         <i class="el-icon-info"></i>
         <span>使用指南</span>
       </div>
-      
+
       <div class="guide-content">
         <div class="guide-item">
           <div class="guide-title">
@@ -102,19 +102,19 @@
 
     <!-- 上传进度对话框 -->
     <el-dialog
-      title="文件上传进度"
-      :visible.sync="progressVisible"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :show-close="false"
-      width="400px"
-      center>
+      :visible.sync="progressVisible"
+      center
+      title="文件上传进度"
+      width="400px">
       <div class="progress-content">
         <div class="progress-icon">
           <i :class="progressStatus.icon"></i>
         </div>
         <div class="progress-text">{{ progressStatus.text }}</div>
-        <el-progress 
+        <el-progress
           :percentage="uploadProgress"
           :status="progressStatus.type">
         </el-progress>
@@ -147,7 +147,7 @@ export default {
     customUpload(options) {
       const formData = new FormData()
       formData.append('file', options.file)
-      
+
       console.log('开始上传文件:', {
         file: options.file,
         headers: this.uploadHeaders,
@@ -156,13 +156,13 @@ export default {
 
       const xhr = new XMLHttpRequest()
       xhr.open('POST', this.uploadUrl, true)
-      
+
       xhr.withCredentials = true
-      
+
       Object.keys(this.uploadHeaders).forEach(key => {
         xhr.setRequestHeader(key, this.uploadHeaders[key])
       })
-      
+
       xhr.onload = () => {
         if (xhr.status === 200) {
           console.log('上传响应:', xhr.responseText)
@@ -179,7 +179,7 @@ export default {
           options.onError(new Error(xhr.responseText || '上传失败'))
         }
       }
-      
+
       xhr.onerror = () => {
         console.error('上传错误:', {
           status: xhr.status,
@@ -188,7 +188,7 @@ export default {
         })
         options.onError(new Error('网络错误'))
       }
-      
+
       xhr.upload.onprogress = (e) => {
         if (e.lengthComputable) {
           const percent = Math.round((e.loaded * 100) / e.total)
@@ -196,7 +196,7 @@ export default {
           console.log('上传进度:', percent + '%')
         }
       }
-      
+
       try {
         xhr.send(formData)
       } catch (error) {
@@ -217,11 +217,11 @@ export default {
         this.$message.error('文件大小不能超过 6MB!')
         return false
       }
-      
+
       const fileName = file.name.toLowerCase()
       const validExtensions = ['.txt', '.pdf', '.docx', '.pptx', '.xlsx']
       const isValidType = validExtensions.some(ext => fileName.endsWith(ext))
-      
+
       if (!isValidType) {
         this.$message.error('只支持txt、pdf、docx、pptx、xlsx格式文件!')
         return false
@@ -245,9 +245,9 @@ export default {
         status: err.status,
         file: file.name
       })
-      
+
       let errorMessage = '上传失败'
-      
+
       if (err.response) {
         try {
           const response = err.response
@@ -257,16 +257,16 @@ export default {
           errorMessage = '文件处失败，请稍后重试'
         }
       }
-      
+
       this.handleUploadError(errorMessage)
     },
 
     uploadSuccess(response, file) {
       console.log('上传响应:', response)
-      
-      const isSuccess = response === "文档上传成功" || 
-                       (response && typeof response === 'object' && response.message === "文档上传成功")
-      
+
+      const isSuccess = response === "文档上传成功" ||
+        (response && typeof response === 'object' && response.message === "文档上传成功")
+
       if (isSuccess) {
         this.uploadProgress = 100
         this.progressStatus = {
@@ -274,7 +274,7 @@ export default {
           text: '文件上传成功!',
           type: 'success'
         }
-        
+
         setTimeout(() => {
           this.progressVisible = false
           this.$message.success('文件已成功上传到知识库')
@@ -290,7 +290,7 @@ export default {
         text: '上传失败: ' + message,
         type: 'exception'
       }
-      
+
       setTimeout(() => {
         this.progressVisible = false
         this.$message.error(message || '上传失败，请稍后重试')
@@ -532,4 +532,4 @@ export default {
   font-size: 14px;
   background: white;
 }
-</style> 
+</style>

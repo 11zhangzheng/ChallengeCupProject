@@ -6,41 +6,41 @@
         <!--背景图片-->
         <div style="height: 66%; width:100%;position: absolute">
           <el-image
-            style="width: 100%; height: 100%"
             :src="this.userForm.backgroundUrl"
-            fit="none">
+            fit="none"
+            style="width: 100%; height: 100%">
             <div slot="error" style="height: 100%"><!--加载失败或未设置图片后显示的图片内容-->
-              <el-image :lazy="true" style="width: 100%; height: 100%" fit="none"
-                        src="https://oss-qiu.oss-cn-hangzhou.aliyuncs.com/qiu-blogs-images/background.jpg">
+              <el-image :lazy="true" fit="none" src="https://oss-qiu.oss-cn-hangzhou.aliyuncs.com/qiu-blogs-images/background.jpg"
+                        style="width: 100%; height: 100%">
               </el-image>
             </div>
           </el-image>
-          <el-button plain size="small" @click="backDialogClose=true"
-                     style="position: absolute;top: 20px;right: 20px;background-color: rgba(255,255,255,0);">
+          <el-button plain size="small" style="position: absolute;top: 20px;right: 20px;background-color: rgba(255,255,255,0);"
+                     @click="backDialogClose=true">
             <i class="el-icon-camera"/>
             编辑封面图片
           </el-button>
         </div>
         <div style="position: absolute;width: 100%;top: 48%;">
           <!--头像图片-->
-          <el-avatar shape="square" class="avatarImg" :size="140" @error="errorHandler" :src="this.userForm.avatarUrl">
-            <img src="http://cdn.code51.cn/code51.jpg" alt="默认头像"/>
+          <el-avatar :size="140" :src="this.userForm.avatarUrl" class="avatarImg" shape="square" @error="errorHandler">
+            <img alt="默认头像" src="http://cdn.code51.cn/code51.jpg"/>
           </el-avatar>
           <!--昵称 和 身份-->
           <div style="display: inline-block; position: relative;top: -22px;margin-left: 35px;height: 50%">
             <h1 style="font-size: 45px; user-select:text; margin:0;display: inline">{{ this.userForm.userName }}</h1>
             <span v-for="role in roles" style="margin-left: 20px;font-size: 14px;">
-            <el-tag type="success" style="position: relative;top: -5px;font-size: 15px;">{{ role }}</el-tag>
+            <el-tag style="position: relative;top: -5px;font-size: 15px;" type="success">{{ role }}</el-tag>
           </span>
-            <el-tag class="animate__animated animate__wobble" v-if="isVip" @click="vipVisible=true"
-                    style="margin-left: 20px;position: relative;top: -5px;cursor:pointer;font-size: 15px;background-color: #292C32;color: #E1BE92;">
+            <el-tag v-if="isVip" class="animate__animated animate__wobble" style="margin-left: 20px;position: relative;top: -5px;cursor:pointer;font-size: 15px;background-color: #292C32;color: #E1BE92;"
+                    @click="vipVisible=true">
               VIP
             </el-tag>
           </div>
-          <el-tooltip effect="dark" content="88元加入VIP" placement="bottom-start">
-            <el-button size="medium"
-                       style="position: absolute;right:160px;bottom: 20px;font-weight:700;color: #000;background-color: rgb(225, 190, 146);"
-                       @click="vipVisible=true" v-if="!isVip">开通VIP
+          <el-tooltip content="88元加入VIP" effect="dark" placement="bottom-start">
+            <el-button v-if="!isVip"
+                       size="medium"
+                       style="position: absolute;right:160px;bottom: 20px;font-weight:700;color: #000;background-color: rgb(225, 190, 146);" @click="vipVisible=true">开通VIP
             </el-button>
           </el-tooltip>
           <el-button plain size="medium" style="position: absolute;right: 20px;bottom: 20px;" @click="editFrom">编辑个人资料
@@ -49,53 +49,53 @@
       </el-card>
       <!--用户表单-->
       <el-card class="box-card box-info" shadow="hover">
-        <el-form :model="userForm" :disabled=isEdit :rules="rules" class="personal-form" ref="userForm" inline
+        <el-form ref="userForm" :disabled=isEdit :model="userForm" :rules="rules" class="personal-form" inline
                  style="height: 100%;padding: 40px 80px;">
           <el-form-item class="el-user-item" style="position: relative">
             <el-image v-if="isVip"
-                      src="http://img.alicdn.com/tfs/TB1felqRXXXXXa7XXXXXXXXXXXX-22-22.png"
-                      alt="vip" style="position: absolute;top: -21px;right: 22px;width: 35px;"></el-image>
+                      alt="vip"
+                      src="http://img.alicdn.com/tfs/TB1felqRXXXXXa7XXXXXXXXXXXX-22-22.png" style="position: absolute;top: -21px;right: 22px;width: 35px;"></el-image>
             <el-avatar :size="80" :src="this.userForm.avatarUrl" alt="头像" style="margin: 0 30px 0 8px;"
                        @error="errorHandler">
-              <img src="http://cdn.code51.cn/code51.jpg" alt="默认头像"/>
+              <img alt="默认头像" src="http://cdn.code51.cn/code51.jpg"/>
             </el-avatar>
-            <el-button type="success" round plain size="mini" @click="avatarDialogClose=true"
-                       style="position: absolute;top: 35%;left: 100%;">更改头像
+            <el-button plain round size="mini" style="position: absolute;top: 35%;left: 100%;" type="success"
+                       @click="avatarDialogClose=true">更改头像
             </el-button>
           </el-form-item>
           <el-form-item class="el-user-item" label="账号" prop="accountNumber">
-            <el-input v-model="userForm.accountNumber" readonly placeholder="账号信息"></el-input>
+            <el-input v-model="userForm.accountNumber" placeholder="账号信息" readonly></el-input>
           </el-form-item>
           <el-form-item class="el-user-item" label="昵称" prop="userName">
             <el-input v-model="userForm.userName" placeholder="昵称信息"></el-input>
           </el-form-item>
           <el-form-item class="el-user-item" label="性别" prop="userSex">
-            <el-select v-model="userForm.userSex" placeholder="未填" clearable style="width: 206px">
+            <el-select v-model="userForm.userSex" clearable placeholder="未填" style="width: 206px">
               <el-option v-for="item in sexOption" :key="item.value" :label="item.label"
                          :value="item.value"></el-option>
             </el-select>
           </el-form-item>
-          <el-tooltip class="item" effect="light" content="绑定手机后，可使用手机号登录" placement="bottom-end">
+          <el-tooltip class="item" content="绑定手机后，可使用手机号登录" effect="light" placement="bottom-end">
             <el-form-item class="el-user-item" label="手机" prop="telephone">
               <el-input v-model="userForm.telephone" placeholder="手机" readonly style="width: 83%"></el-input>
-              <el-button size="mini" icon="el-icon-edit" circle @click="isCheckMail"></el-button>
+              <el-button circle icon="el-icon-edit" size="mini" @click="isCheckMail"></el-button>
             </el-form-item>
           </el-tooltip>
           <el-form-item class="el-user-item" label="简介" prop="summary">
-            <el-input type="textarea" :rows="1" v-model="userForm.summary" style="height: 40px;width: 206px"
-                      placeholder="填写你的个人简介"></el-input>
+            <el-input v-model="userForm.summary" :rows="1" placeholder="填写你的个人简介" style="height: 40px;width: 206px"
+                      type="textarea"></el-input>
           </el-form-item>
           <el-form-item class="el-user-item address" label="地址" prop="userAddress">
-            <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="userForm.userAddress"
-                      placeholder="地址" readonly style="width: 206px;position: absolute"></el-input>
-            <el-button size="mini" icon="el-icon-edit" style="position: absolute;right: -37px;margin: 10px 0" circle
+            <el-input v-model="userForm.userAddress" :autosize="{ minRows: 2, maxRows: 4}" placeholder="地址"
+                      readonly style="width: 206px;position: absolute" type="textarea"></el-input>
+            <el-button circle icon="el-icon-edit" size="mini" style="position: absolute;right: -37px;margin: 10px 0"
                        @click="addressFormVisible=true"></el-button>
           </el-form-item>
           <el-row style="text-align: center;margin: 20px auto;">
-            <el-button type="primary" round v-if="!isEdit" style="width: 150px; margin:0 4%"
+            <el-button v-if="!isEdit" round style="width: 150px; margin:0 4%" type="primary"
                        @click="submitForm('userForm')">保存
             </el-button>
-            <el-button round v-if="!isEdit" style="width: 150px; margin:0 4%" @click="cancelForm('userForm')">取消
+            <el-button v-if="!isEdit" round style="width: 150px; margin:0 4%" @click="cancelForm('userForm')">取消
             </el-button>
           </el-row>
         </el-form>
@@ -103,20 +103,20 @@
       <!--上传背景图片-->
     </div>
     <el-dialog
-      title="背景图片"
       :visible.sync="backDialogClose"
-      width="20%"
       class="personal-dialog"
-      style="text-align: center;">
+      style="text-align: center;"
+      title="背景图片"
+      width="20%">
       <el-upload
-        class="personal-upload"
+        ref="backGroundUpload"
         :action="this.$VAR.http+'/uploadImage?name=background'"
-        :on-success="uploadSuccess"
-        :on-error="uploadError"
         :before-upload="beforeAvatarUpload"
         :drag="true"
-        list-type="picture"
-        ref="backGroundUpload">
+        :on-error="uploadError"
+        :on-success="uploadSuccess"
+        class="personal-upload"
+        list-type="picture">
         <i class="el-icon-plus"></i>
       </el-upload>
       <span slot="footer" class="dialog-footer">
@@ -125,20 +125,20 @@
     </el-dialog>
     <!--上传头像-->
     <el-dialog
-      title="上传头像"
       :visible.sync="avatarDialogClose"
-      width="20%"
       class="personal-dialog"
-      style="text-align: center;">
+      style="text-align: center;"
+      title="上传头像"
+      width="20%">
       <el-upload
-        class="personal-upload"
+        ref="avatarUpload"
         :action="this.$VAR.http+'/uploadImage?name=userAvatar'"
-        :on-success="uploadAvaterSuccess"
-        :on-error="uploadError"
-        :drag="true"
         :before-upload="beforeAvatarUpload"
-        list-type="picture"
-        ref="avatarUpload">
+        :drag="true"
+        :on-error="uploadError"
+        :on-success="uploadAvaterSuccess"
+        class="personal-upload"
+        list-type="picture">
         <i class="el-icon-plus"></i>
       </el-upload>
       <span slot="footer" class="dialog-footer">
@@ -147,10 +147,10 @@
     </el-dialog>
     <!--绑定手机号前验证身份-->
     <el-dialog
-      title="安全验证"
       :visible.sync="mailDialogClose"
-      width="20%"
-      class="phone-dialog">
+      class="phone-dialog"
+      title="安全验证"
+      width="20%">
       <p style="text-align: left">
         为了保证你的帐号安全，请先验证身份，验证成功后进行下一步操作，验证码10分钟内有效
       </p>
@@ -159,23 +159,23 @@
         <el-input v-model="mailCode" placeholder="验证码">
           <i slot="prefix" class="el-input__icon el-icon-position"></i>
         </el-input>
-        <el-button type="primary" round size="small" :disabled="!show"
-                   style="position:absolute;right:3px;top:0;margin:4px 0;" @click="sendEmailCode">
+        <el-button :disabled="!show" round size="small" style="position:absolute;right:3px;top:0;margin:4px 0;"
+                   type="primary" @click="sendEmailCode">
           <span v-show="show">发送验证码</span>
           <span v-show="!show" class="count">重新发送({{ count }}s)</span>
         </el-button>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="bindingPhone" :disabled="isEditPhone">确 定</el-button>
+        <el-button :disabled="isEditPhone" type="primary" @click="bindingPhone">确 定</el-button>
         <el-button @click="mailDialogClose = false">取 消</el-button>
       </span>
     </el-dialog>
     <!--绑定手机号-->
     <el-dialog
-      title="绑定手机号"
       :visible.sync="phoneDialogClose"
-      width="20%"
-      class="phone-dialog">
+      class="phone-dialog"
+      title="绑定手机号"
+      width="20%">
       <el-input v-model="phoneInfo" placeholder="请输入你常用的手机号" style="margin: 10px 0;">
         <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
       </el-input>
@@ -183,14 +183,14 @@
         <el-input v-model="phoneCode" placeholder="验证码">
           <i slot="prefix" class="el-input__icon el-icon-position"></i>
         </el-input>
-        <el-button type="primary" round size="small" :disabled="!show"
-                   style="position:absolute;right:3px;top:0;margin:4px 0;" @click="editPhoneCode()">
+        <el-button :disabled="!show" round size="small" style="position:absolute;right:3px;top:0;margin:4px 0;"
+                   type="primary" @click="editPhoneCode()">
           <span v-show="show">发送验证码</span>
           <span v-show="!show" class="count">重新发送({{ count }}s)</span>
         </el-button>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitPhone" :disabled="editPhone">
+        <el-button :disabled="editPhone" type="primary" @click="submitPhone">
           <span v-if="this.userForm.telephone">更 换</span>
           <span v-else>确 定</span>
         </el-button>
@@ -199,16 +199,16 @@
       </span>
     </el-dialog>
     <!--收货地址-->
-    <el-dialog title="地址信息" class="address-dialog" width="450px" :visible.sync="addressFormVisible">
-      <el-form :model="addressForm" :rules="addressRules" ref="addressForm">
+    <el-dialog :visible.sync="addressFormVisible" class="address-dialog" title="地址信息" width="450px">
+      <el-form ref="addressForm" :model="addressForm" :rules="addressRules">
         <el-form-item label="所在地区" prop="selectedOptions">
-          <el-cascader size="large" :options="options" separator=" "
-                       v-model="addressForm.selectedOptions">
+          <el-cascader v-model="addressForm.selectedOptions" :options="options" separator=" "
+                       size="large">
           </el-cascader>
         </el-form-item>
         <el-form-item label="详细地址" prop="detailAddress">
           <el-input v-model="addressForm.detailAddress" autocomplete="off" style="width: auto">
-            <i class="el-icon-edit el-input__icon" slot="suffix"/>
+            <i slot="suffix" class="el-icon-edit el-input__icon"/>
           </el-input>
         </el-form-item>
       </el-form>
@@ -219,16 +219,16 @@
     </el-dialog>
     <!--开通vip-->
     <el-dialog
-      title="VIP"
-      class="vip-dialog"
-      :visible.sync="vipVisible"
+      :modal="false"
       :show-close="isVip"
-      top=0
-      :modal="false">
+      :visible.sync="vipVisible"
+      class="vip-dialog"
+      title="VIP"
+      top=0>
       <span v-if="isVip" style="color:#F8C4A2">{{ getDate(vip['overdueTime']) }} 到期</span>
       <span v-else style="color:#F8C4A2">开通仅需88元</span>
       <div class="vip-box">
-        <div class="discount-card" v-for="(item,index) in vipInfo" :key="index">
+        <div v-for="(item,index) in vipInfo" :key="index" class="discount-card">
           <h3>折扣卡</h3>
           <div>
             <span style="font-size: xx-large;color: #F8313C;">{{ item['discount'] }}</span>
@@ -236,7 +236,7 @@
           </div>
           <h6>{{ item['desc'] }}</h6>
           <div class="vip-use">
-            <el-button type="danger" class="mini-button" size="mini" round @click="$router.push('/MallHome')">立即使用
+            <el-button class="mini-button" round size="mini" type="danger" @click="$router.push('/MallHome')">立即使用
             </el-button>
           </div>
           <div class="left-dots"></div>
@@ -252,7 +252,7 @@
 </template>
 
 <script>
-import {regionData, CodeToText} from 'element-china-area-data'
+import {CodeToText, regionData} from 'element-china-area-data'
 
 export default {
   name: "PersonalCenter",
@@ -276,7 +276,10 @@ export default {
       isVip: this.$store.state.user['isVip'],
       vipVisible: false,
       vip: {overdueTime: ''},
-      vipInfo: [{discount: 98, desc: '全场农产品享受'}, {discount: 95, desc: '满1000可用'}, {discount: 90, desc: '满5000可用'}],
+      vipInfo: [{discount: 98, desc: '全场农产品享受'}, {discount: 95, desc: '满1000可用'}, {
+        discount: 90,
+        desc: '满5000可用'
+      }],
       roles: this.$store.state.roleInfo,
       backDialogClose: false,
       avatarDialogClose: false,
@@ -813,7 +816,7 @@ export default {
   background: #f5f5f5;
 }
 
-.person-center .user-info-box{
+.person-center .user-info-box {
   display: flex;
   justify-content: center;
 }

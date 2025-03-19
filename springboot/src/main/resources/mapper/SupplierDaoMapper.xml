@@ -33,7 +33,7 @@
         select count(supplier_name)
         from supplier
         where supplier_id != #{supplierId}
-          and supplier_name = #{supplierName};
+        and supplier_name = #{supplierName};
     </select>
 
     <!--插入一条数据-->

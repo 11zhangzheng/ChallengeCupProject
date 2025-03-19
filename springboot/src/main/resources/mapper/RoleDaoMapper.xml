@@ -46,7 +46,7 @@
         select count(role_name)
         from role
         where role_id != #{roleId}
-          and role_name = #{roleName};
+        and role_name = #{roleName};
     </select>
 
     <!--插入一条数据-->

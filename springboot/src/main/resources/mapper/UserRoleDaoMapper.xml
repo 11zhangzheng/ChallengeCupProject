@@ -12,9 +12,9 @@
     <select id="selectRoleByUserId" resultType="Map" parameterType="Integer">
         select user_id as userId, role.role_id as roleId, role_name as roleName, role_describe as roleDescribe
         from user_role,
-             role
+        role
         where role.role_id = user_role.role_id
-          and user_id = #{userId}
+        and user_id = #{userId}
     </select>
 
     <!--查询所有-->

@@ -12,6 +12,9 @@ public class Cache {
      */
     private static final ConcurrentHashMap<String, List<String>> MAP = new ConcurrentHashMap<>();
 
+    private Cache() {
+    }
+
     /**
      * 添加缓存
      */
@@ -34,8 +37,5 @@ public class Cache {
      */
     public static synchronized void remove(String key) {
         MAP.remove(key);
-    }
-
-    private Cache() {
     }
 }

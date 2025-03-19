@@ -4,40 +4,40 @@
     <!--通过ID查询-->
     <select id="selectById" resultType="ProductReview" parameterType="Integer">
         select review_id,
-               account_number,
-               product_no,
-               product_specs,
-               order_no,
-               review_time,
-               star_level,
-               product_review
+        account_number,
+        product_no,
+        product_specs,
+        order_no,
+        review_time,
+        star_level,
+        product_review
         from product_review
         where review_id = #{reviewId};
     </select>
 
     <!--查询所有-->
     <select id="selectAll" resultType="java.util.Map" parameterType="String">
-        select review_id      as reviewId,
-               user_name      as userName,
-               product_specs  as productSpecs,
-               avatar_url     as avatarUrl,
-               review_time    as reviewTime,
-               star_level     as starLevel,
-               product_review as productReview
+        select review_id as reviewId,
+        user_name as userName,
+        product_specs as productSpecs,
+        avatar_url as avatarUrl,
+        review_time as reviewTime,
+        star_level as starLevel,
+        product_review as productReview
         from product_review as a,
-             user as b,
-             product as c
+        user as b,
+        product as c
         where a.account_number = b.account_number
-          and a.product_no = c.product_no
-          and a.product_no = #{productNo}
+        and a.product_no = c.product_no
+        and a.product_no = #{productNo}
     </select>
 
     <!--插入一条数据-->
     <insert id="insertData" parameterType="ProductReview">
         insert into product_review (review_id, account_number, product_no, product_specs, order_no, review_time,
-                                    star_level, product_review)
+        star_level, product_review)
         values (#{reviewId}, #{accountNumber}, #{productNo}, #{productSpecs}, #{orderNo}, #{reviewTime}, #{starLevel},
-                #{productReview});
+        #{productReview});
     </insert>
 
     <!--通过ID更新-->

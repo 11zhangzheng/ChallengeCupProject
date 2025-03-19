@@ -20,10 +20,8 @@ import java.io.IOException;
 public class FileController {
 
 
-
     @Resource
     InfraFileDao infraFileDao;
-
 
 
     @GetMapping("/get/{path}")
@@ -31,7 +29,7 @@ public class FileController {
     public void getFile(HttpServletResponse response, @PathVariable("path") String path) throws IOException {
 
         QueryWrapper<InfFileDO> infFileDOQueryWrapper = new QueryWrapper<>();
-        infFileDOQueryWrapper.eq("id",path);
+        infFileDOQueryWrapper.eq("id", path);
         InfFileDO file = infraFileDao.selectOne(infFileDOQueryWrapper);
         ServletUtils.writeAttachment(response, path, file.getContent());
     }

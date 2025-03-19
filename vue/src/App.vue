@@ -10,52 +10,52 @@ import router from "./router";
 
 export default {
   name: 'App',
-  methods:{
-    clearInfo(){
-      this.$store.commit('setToken',null)
-      this.$store.commit('setRole',null)
-      this.$store.commit('setUser',null)
-      this.$store.commit('setRoleInfo',null)
+  methods: {
+    clearInfo() {
+      this.$store.commit('setToken', null)
+      this.$store.commit('setRole', null)
+      this.$store.commit('setUser', null)
+      this.$store.commit('setRoleInfo', null)
       localStorage.clear()
       //调转到login界面
-      router.replace({path:'/loginForm'})
+      router.replace({path: '/loginForm'})
     },
-    log(){
-      setTimeout(function(){
+    log() {
+      setTimeout(function () {
         console.clear();
       }, 2000);
     },
-    exit(accountNumber,token){
+    exit(accountNumber, token) {
       let that = this;
-      that.$http.post("/logout?key="+accountNumber+"&session="+token).then((res)=>{
-        if(res.status === 200) {
+      that.$http.post("/logout?key=" + accountNumber + "&session=" + token).then((res) => {
+        if (res.status === 200) {
           if (res.data.code !== 200) {
-            setTimeout(function(){
-              that.$http.post("/logout?key="+accountNumber+"&session="+token)
+            setTimeout(function () {
+              that.$http.post("/logout?key=" + accountNumber + "&session=" + token)
             }, 1000);
           }
         }
-      }).catch(()=>{
-        setTimeout(function(){
-          that.$http.post("/logout?key="+accountNumber+"&session="+token)
+      }).catch(() => {
+        setTimeout(function () {
+          that.$http.post("/logout?key=" + accountNumber + "&session=" + token)
         }, 1000);
       })
     }
   },
-  created () {
+  created() {
     //在页面加载时读取localStorage里的状态信息
     if (localStorage.getItem("store")) {
-      this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(localStorage.getItem("store"))))
-      if(this.$store.state.user!==null){
-      let accountNumber = this.$store.state.user.accountNumber;
-        this.$http.post('/user/existKey?key='+accountNumber).then((res)=>{
-          if(res.data.code===200){
-            if(!res.data.data){
-              const confirmText = [`帐号：${accountNumber}` , `已被注销（有疑问请联系管理人员）`];
+      this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(localStorage.getItem("store"))))
+      if (this.$store.state.user !== null) {
+        let accountNumber = this.$store.state.user.accountNumber;
+        this.$http.post('/user/existKey?key=' + accountNumber).then((res) => {
+          if (res.data.code === 200) {
+            if (!res.data.data) {
+              const confirmText = [`帐号：${accountNumber}`, `已被注销（有疑问请联系管理人员）`];
               const newData = []
               const h = this.$createElement
-              let i =0;
-              for ( i in confirmText) {
+              let i = 0;
+              for (i in confirmText) {
                 if (confirmText.hasOwnProperty(i)) {
                   newData.push(h('p', null, confirmText[i]))
                 }
@@ -66,36 +66,42 @@ export default {
                 type: 'warning'
               });
               this.clearInfo();
-            }else{
-              this.$http.post('/user/userState?accountNumber='+accountNumber).then((res)=>{
-                if(res.data.code===200){
-                  if(!res.data.data){
-                    this.exit(accountNumber,this.$store.state.token);
+            } else {
+              this.$http.post('/user/userState?accountNumber=' + accountNumber).then((res) => {
+                if (res.data.code === 200) {
+                  if (!res.data.data) {
+                    this.exit(accountNumber, this.$store.state.token);
                     this.log();
                     this.clearInfo();
                     this.$msg.error("您的帐号存在异常行为，请联系工作人员")
-                  }else{
-                    this.$http.post('/vip/existsVip?accountNumber='+accountNumber).then((rep)=>{
-                      if(rep.data.code === 200) {
+                  } else {
+                    this.$http.post('/vip/existsVip?accountNumber=' + accountNumber).then((rep) => {
+                      if (rep.data.code === 200) {
                         let user = this.$store.state.user;
                         user['isVip'] = rep.data.data;
                         this.$store.commit('setUser', user)
                       }
-                    }).catch((err)=>{this.$msg.error(err)})
+                    }).catch((err) => {
+                      this.$msg.error(err)
+                    })
                   }
                 }
-              }).catch((err)=>{this.$msg.error(err)})
+              }).catch((err) => {
+                this.$msg.error(err)
+              })
             }
           }
-        }).catch((err)=>{this.$msg.error(err)})
+        }).catch((err) => {
+          this.$msg.error(err)
+        })
       }
     }
 
     //在页面刷新时将vuex里的信息保存到localStorage里
-    window.addEventListener("beforeunload",()=>{
-      if(localStorage.length!==0){
-        localStorage.setItem("store",JSON.stringify(this.$store.state))
-      }else{
+    window.addEventListener("beforeunload", () => {
+      if (localStorage.length !== 0) {
+        localStorage.setItem("store", JSON.stringify(this.$store.state))
+      } else {
         this.$router.push("/loginForm")
       }
     })
@@ -113,7 +119,7 @@ export default {
   height: 100vh;
 }
 
-.el-dropdown-menu{
+.el-dropdown-menu {
   min-width: 137px;
 }
 

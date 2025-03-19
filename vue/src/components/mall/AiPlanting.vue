@@ -45,10 +45,10 @@
                 <h3>开始智能对话</h3>
                 <p>让AI助手为您解答种植难题</p>
                 <el-button
-                  type="primary"
-                  size="large"
-                  @click="$router.push('/chatPage')"
                   class="start-button"
+                  size="large"
+                  type="primary"
+                  @click="$router.push('/chatPage')"
                 >
                   开始智能问答
                 </el-button>

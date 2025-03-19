@@ -1,11 +1,11 @@
 <template>
   <div class="chat-container">
     <!-- 左侧历史记录 -->
-    <div class="chat-history" :class="{ 'collapsed': isHistoryCollapsed }">
+    <div :class="{ 'collapsed': isHistoryCollapsed }" class="chat-history">
       <div class="history-toggle" @click="toggleHistory">
         <i :class="isHistoryCollapsed ? 'el-icon-arrow-right' : 'el-icon-arrow-left'"></i>
       </div>
-      <div class="history-content" v-show="!isHistoryCollapsed">
+      <div v-show="!isHistoryCollapsed" class="history-content">
         <div class="history-header">
           <h3>聊天记录</h3>
         </div>
@@ -13,8 +13,8 @@
           <div
             v-for="(item, index) in chatHistory"
             :key="item.id"
-            class="history-item"
             :class="{ active: currentChat === item.id }"
+            class="history-item"
             @click="switchChat(item.id)"
           >
             <i class="el-icon-chat-dot-round"></i>
@@ -45,13 +45,13 @@
     <!-- 右侧聊天区域 -->
     <div class="chat-main">
       <!-- 聊天消息区域 -->
-      <div class="chat-messages" ref="messageContainer">
+      <div ref="messageContainer" class="chat-messages">
         <template v-if="currentChat">
           <div
             v-for="(msg, index) in currentMessages"
             :key="index"
-            class="message"
             :class="msg.role"
+            class="message"
           >
             <div class="avatar">
               <i :class="msg.role === 'user' ? 'el-icon-user' : 'el-icon-service'"></i>
@@ -86,19 +86,19 @@
           <div class="input-wrapper">
             <el-input
               v-model="inputMessage"
-              type="textarea"
-              :rows="3"
-              :maxlength="1000"
               :disabled="!currentChat || isTyping"
+              :maxlength="1000"
+              :rows="3"
               :show-word-limit="true"
               placeholder="请输入您的问题...(Shift + Enter 换行)"
+              type="textarea"
               @keyup.enter.native="handleEnter"
             ></el-input>
           </div>
           <el-button
-            type="primary"
-            :loading="isTyping"
             :disabled="!currentChat || !inputMessage.trim() || isTyping"
+            :loading="isTyping"
+            type="primary"
             @click="sendMessage"
           >
             <i class="el-icon-position"></i>
@@ -120,11 +120,12 @@ const md = new MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
-  highlight: function(str, lang) {
+  highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(lang, str).value
-      } catch (__) {}
+      } catch (__) {
+      }
     }
     return ''
   }

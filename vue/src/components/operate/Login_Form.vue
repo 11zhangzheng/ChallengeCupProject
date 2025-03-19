@@ -8,21 +8,22 @@
       </span>
     </el-header>
     <div class="form">
-      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm">
+      <el-form ref="loginForm" :model="loginForm" :rules="rules" status-icon>
         <el-form-item prop="userAccount">
           <el-input v-model="loginForm.userAccount" autocomplete="on" placeholder="请输入帐号"
-                    @keyup.enter.native="submitForm('loginForm')" prefix-icon="el-icon-user"></el-input>
+                    prefix-icon="el-icon-user" @keyup.enter.native="submitForm('loginForm')"></el-input>
         </el-form-item>
         <el-form-item prop="passWord" style="margin-bottom: 10px;">
-          <el-input type="password" show-password v-model="loginForm.passWord" autocomplete="off" placeholder="请输入密码"
-                    @keyup.enter.native="submitForm('loginForm')" prefix-icon="el-icon-lock"></el-input>
+          <el-input v-model="loginForm.passWord" autocomplete="off" placeholder="请输入密码" prefix-icon="el-icon-lock"
+                    show-password
+                    type="password" @keyup.enter.native="submitForm('loginForm')"></el-input>
         </el-form-item>
         <el-form-item style="margin-bottom: 5px;">
           <el-checkbox v-model="rememberMe">记住我</el-checkbox>
-          <router-link to="/forgotPassword" class="retrieve-password">找回密码</router-link>
+          <router-link class="retrieve-password" to="/forgotPassword">找回密码</router-link>
         </el-form-item>
         <el-form-item style="margin-bottom: 10px;">
-          <el-button type="primary" class="submit" v-preventReClick @click="submitForm('loginForm')">登录</el-button>
+          <el-button v-preventReClick class="submit" type="primary" @click="submitForm('loginForm')">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -69,7 +70,7 @@ export default {
             loading.close();
             if (res.data.code === 200) {
               let role = res.data.data.role;
-              localStorage.setItem("satoken",res.data.data.sessionId);
+              localStorage.setItem("satoken", res.data.data.sessionId);
               this.$store.commit('setToken', res.data.data.sessionId);
               this.$store.commit('setRole', res.data.data.role);
               this.$store.commit('setUser', res.data.data.user);

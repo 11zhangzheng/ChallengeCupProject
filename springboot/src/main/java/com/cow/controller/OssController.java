@@ -24,20 +24,18 @@ import java.io.IOException;
 @CrossOrigin
 @RestController
 public class OssController {
-    @Autowired
-    private AliyunOssUtil ossUtil;
-
-
     @Resource
     UploadLoadSerivceImpl uploadLoadSerivce;
+    @Autowired
+    private AliyunOssUtil ossUtil;
 
     @RequestMapping("/uploadImage")
     public CommonResult upload(@RequestParam("name") String folderName,
                                @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null) {
-            String fileName = folderName+file.getOriginalFilename();
+            String fileName = folderName + file.getOriginalFilename();
             if (StringUtils.isNotBlank(fileName)) {
-                try  {
+                try {
                     Result<InfFileDO> infFileDOResult = uploadLoadSerivce.uploadFile(file);
                     String url = infFileDOResult.getData().getUrl();
                     return new CommonResult(200, "上传成功", url);

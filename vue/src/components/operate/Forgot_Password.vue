@@ -7,7 +7,7 @@
       </span>
     </el-header>
     <div class="form">
-      <el-form :model="userForm" status-icon :rules="rules" ref="userForm">
+      <el-form ref="userForm" :model="userForm" :rules="rules" status-icon>
         <el-form-item prop="userAccount">
           <el-input v-model="userForm.userAccount" autocomplete="off" placeholder="请输入邮箱"
                     prefix-icon="el-icon-message"></el-input>
@@ -15,20 +15,20 @@
         <el-form-item prop="checkCode">
           <el-input v-model="userForm.checkCode" :disabled="codeRight" autocomplete="off" placeholder="邮箱验证码"
                     prefix-icon="el-icon-link"></el-input>
-          <el-button plain style="position: absolute;right: 0; width: 40%;top: 0;" v-preventReClick
+          <el-button v-preventReClick plain style="position: absolute;right: 0; width: 40%;top: 0;"
                      @click="sendEmailCode('userForm',$event)">发送验证码
           </el-button>
         </el-form-item>
         <el-form-item prop="passWord">
-          <el-input type="password" auto-complete="new-password" show-password v-model="userForm.passWord"
-                    autocomplete="off" placeholder="请输入密码" prefix-icon="el-icon-lock"></el-input>
+          <el-input v-model="userForm.passWord" auto-complete="new-password" autocomplete="off" placeholder="请输入密码"
+                    prefix-icon="el-icon-lock" show-password type="password"></el-input>
         </el-form-item>
         <el-form-item prop="checkPassWord">
-          <el-input type="password" auto-complete="new-password" show-password v-model="userForm.checkPassWord"
-                    autocomplete="off" placeholder="请再次输入密码" prefix-icon="el-icon-lock"></el-input>
+          <el-input v-model="userForm.checkPassWord" auto-complete="new-password" autocomplete="off" placeholder="请再次输入密码"
+                    prefix-icon="el-icon-lock" show-password type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="submit" v-preventReClick @click="submitForm('userForm')">找回密码</el-button>
+          <el-button v-preventReClick class="submit" type="primary" @click="submitForm('userForm')">找回密码</el-button>
         </el-form-item>
       </el-form>
     </div>

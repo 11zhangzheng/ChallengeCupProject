@@ -1,6 +1,7 @@
 package com.cow.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import com.cow.service.impl.DocumentChatService;
 import com.cow.service.impl.ChatHistoryService;
 import com.cow.model.ChatHistory;
@@ -54,12 +55,12 @@ public class ChatController {
         try {
             String fileName = file.getOriginalFilename().toLowerCase();
             log.info("Receiving file upload request: {}, size: {}", fileName, file.getSize());
-            
+
             // 创建 Tika 配置和解析器
             TikaConfig tikaConfig = TikaConfig.getDefaultConfig();
             AutoDetectParser autoDetectParser = new AutoDetectParser(tikaConfig);
             org.apache.tika.metadata.Metadata tikaMetadata = new org.apache.tika.metadata.Metadata();
-            
+
             // 先尝试用 Tika 直接解析文本
             String extractedText;
             try (InputStream stream = file.getInputStream()) {
@@ -68,7 +69,7 @@ public class ChatController {
                 extractedText = handler.toString();
                 log.info("Tika extracted text length: {}", extractedText.length());
             }
-            
+
             if (extractedText == null || extractedText.trim().isEmpty()) {
                 log.error("Tika failed to extract text from file: {}", fileName);
                 return ResponseEntity.badRequest().body("无法从文件中提取文本内容");
@@ -76,10 +77,10 @@ public class ChatController {
 
             // 创建文档对象
             Document document = Document.from(
-                extractedText,
-                new dev.langchain4j.data.document.Metadata()
-                    .add("fileName", fileName)
-                    .add("Content-Type", tikaMetadata.get("Content-Type"))
+                    extractedText,
+                    new dev.langchain4j.data.document.Metadata()
+                            .add("fileName", fileName)
+                            .add("Content-Type", tikaMetadata.get("Content-Type"))
             );
 
             try {
@@ -102,13 +103,13 @@ public class ChatController {
     // 添加检查 DOC 文件格式的方法
     private boolean isValidDoc(byte[] content) {
         // DOC 文件的魔数
-        byte[] docMagicNumber = {(byte) 0xD0, (byte) 0xCF, (byte) 0x11, (byte) 0xE0, 
-                                (byte) 0xA1, (byte) 0xB1, (byte) 0x1A, (byte) 0xE1};
-        
+        byte[] docMagicNumber = {(byte) 0xD0, (byte) 0xCF, (byte) 0x11, (byte) 0xE0,
+                (byte) 0xA1, (byte) 0xB1, (byte) 0x1A, (byte) 0xE1};
+
         if (content.length < docMagicNumber.length) {
             return false;
         }
-        
+
         for (int i = 0; i < docMagicNumber.length; i++) {
             if (content[i] != docMagicNumber[i]) {
                 return false;
@@ -127,13 +128,13 @@ public class ChatController {
 
         // 保存用户问题
         chatHistoryService.addMessage(chatId, "user", question, "text");
-        
+
         // 获取AI回答，传入 chatId
         String response = chatService.chat(userId, chatId, question);
-        
+
         // 保存AI回答
         chatHistoryService.addMessage(chatId, "assistant", response, "text");
-        
+
         return response;
     }
 
@@ -144,20 +145,20 @@ public class ChatController {
             org.jsoup.nodes.Document jsoupDoc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
                     .get();
-            
+
             // 提取文本内容
             String text = jsoupDoc.body().text();
-            
+
             // 创建Document对象
             Document document = Document.from(text);
-            
+
             // 添加元数据
             document.metadata().add("source", url);
             document.metadata().add("type", "webpage");
-            
+
             // 处理文档
             chatService.loadDocument(document);
-            
+
             return ResponseEntity.ok("网页内容加载成功");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("网页加载失败: " + e.getMessage());
@@ -189,11 +190,11 @@ public class ChatController {
             HttpServletRequest httpRequest) {
         String userId = httpRequest.getHeader("satoken");
         String title = request.getOrDefault("title", "新对话");
-        
+
         // 创建新对话的同时清除 DocumentChatService 中的历史记录
         ChatHistory chatHistory = chatHistoryService.createChatHistory(userId, title);
         chatService.clearHistory(userId, chatHistory.getId());
-        
+
         return ResponseEntity.ok(chatHistory);
     }
 
@@ -204,7 +205,7 @@ public class ChatController {
             HttpServletRequest request) {
         String userId = request.getHeader("satoken");
         ChatHistory history = chatHistoryService.getChatHistory(chatId);
-        
+
         if (history != null) {
             // 加载聊天历史到 DocumentChatService 的上下文中
             chatService.loadChatHistory(userId, chatId, history.getMessages());

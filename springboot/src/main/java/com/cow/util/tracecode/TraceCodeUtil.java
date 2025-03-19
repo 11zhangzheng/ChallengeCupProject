@@ -6,6 +6,7 @@ public class TraceCodeUtil {
 
     /**
      * 生成溯源码
+     *
      * @return 20位溯源码
      */
     public static String generateTraceCode() {

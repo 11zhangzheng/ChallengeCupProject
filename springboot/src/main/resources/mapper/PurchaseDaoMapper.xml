@@ -4,17 +4,17 @@
     <!--通过ID查询-->
     <select id="selectById" resultType="Purchase" parameterType="Integer">
         select purchase_id,
-               purchase_no,
-               purchase_number,
-               purchase_time,
-               receipt_time,
-               product_no,
-               product_name,
-               supplier_no,
-               supplier_name,
-               account_number,
-               user_name,
-               receipt_status
+        purchase_no,
+        purchase_number,
+        purchase_time,
+        receipt_time,
+        product_no,
+        product_name,
+        supplier_no,
+        supplier_name,
+        account_number,
+        user_name,
+        receipt_status
         from purchase
         where purchase_id = #{purchaseId};;
     </select>
@@ -22,17 +22,17 @@
     <!--查询所有-->
     <select id="selectAll" resultType="Purchase">
         select purchase_id,
-               purchase_no,
-               purchase_number,
-               purchase_time,
-               receipt_time,
-               product_no,
-               product_name,
-               supplier_no,
-               supplier_name,
-               account_number,
-               user_name,
-               receipt_status
+        purchase_no,
+        purchase_number,
+        purchase_time,
+        receipt_time,
+        product_no,
+        product_name,
+        supplier_no,
+        supplier_name,
+        account_number,
+        user_name,
+        receipt_status
         from purchase
         order by receipt_status, purchase_time;
     </select>
@@ -49,9 +49,9 @@
     <!--插入一条数据-->
     <insert id="insertData" parameterType="Purchase">
         insert into purchase (purchase_id, purchase_no, purchase_number, purchase_time, receipt_time, product_no,
-                              product_name, supplier_no, supplier_name, account_number, user_name, receipt_status)
+        product_name, supplier_no, supplier_name, account_number, user_name, receipt_status)
         values (#{purchaseId}, #{purchaseNo}, #{purchaseNumber}, #{purchaseTime}, #{receiptTime}, #{productNo},
-                #{productName}, #{supplierNo}, #{supplierName}, #{accountNumber}, #{userName}, #{receiptStatus});
+        #{productName}, #{supplierNo}, #{supplierName}, #{accountNumber}, #{userName}, #{receiptStatus});
     </insert>
 
     <!--通过ID更新-->

@@ -25,7 +25,7 @@
         select count(type_name)
         from product_type
         where type_name = #{typeName}
-          and type_id != #{typeId};
+        and type_id != #{typeId};
     </select>
 
 

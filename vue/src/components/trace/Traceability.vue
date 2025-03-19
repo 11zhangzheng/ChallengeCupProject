@@ -21,15 +21,15 @@
     <div class="trace-card trace-content">
       <div class="product-info">
         <div class="product-image">
-            <!-- 取图片的变量在这里 -->
+          <!-- 取图片的变量在这里 -->
           <div v-if="!traceData.productImage" class="image-placeholder">
             <i class="el-icon-picture-outline"></i>
             <span>暂无图片</span>
           </div>
           <img
             v-else
-            :src="traceData.productImage"
-            :alt="traceData.productName">
+            :alt="traceData.productName"
+            :src="traceData.productImage">
         </div>
 
         <h3>{{ traceData.productName }}</h3>
@@ -86,13 +86,13 @@ export default {
   },
   created() {
     const productId = this.$route.query.id;
-    this.$http.get('api/trace/info?id='+productId).then(res => {
-      if(res.data.code===200||res.data.code===20000){
-        this.traceData=res.data.data;
-      }else{
+    this.$http.get('api/trace/info?id=' + productId).then(res => {
+      if (res.data.code === 200 || res.data.code === 20000) {
+        this.traceData = res.data.data;
+      } else {
         this.$message('获取溯源信息失败,请联系管理员处理 ！')
       }
-})
+    })
     console.log('商品ID:', productId);
   }
 }

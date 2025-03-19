@@ -3,7 +3,6 @@ package com.cow.util.mail;
 import java.util.Map;
 
 /**
- *
  * 发送邮箱
  */
 public interface IMailService {

@@ -19,8 +19,8 @@
         select count(specs_name)
         from specs
         where specs_name = #{specsName}
-          and specs_id != #{specsId}
-          and product_type = #{productType};
+        and specs_id != #{specsId}
+        and product_type = #{productType};
     </select>
 
     <!--通过类型查询所有-->

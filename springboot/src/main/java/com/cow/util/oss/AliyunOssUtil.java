@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.UUID;
 
 /**
- *
  * 上传文件到阿里云OSS对象存储
  */
 @Slf4j

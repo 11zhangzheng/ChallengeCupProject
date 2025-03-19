@@ -2,7 +2,7 @@
   <div class="order-detail">
     <div class="order-box">
       <div class="box-title">
-        <el-alert class="order-state" type="warning" show-icon>当前订单状态：{{ orderInfo.orderState }}</el-alert>
+        <el-alert class="order-state" show-icon type="warning">当前订单状态：{{ orderInfo.orderState }}</el-alert>
       </div>
       <div class="order-info">
         <div class="info-title">
@@ -12,8 +12,8 @@
         <div class="info-content traceability-content">
           <div class="qr-container">
             <template v-if="orderInfo.QRCodeBase64">
-              <img 
-                :src="orderInfo.QRCodeBase64" 
+              <img
+                :src="orderInfo.QRCodeBase64"
                 class="qr-image"
                 @error="handleImageError"
               />
@@ -82,7 +82,7 @@
           </div>
         </div>
       </div>
-      <div class="order-info" v-if="logistics.receiver.length!==0">
+      <div v-if="logistics.receiver.length!==0" class="order-info">
         <div class="info-title">
           <i class="el-icon-user"></i>
           收货人信息
@@ -104,7 +104,7 @@
           </div>
         </div>
       </div>
-      <div class="order-info" v-if="logistics.sender.length!==0">
+      <div v-if="logistics.sender.length!==0" class="order-info">
         <div class="info-title">
           <i class="el-icon-user-solid"></i>
           发货人信息
@@ -176,7 +176,7 @@ export default {
         } else if (state === '1') {
           res = await this.$http.post('/orderDetail/returnInfo?orderNo=' + orderNo);
         }
-        
+
         if (res.data.code === 200) {
           console.log("orderInfo", res.data);
           this.orderInfo = res.data.data[0];
@@ -185,7 +185,7 @@ export default {
           } else {
             this.logistics.parcelName = '暂无信息';
           }
-          
+
           // 在获取到订单信息后，立即获取二维码
           if (this.orderInfo.traceCode) {
             await this.getQRCode(this.orderInfo.traceCode);
@@ -201,15 +201,15 @@ export default {
       try {
         console.log("开始获取二维码, traceCode:", traceCode);
         const url = 'api/qr/getQRCodeBytes/?productId=' + traceCode;
-        
+
         const res = await this.$http.get(url);
         console.log("二维码响应:", res.data);
-        
+
         // 检查返回的数据格式
         if (res.data && res.data.flag && res.data.code === 20000 && res.data.data) {
           // 直接设置base64数据
           this.$set(this.orderInfo, 'QRCodeBase64', 'data:image/jpeg;base64,' + res.data.data);
-          
+
           // 强制更新视图
           this.$forceUpdate();
         } else {

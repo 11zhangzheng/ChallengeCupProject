@@ -15,12 +15,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class TraceInfoVO {
     private static ManagerDao managerDao;
-    
-    @Autowired
-    public void setManagerDao(ManagerDao managerDao) {
-        TraceInfoVO.managerDao = managerDao;
-    }
-    
     private Integer managerId;
     private String managerName;
     private String phone;
@@ -30,7 +24,6 @@ public class TraceInfoVO {
     private String productDate;
     private String specification;
     private String productionAddress;
-    
     public TraceInfoVO(TraceInfo traceInfo) {
         this.managerId = traceInfo.getManager();
         this.traceCode = traceInfo.getTraceCode();
@@ -39,7 +32,7 @@ public class TraceInfoVO {
         this.productDate = traceInfo.getProductDate();
         this.specification = traceInfo.getSpecification();
         this.productionAddress = traceInfo.getProductionAddress();
-        
+
         if (managerDao != null) {
             Manager manager = managerDao.selectById(this.managerId);
             if (manager != null) {
@@ -47,5 +40,10 @@ public class TraceInfoVO {
                 this.phone = manager.getPhone();
             }
         }
+    }
+
+    @Autowired
+    public void setManagerDao(ManagerDao managerDao) {
+        TraceInfoVO.managerDao = managerDao;
     }
 }

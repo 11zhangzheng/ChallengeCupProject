@@ -19,7 +19,7 @@
         select count(brand_name)
         from product_brand
         where brand_id != #{brandId}
-          and brand_name = #{brandName};
+        and brand_name = #{brandName};
     </select>
 
     <!--查询所有品牌名-->

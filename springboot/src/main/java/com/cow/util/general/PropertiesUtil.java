@@ -9,12 +9,11 @@ import java.util.Properties;
 
 
 public class PropertiesUtil {
+    public static final String DOMAIN;
     private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
-
     private static final String REDIS_HOST;
     private static final String REDIS_PWD;
     private static final String PORT;
-    public static final String DOMAIN;
     private static final String CALLBACK;
 
     static {
@@ -31,6 +30,9 @@ public class PropertiesUtil {
         PORT = (String) properties.get("port");
         DOMAIN = (String) properties.get("domain");
         CALLBACK = (String) properties.get("callback");
+    }
+
+    private PropertiesUtil() {
     }
 
     public static String getRedisHost() {
@@ -51,8 +53,5 @@ public class PropertiesUtil {
 
     public static String getCallback() {
         return CALLBACK;
-    }
-
-    private PropertiesUtil() {
     }
 }

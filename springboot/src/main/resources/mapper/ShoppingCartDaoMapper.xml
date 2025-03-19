@@ -10,20 +10,20 @@
 
     <!--查询所有-->
     <select id="selectAll" resultType="java.util.Map" parameterType="String">
-        select cart_id        as cartId,
-               account_number as accountNumber,
-               a.product_id   as productId,
-               pay_amount     as payAmount,
-               product_name   as productName,
-               product_stock  as productStock,
-               product_no     as productNo,
-               product_specs  as productSpecs,
-               out_price      as productPrice,
-               product_url    as productUrl
+        select cart_id as cartId,
+        account_number as accountNumber,
+        a.product_id as productId,
+        pay_amount as payAmount,
+        product_name as productName,
+        product_stock as productStock,
+        product_no as productNo,
+        product_specs as productSpecs,
+        out_price as productPrice,
+        product_url as productUrl
         from shopping_cart as a,
-             product as b
+        product as b
         where a.product_id = b.product_id
-          and account_number = #{accountNumber};
+        and account_number = #{accountNumber};
     </select>
 
     <!--插入一条数据-->

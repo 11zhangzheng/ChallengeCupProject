@@ -3,7 +3,8 @@ package com.cow.vo;
 import com.cow.enums.StatusCodeEnum;
 import lombok.Data;
 
-import static com.cow.enums.StatusCodeEnum.*;
+import static com.cow.enums.StatusCodeEnum.FAIL;
+import static com.cow.enums.StatusCodeEnum.SUCCESS;
 
 /**
  * 接口返回类

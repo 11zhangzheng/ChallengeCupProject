@@ -8,8 +8,6 @@ import java.util.List;
 
 /**
  * sa-token 自定义权限验证
- *
- *
  */
 @Component
 public class StpInterfaceImpl implements StpInterface {

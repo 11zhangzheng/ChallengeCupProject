@@ -26,7 +26,7 @@
         select count(reason_name)
         from return_reason
         where reason_id != #{reasonId}
-          and reason_name = #{reasonName};
+        and reason_name = #{reasonName};
     </select>
 
     <!--插入一条数据-->

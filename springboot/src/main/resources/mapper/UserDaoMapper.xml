@@ -4,18 +4,18 @@
     <!--通过ID查询-->
     <select id="selectById" resultType="User" parameterType="int">
         select user_id,
-               account_number,
-               user_name,
-               password,
-               user_sex,
-               telephone,
-               creat_time,
-               login_time,
-               user_state,
-               summary,
-               user_address,
-               avatar_url,
-               background_url
+        account_number,
+        user_name,
+        password,
+        user_sex,
+        telephone,
+        creat_time,
+        login_time,
+        user_state,
+        summary,
+        user_address,
+        avatar_url,
+        background_url
         from user
         where user_id = #{userId}
     </select>
@@ -23,19 +23,19 @@
     <!--通过Key查询-->
     <select id="selectByKey" resultType="User" parameterType="String">
         select user_id,
-               account_number,
-               user_name,
-               password,
-               user_sex,
-               telephone,
-               creat_time,
-               login_time,
-               user_state,
-               summary,
-               user_address,
-               avatar_url,
-               background_url,
-               status
+        account_number,
+        user_name,
+        password,
+        user_sex,
+        telephone,
+        creat_time,
+        login_time,
+        user_state,
+        summary,
+        user_address,
+        avatar_url,
+        background_url,
+        status
         from user
         where account_number = #{accountNumber}
     </select>
@@ -43,19 +43,19 @@
     <!--通过手机phone查询-->
     <select id="selectByPhone" resultType="User" parameterType="String">
         select user_id,
-               account_number,
-               user_name,
-               password,
-               user_sex,
-               telephone,
-               creat_time,
-               login_time,
-               user_state,
-               summary,
-               user_address,
-               avatar_url,
-               background_url,
-               status
+        account_number,
+        user_name,
+        password,
+        user_sex,
+        telephone,
+        creat_time,
+        login_time,
+        user_state,
+        summary,
+        user_address,
+        avatar_url,
+        background_url,
+        status
         from user
         where telephone = #{telephone}
     </select>
@@ -63,12 +63,12 @@
     <!-- 获取用户对应角色 -->
     <select id="getRoleList" resultType="role">
         SELECT
-            role.*
+        role.*
         FROM user_role
-                 LEFT JOIN role ON role.role_id = user_role.role_id
+        LEFT JOIN role ON role.role_id = user_role.role_id
         WHERE
-            user_role.user_id = #{userId}
-          AND role.role_state = 1;
+        user_role.user_id = #{userId}
+        AND role.role_state = 1;
     </select>
 
     <!--获取用户信息根据用户身份-->
@@ -113,19 +113,19 @@
     <!--查询所有-->
     <select id="selectAll" resultType="User">
         select user_id,
-               account_number,
-               user_name,
-               password,
-               user_sex,
-               telephone,
-               creat_time,
-               login_time,
-               user_state,
-               summary,
-               user_address,
-               avatar_url,
-               background_url,
-               status
+        account_number,
+        user_name,
+        password,
+        user_sex,
+        telephone,
+        creat_time,
+        login_time,
+        user_state,
+        summary,
+        user_address,
+        avatar_url,
+        background_url,
+        status
         from user;
     </select>
 
@@ -133,7 +133,7 @@
     <insert id="insertData" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
         insert into user
         values (#{userId}, #{accountNumber}, #{userName}, #{password}, #{userSex}, #{telephone}, #{creatTime},
-                #{loginTime}, #{userState}, #{summary}, #{userAddress}, #{avatarUrl}, #{backgroundUrl},#{status});
+        #{loginTime}, #{userState}, #{summary}, #{userAddress}, #{avatarUrl}, #{backgroundUrl},#{status});
     </insert>
 
     <!--通过ID更新-->

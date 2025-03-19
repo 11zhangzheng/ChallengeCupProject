@@ -37,6 +37,7 @@ public interface UserDao extends BaseDao<User> {
 
     /**
      * 获取用户对应角色
+     *
      * @param userId 用户唯一标识
      * @return 角色列表
      */
@@ -44,6 +45,7 @@ public interface UserDao extends BaseDao<User> {
 
     /**
      * 获取用户信息根据用户身份
+     *
      * @param status 用户身份
      * @return 用户列表
      */

@@ -3,7 +3,6 @@ package com.cow.dao;
 import java.util.List;
 
 /**
- *
  * @description 基础Mapper
  */
 public interface BaseDao<T> {

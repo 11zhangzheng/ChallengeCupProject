@@ -6,19 +6,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.util.CollectionUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
- *
  * 敏感词汇过滤替换为*
  */
 @Slf4j
@@ -27,6 +22,10 @@ public class WordFilter {
     private static final String REPLACE_CHAR = "*";
     private static final int MIN_MATCHT_YPE = 1;
     private static HashMap<String, Object> sensitiveWordMap;
+
+    private WordFilter() {
+
+    }
 
     /**
      * 敏感词汇过滤替换为*     *
@@ -93,7 +92,6 @@ public class WordFilter {
         return resultTxt;
     }
 
-
     /**
      * 读取敏感词库，将敏感词放入HashSet中，构建一个DFA算法模型：
      * 说明：该方法来源于互联网
@@ -159,9 +157,5 @@ public class WordFilter {
             }
         }
         return words;
-    }
-
-    private WordFilter() {
-
     }
 }
