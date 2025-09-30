@@ -1,8 +1,8 @@
-# ChallengeCupProject
+# HarvestHub
 
 ## 项目概述
 
-ChallengeCupProject 是一个全栈开发项目，包含前端和后端完整实现。
+HarvestHub 是一个全栈开发项目，包含前端和后端完整实现。
 
 ## 技术栈
 
